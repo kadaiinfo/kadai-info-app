@@ -1,5 +1,5 @@
 extension DateTimeExtension on DateTime {
-  String get dot {
+  String get toDot {
     final year = this.year;
     final month = this.month;
     final day = this.day;

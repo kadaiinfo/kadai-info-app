@@ -43,12 +43,21 @@ class ArticleItem extends HookConsumerWidget {
                             ),
                           ),
                           SizedBox(width: 10),
-                          Text(
-                            article.publishedAt,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey,
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                article.publishedAt,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              SizedBox(width: 5),
+                              InkWell(
+                                onTap: () {},
+                                child: Icon(Icons.favorite),
+                              ),
+                            ],
                           ),
                         ],
                       ),

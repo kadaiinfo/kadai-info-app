@@ -28,11 +28,13 @@ class ArticleAuthor extends ConsumerWidget {
           ),
         ),
         const SizedBox(width: 10),
-        Text(
-          author.name,
-          style: const TextStyle(
-            fontSize: 12,
-            color: Colors.grey,
+        Expanded(
+          child: Text(
+            author.name,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Colors.grey,
+            ),
           ),
         ),
       ],

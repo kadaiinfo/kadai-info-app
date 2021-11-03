@@ -51,9 +51,6 @@ class ArticleRepository implements IArticleRepository {
         return Result.failure(error);
       },
     );
-    final collection = ArticleCollection();
-    // TODO: implement getArticlePage
-    throw UnimplementedError();
   }
 
   @override

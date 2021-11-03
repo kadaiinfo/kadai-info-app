@@ -18,13 +18,10 @@ class _$ArticleListStateTearOff {
   const _$ArticleListStateTearOff();
 
   _ArticleListState call(
-      {List<ArticleModel> articles = const [],
-      bool hasNext = false,
-      required ArticleListType type}) {
+      {List<ArticleModel> articles = const [], bool hasNext = false}) {
     return _ArticleListState(
       articles: articles,
       hasNext: hasNext,
-      type: type,
     );
   }
 }
@@ -36,7 +33,6 @@ const $ArticleListState = _$ArticleListStateTearOff();
 mixin _$ArticleListState {
   List<ArticleModel> get articles => throw _privateConstructorUsedError;
   bool get hasNext => throw _privateConstructorUsedError;
-  ArticleListType get type => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ArticleListStateCopyWith<ArticleListState> get copyWith =>
@@ -48,7 +44,7 @@ abstract class $ArticleListStateCopyWith<$Res> {
   factory $ArticleListStateCopyWith(
           ArticleListState value, $Res Function(ArticleListState) then) =
       _$ArticleListStateCopyWithImpl<$Res>;
-  $Res call({List<ArticleModel> articles, bool hasNext, ArticleListType type});
+  $Res call({List<ArticleModel> articles, bool hasNext});
 }
 
 /// @nodoc
@@ -64,7 +60,6 @@ class _$ArticleListStateCopyWithImpl<$Res>
   $Res call({
     Object? articles = freezed,
     Object? hasNext = freezed,
-    Object? type = freezed,
   }) {
     return _then(_value.copyWith(
       articles: articles == freezed
@@ -75,10 +70,6 @@ class _$ArticleListStateCopyWithImpl<$Res>
           ? _value.hasNext
           : hasNext // ignore: cast_nullable_to_non_nullable
               as bool,
-      type: type == freezed
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as ArticleListType,
     ));
   }
 }
@@ -90,7 +81,7 @@ abstract class _$ArticleListStateCopyWith<$Res>
           _ArticleListState value, $Res Function(_ArticleListState) then) =
       __$ArticleListStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<ArticleModel> articles, bool hasNext, ArticleListType type});
+  $Res call({List<ArticleModel> articles, bool hasNext});
 }
 
 /// @nodoc
@@ -108,7 +99,6 @@ class __$ArticleListStateCopyWithImpl<$Res>
   $Res call({
     Object? articles = freezed,
     Object? hasNext = freezed,
-    Object? type = freezed,
   }) {
     return _then(_ArticleListState(
       articles: articles == freezed
@@ -119,10 +109,6 @@ class __$ArticleListStateCopyWithImpl<$Res>
           ? _value.hasNext
           : hasNext // ignore: cast_nullable_to_non_nullable
               as bool,
-      type: type == freezed
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as ArticleListType,
     ));
   }
 }
@@ -130,8 +116,7 @@ class __$ArticleListStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ArticleListState implements _ArticleListState {
-  const _$_ArticleListState(
-      {this.articles = const [], this.hasNext = false, required this.type});
+  const _$_ArticleListState({this.articles = const [], this.hasNext = false});
 
   @JsonKey(defaultValue: const [])
   @override
@@ -139,12 +124,10 @@ class _$_ArticleListState implements _ArticleListState {
   @JsonKey(defaultValue: false)
   @override
   final bool hasNext;
-  @override
-  final ArticleListType type;
 
   @override
   String toString() {
-    return 'ArticleListState(articles: $articles, hasNext: $hasNext, type: $type)';
+    return 'ArticleListState(articles: $articles, hasNext: $hasNext)';
   }
 
   @override
@@ -155,18 +138,14 @@ class _$_ArticleListState implements _ArticleListState {
                 const DeepCollectionEquality()
                     .equals(other.articles, articles)) &&
             (identical(other.hasNext, hasNext) ||
-                const DeepCollectionEquality()
-                    .equals(other.hasNext, hasNext)) &&
-            (identical(other.type, type) ||
-                const DeepCollectionEquality().equals(other.type, type)));
+                const DeepCollectionEquality().equals(other.hasNext, hasNext)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(articles) ^
-      const DeepCollectionEquality().hash(hasNext) ^
-      const DeepCollectionEquality().hash(type);
+      const DeepCollectionEquality().hash(hasNext);
 
   @JsonKey(ignore: true)
   @override
@@ -175,17 +154,13 @@ class _$_ArticleListState implements _ArticleListState {
 }
 
 abstract class _ArticleListState implements ArticleListState {
-  const factory _ArticleListState(
-      {List<ArticleModel> articles,
-      bool hasNext,
-      required ArticleListType type}) = _$_ArticleListState;
+  const factory _ArticleListState({List<ArticleModel> articles, bool hasNext}) =
+      _$_ArticleListState;
 
   @override
   List<ArticleModel> get articles => throw _privateConstructorUsedError;
   @override
   bool get hasNext => throw _privateConstructorUsedError;
-  @override
-  ArticleListType get type => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ArticleListStateCopyWith<_ArticleListState> get copyWith =>

@@ -10,15 +10,12 @@ class ArticleListState with _$ArticleListState {
   const factory ArticleListState({
     @Default([]) List<ArticleModel> articles,
     @Default(false) bool hasNext,
-    required ArticleListType type,
   }) = _ArticleListState;
 
-  factory ArticleListState.from(
-      ArticleCollection collection, ArticleListType type) {
+  factory ArticleListState.from(ArticleCollection collection) {
     return ArticleListState(
       articles: collection.articles.map((e) => ArticleModel.from(e)).toList(),
       hasNext: collection.hasNext,
-      type: type,
     );
   }
 }

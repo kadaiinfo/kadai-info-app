@@ -29,17 +29,11 @@ class ArticlePage extends HookConsumerWidget {
         ),
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: TabBarView(
-                controller: tabController,
-                children: types.map((type) {
-                  return ArticleList(type: type);
-                }).toList(),
-              ),
-            ),
-          ],
+        child: TabBarView(
+          controller: tabController,
+          children: types.map((type) {
+            return ArticleList(type: type);
+          }).toList(),
         ),
       ),
     );

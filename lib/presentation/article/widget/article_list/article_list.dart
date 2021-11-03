@@ -28,6 +28,11 @@ class ArticleList extends HookConsumerWidget {
       child: state.when(
         data: (data) {
           final articles = data.articles;
+
+          if (articles.isEmpty) {
+            return const ErrorText('記事が見つかりませんでした。');
+          }
+
           return ListView.separated(
             controller: scrollController,
             shrinkWrap: true,

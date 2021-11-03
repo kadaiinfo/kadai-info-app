@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/presentation/article/model/article_model.dart';
 import 'package:kadai_info_flutter/presentation/article/widget/article_author/article_author.dart';
+import 'package:kadai_info_flutter/presentation/article/widget/article_favorite_button/article_favorite_button.dart';
 
 class ArticleItem extends HookConsumerWidget {
   const ArticleItem({
@@ -53,10 +54,7 @@ class ArticleItem extends HookConsumerWidget {
                                 ),
                               ),
                               SizedBox(width: 5),
-                              InkWell(
-                                onTap: () {},
-                                child: Icon(Icons.favorite),
-                              ),
+                              ArticleFavoriteButton(articleId: article.id),
                             ],
                           ),
                         ],

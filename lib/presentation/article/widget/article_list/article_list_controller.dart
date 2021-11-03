@@ -39,7 +39,10 @@ class ArticleListController
     );
     result.when(
       success: (data) {
-        state = AsyncData(ArticleListState.from(data, type));
+        if (data.hasNext) {
+          _page++;
+        }
+        state = AsyncData(ArticleListState.from(data));
       },
       failure: (error) {
         state = AsyncError(error);

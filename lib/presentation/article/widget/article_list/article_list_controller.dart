@@ -1,6 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/application/article/article_application.dart';
-import 'package:kadai_info_flutter/interactor/article/article_interactor.dart';
 import 'package:kadai_info_flutter/presentation/article/model/article_list_type.dart';
 
 import 'article_list_state.dart';
@@ -8,15 +7,12 @@ import 'article_list_state.dart';
 class ArticleListController
     extends StateNotifier<AsyncValue<ArticleListState>> {
   ArticleListController(
-    AsyncValue<ArticleListState> state,
-    this._interactor,
     this._app, {
     required this.type,
   }) : super(const AsyncLoading()) {
     _fetch();
   }
 
-  final ArticleInteractor _interactor;
   final ArticleApplication _app;
 
   static const _perPage = 20;

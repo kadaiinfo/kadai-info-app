@@ -1,4 +1,5 @@
 import 'package:kadai_info_flutter/core/result/result.dart';
+import 'package:kadai_info_flutter/domain/entity/article/article_category.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_post_list_response.dart';
 
 abstract class IWordpressDatasource {
@@ -6,7 +7,7 @@ abstract class IWordpressDatasource {
   Future<Result<WPPostListResponse>> postList({
     int page = 1,
     int perPage = 10,
-    List<int> categories = const [],
+    List<ArticleCategory> categories = const [],
     List<int> categoriesExclude = const [],
   });
 }

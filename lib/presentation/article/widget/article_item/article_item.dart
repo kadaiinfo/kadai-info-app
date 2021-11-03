@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kadai_info_flutter/presentation/article/widget/article_item/article_item_controller_provider.dart';
+import 'package:kadai_info_flutter/presentation/article/model/article_model.dart';
+import 'package:kadai_info_flutter/presentation/article/widget/article_author/article_author.dart';
 
 class ArticleItem extends HookConsumerWidget {
   const ArticleItem({
     Key? key,
-    required this.id,
+    required this.article,
   }) : super(key: key);
 
-  final String id;
+  final ArticleModel article;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(articleItemControllerProvider(id));
     return InkWell(
       onTap: () {},
       child: Padding(
@@ -28,7 +28,7 @@ class ArticleItem extends HookConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '記事のタイトル記事の',
+                        article.title,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -39,33 +39,13 @@ class ArticleItem extends HookConsumerWidget {
                         children: [
                           Expanded(
                             child: IntrinsicHeight(
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    height: 25,
-                                    width: 25,
-                                    child: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                        'https://i0.wp.com/www.communitycom.jp/shop/wp-content/uploads/2019/11/eyecatch_img_01.png?fit=1130%2C593&ssl=1',
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text(
-                                    'Kodai Nakahara',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              child: ArticleAuthor(author: article.author),
                             ),
                           ),
                           SizedBox(width: 10),
                           Text(
-                            '2021.9.3',
-                            style: TextStyle(
+                            article.publishedAt,
+                            style: const TextStyle(
                               fontSize: 12,
                               color: Colors.grey,
                             ),
@@ -83,9 +63,11 @@ class ArticleItem extends HookConsumerWidget {
                   borderRadius: BorderRadius.circular(10),
                   child: AspectRatio(
                     aspectRatio: 1.91 / 1,
-                    child: Image.network(
-                      'https://i0.wp.com/www.communitycom.jp/shop/wp-content/uploads/2019/11/eyecatch_img_01.png?fit=1130%2C593&ssl=1',
-                    ),
+                    child: article.thumbnailUrl != null
+                        ? Image.network(article.thumbnailUrl!)
+                        : Image.network(
+                            'https://i0.wp.com/www.communitycom.jp/shop/wp-content/uploads/2019/11/eyecatch_img_01.png?fit=1130%2C593&ssl=1',
+                          ),
                   ),
                 ),
               ),

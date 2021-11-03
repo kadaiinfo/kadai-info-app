@@ -6,7 +6,8 @@ class WPMediaSize {
   final WPMediaInfo? full;
 
   WPMediaSize.fromMap(Map<String, dynamic> map)
-      : medium = WPMediaInfo.fromMap(map['medium']),
-        large = WPMediaInfo.fromMap(map['large']),
-        full = WPMediaInfo.fromMap(map['full']);
+      : medium =
+            map['medium'] != null ? WPMediaInfo.fromMap(map['medium']) : null,
+        large = map['large'] != null ? WPMediaInfo.fromMap(map['large']) : null,
+        full = map['full'] != null ? WPMediaInfo.fromMap(map['full']) : null;
 }

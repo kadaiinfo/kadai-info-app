@@ -18,11 +18,11 @@ class _$ArticleListStateTearOff {
   const _$ArticleListStateTearOff();
 
   _ArticleListState call(
-      {List<String> ids = const [],
+      {List<ArticleModel> articles = const [],
       bool hasNext = false,
-      required ArticleTabType type}) {
+      required ArticleListType type}) {
     return _ArticleListState(
-      ids: ids,
+      articles: articles,
       hasNext: hasNext,
       type: type,
     );
@@ -34,9 +34,9 @@ const $ArticleListState = _$ArticleListStateTearOff();
 
 /// @nodoc
 mixin _$ArticleListState {
-  List<String> get ids => throw _privateConstructorUsedError;
+  List<ArticleModel> get articles => throw _privateConstructorUsedError;
   bool get hasNext => throw _privateConstructorUsedError;
-  ArticleTabType get type => throw _privateConstructorUsedError;
+  ArticleListType get type => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ArticleListStateCopyWith<ArticleListState> get copyWith =>
@@ -48,7 +48,7 @@ abstract class $ArticleListStateCopyWith<$Res> {
   factory $ArticleListStateCopyWith(
           ArticleListState value, $Res Function(ArticleListState) then) =
       _$ArticleListStateCopyWithImpl<$Res>;
-  $Res call({List<String> ids, bool hasNext, ArticleTabType type});
+  $Res call({List<ArticleModel> articles, bool hasNext, ArticleListType type});
 }
 
 /// @nodoc
@@ -62,15 +62,15 @@ class _$ArticleListStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? ids = freezed,
+    Object? articles = freezed,
     Object? hasNext = freezed,
     Object? type = freezed,
   }) {
     return _then(_value.copyWith(
-      ids: ids == freezed
-          ? _value.ids
-          : ids // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      articles: articles == freezed
+          ? _value.articles
+          : articles // ignore: cast_nullable_to_non_nullable
+              as List<ArticleModel>,
       hasNext: hasNext == freezed
           ? _value.hasNext
           : hasNext // ignore: cast_nullable_to_non_nullable
@@ -78,7 +78,7 @@ class _$ArticleListStateCopyWithImpl<$Res>
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as ArticleTabType,
+              as ArticleListType,
     ));
   }
 }
@@ -90,7 +90,7 @@ abstract class _$ArticleListStateCopyWith<$Res>
           _ArticleListState value, $Res Function(_ArticleListState) then) =
       __$ArticleListStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<String> ids, bool hasNext, ArticleTabType type});
+  $Res call({List<ArticleModel> articles, bool hasNext, ArticleListType type});
 }
 
 /// @nodoc
@@ -106,15 +106,15 @@ class __$ArticleListStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? ids = freezed,
+    Object? articles = freezed,
     Object? hasNext = freezed,
     Object? type = freezed,
   }) {
     return _then(_ArticleListState(
-      ids: ids == freezed
-          ? _value.ids
-          : ids // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      articles: articles == freezed
+          ? _value.articles
+          : articles // ignore: cast_nullable_to_non_nullable
+              as List<ArticleModel>,
       hasNext: hasNext == freezed
           ? _value.hasNext
           : hasNext // ignore: cast_nullable_to_non_nullable
@@ -122,7 +122,7 @@ class __$ArticleListStateCopyWithImpl<$Res>
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as ArticleTabType,
+              as ArticleListType,
     ));
   }
 }
@@ -131,28 +131,29 @@ class __$ArticleListStateCopyWithImpl<$Res>
 
 class _$_ArticleListState implements _ArticleListState {
   const _$_ArticleListState(
-      {this.ids = const [], this.hasNext = false, required this.type});
+      {this.articles = const [], this.hasNext = false, required this.type});
 
   @JsonKey(defaultValue: const [])
   @override
-  final List<String> ids;
+  final List<ArticleModel> articles;
   @JsonKey(defaultValue: false)
   @override
   final bool hasNext;
   @override
-  final ArticleTabType type;
+  final ArticleListType type;
 
   @override
   String toString() {
-    return 'ArticleListState(ids: $ids, hasNext: $hasNext, type: $type)';
+    return 'ArticleListState(articles: $articles, hasNext: $hasNext, type: $type)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _ArticleListState &&
-            (identical(other.ids, ids) ||
-                const DeepCollectionEquality().equals(other.ids, ids)) &&
+            (identical(other.articles, articles) ||
+                const DeepCollectionEquality()
+                    .equals(other.articles, articles)) &&
             (identical(other.hasNext, hasNext) ||
                 const DeepCollectionEquality()
                     .equals(other.hasNext, hasNext)) &&
@@ -163,7 +164,7 @@ class _$_ArticleListState implements _ArticleListState {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(ids) ^
+      const DeepCollectionEquality().hash(articles) ^
       const DeepCollectionEquality().hash(hasNext) ^
       const DeepCollectionEquality().hash(type);
 
@@ -175,16 +176,16 @@ class _$_ArticleListState implements _ArticleListState {
 
 abstract class _ArticleListState implements ArticleListState {
   const factory _ArticleListState(
-      {List<String> ids,
+      {List<ArticleModel> articles,
       bool hasNext,
-      required ArticleTabType type}) = _$_ArticleListState;
+      required ArticleListType type}) = _$_ArticleListState;
 
   @override
-  List<String> get ids => throw _privateConstructorUsedError;
+  List<ArticleModel> get articles => throw _privateConstructorUsedError;
   @override
   bool get hasNext => throw _privateConstructorUsedError;
   @override
-  ArticleTabType get type => throw _privateConstructorUsedError;
+  ArticleListType get type => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ArticleListStateCopyWith<_ArticleListState> get copyWith =>

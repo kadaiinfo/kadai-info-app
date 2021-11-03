@@ -20,7 +20,7 @@ class _$ArticleAuthorTearOff {
   _ArticleAuthor call(
       {required String id,
       required String name,
-      required String thumbnailUrl,
+      required String? thumbnailUrl,
       required String link}) {
     return _ArticleAuthor(
       id: id,
@@ -38,7 +38,7 @@ const $ArticleAuthor = _$ArticleAuthorTearOff();
 mixin _$ArticleAuthor {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get thumbnailUrl => throw _privateConstructorUsedError;
+  String? get thumbnailUrl => throw _privateConstructorUsedError;
   String get link => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -51,7 +51,7 @@ abstract class $ArticleAuthorCopyWith<$Res> {
   factory $ArticleAuthorCopyWith(
           ArticleAuthor value, $Res Function(ArticleAuthor) then) =
       _$ArticleAuthorCopyWithImpl<$Res>;
-  $Res call({String id, String name, String thumbnailUrl, String link});
+  $Res call({String id, String name, String? thumbnailUrl, String link});
 }
 
 /// @nodoc
@@ -82,7 +82,7 @@ class _$ArticleAuthorCopyWithImpl<$Res>
       thumbnailUrl: thumbnailUrl == freezed
           ? _value.thumbnailUrl
           : thumbnailUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       link: link == freezed
           ? _value.link
           : link // ignore: cast_nullable_to_non_nullable
@@ -98,7 +98,7 @@ abstract class _$ArticleAuthorCopyWith<$Res>
           _ArticleAuthor value, $Res Function(_ArticleAuthor) then) =
       __$ArticleAuthorCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String name, String thumbnailUrl, String link});
+  $Res call({String id, String name, String? thumbnailUrl, String link});
 }
 
 /// @nodoc
@@ -131,7 +131,7 @@ class __$ArticleAuthorCopyWithImpl<$Res>
       thumbnailUrl: thumbnailUrl == freezed
           ? _value.thumbnailUrl
           : thumbnailUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       link: link == freezed
           ? _value.link
           : link // ignore: cast_nullable_to_non_nullable
@@ -154,7 +154,7 @@ class _$_ArticleAuthor implements _ArticleAuthor {
   @override
   final String name;
   @override
-  final String thumbnailUrl;
+  final String? thumbnailUrl;
   @override
   final String link;
 
@@ -196,7 +196,7 @@ abstract class _ArticleAuthor implements ArticleAuthor {
   const factory _ArticleAuthor(
       {required String id,
       required String name,
-      required String thumbnailUrl,
+      required String? thumbnailUrl,
       required String link}) = _$_ArticleAuthor;
 
   @override
@@ -204,7 +204,7 @@ abstract class _ArticleAuthor implements ArticleAuthor {
   @override
   String get name => throw _privateConstructorUsedError;
   @override
-  String get thumbnailUrl => throw _privateConstructorUsedError;
+  String? get thumbnailUrl => throw _privateConstructorUsedError;
   @override
   String get link => throw _privateConstructorUsedError;
   @override

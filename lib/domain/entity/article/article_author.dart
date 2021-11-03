@@ -7,7 +7,7 @@ class ArticleAuthor with _$ArticleAuthor {
   const factory ArticleAuthor({
     required String id,
     required String name,
-    required String thumbnailUrl,
+    required String? thumbnailUrl,
     required String link,
   }) = _ArticleAuthor;
 }

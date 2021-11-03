@@ -13,7 +13,7 @@ class ArticleInteractor
 
   /// 記事一覧の取得
   Future<Exception?> getArticleList() async {
-    await _repository.getArticlePage(page: 1, per: 20);
+    await _repository.getArticleCollection(page: 1, perPage: 20);
   }
 
   /// お気に入り記事一覧の取得

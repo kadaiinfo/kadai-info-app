@@ -4,17 +4,21 @@ import 'package:kadai_info_flutter/domain/entity/article/article_author.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_category.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_collection.dart';
 import 'package:kadai_info_flutter/domain/repository/article/i_article_repository.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/i_sqflite_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/i_wordpress_datasource.dart';
-import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_author.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_post.dart';
 
 class ArticleRepository implements IArticleRepository {
-  ArticleRepository({required IWordpressDatasource wp}) : _wp = wp;
+  ArticleRepository({
+    required this.wp,
+    required this.sqf,
+  });
 
-  final IWordpressDatasource _wp;
+  final IWordpressDatasource wp;
+  final ISqfliteDatasource sqf;
 
   @override
-  Future<Result<Article>> deleteArticle(Article article) {
+  Future<Result<Article>> deleteArticle(String articleId) {
     // TODO: implement deleteArticle
     throw UnimplementedError();
   }
@@ -25,7 +29,7 @@ class ArticleRepository implements IArticleRepository {
     required int perPage,
     List<ArticleCategory> categories = const [],
   }) async {
-    final result = await _wp.postList(
+    final result = await wp.postList(
       page: page,
       perPage: perPage,
       categories: categories,
@@ -34,7 +38,7 @@ class ArticleRepository implements IArticleRepository {
       success: (data) {
         final articles = data.body
             .map(
-              (e) => _toArticle(post: e, author: e.embedded.authors.first),
+              (e) => _toArticle(post: e),
             )
             .toList();
         final header = data.header;
@@ -54,12 +58,13 @@ class ArticleRepository implements IArticleRepository {
   }
 
   @override
-  Future<Result<Article>> saveArticle(Article article) {
-    // TODO: implement saveArticle
-    throw UnimplementedError();
+  Future<Result<Article>> saveArticle(String articleId) async {
+    // await sqf.saveArticle(article);
+    throw Exception();
   }
 
-  Article _toArticle({required WPPost post, required WPAuthor author}) {
+  Article _toArticle({required WPPost post}) {
+    final author = post.embedded.authors.first;
     final _author = ArticleAuthor(
       id: '${author.id}',
       name: author.name,

@@ -1,4 +1,5 @@
 import 'package:kadai_info_flutter/core/result/result.dart';
+import 'package:kadai_info_flutter/domain/entity/article/article.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_category.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_collection.dart';
 import 'package:kadai_info_flutter/domain/repository/article/i_article_repository.dart';
@@ -7,6 +8,8 @@ class ArticleApplication {
   ArticleApplication(this._repository);
 
   final IArticleRepository _repository;
+
+  /// 記事一覧の取得
   Future<Result<ArticleCollection>> getArticleList({
     required int page,
     required int perPage,
@@ -25,5 +28,15 @@ class ArticleApplication {
         return Result.failure(error);
       },
     );
+  }
+
+  /// 記事のお気に入り登録
+  Future<Result<Article>> favoriteArticle(String articleId) async {
+    throw Exception();
+  }
+
+  /// 記事のお気に入り解除
+  Future<Result<Article>> releaseArticle(String articleId) async {
+    throw Exception();
   }
 }

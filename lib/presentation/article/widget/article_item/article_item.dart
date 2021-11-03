@@ -71,9 +71,11 @@ class ArticleItem extends HookConsumerWidget {
                   child: AspectRatio(
                     aspectRatio: 1.91 / 1,
                     child: article.thumbnailUrl != null
-                        ? Image.network(article.thumbnailUrl!)
+                        ? Image.network(article.thumbnailUrl!,
+                            fit: BoxFit.cover)
                         : Image.network(
                             'https://i0.wp.com/www.communitycom.jp/shop/wp-content/uploads/2019/11/eyecatch_img_01.png?fit=1130%2C593&ssl=1',
+                            fit: BoxFit.cover,
                           ),
                   ),
                 ),

@@ -12,8 +12,8 @@ abstract class IArticleRepository {
   });
 
   /// 記事の保存
-  Future<Result<Article>> saveArticle(Article article);
+  Future<Result<Article>> saveArticle(String articleId);
 
   /// 記事の削除
-  Future<Result<Article>> deleteArticle(Article article);
+  Future<Result<Article>> deleteArticle(String articleId);
 }

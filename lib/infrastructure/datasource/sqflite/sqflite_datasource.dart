@@ -9,7 +9,7 @@ class SqfliteDatasource implements ISqfliteDatasource {
   static const _articleTableName = 'article';
 
   @override
-  Future<Result<SQFArticleTable>> articles({
+  Future<Result<SQFArticleTable>> findAllArticles({
     required int limit,
     required int offset,
   }) async {
@@ -34,7 +34,7 @@ class SqfliteDatasource implements ISqfliteDatasource {
   }
 
   @override
-  Future<Result<SQFArticle>> article(String id) async {
+  Future<Result<SQFArticle>> findArticle(String id) async {
     // TODO: implement article
     throw UnimplementedError();
   }
@@ -50,11 +50,7 @@ class SqfliteDatasource implements ISqfliteDatasource {
               '''
             CREATE TABLE $_articleTableName (
             ${SQFArticle.keyId} TEXT PRIMARY KEY, 
-            ${SQFArticle.keyLink} TEXT, 
-            ${SQFArticle.keyAuthor} TEXT, 
             ${SQFArticle.keyCreatedAt} TEXT, 
-            ${SQFArticle.keyPublishedAt} INTEGER,
-            ${SQFArticle.keyThumbnailUrl} INTEGER 
             )
             ''',
             );
@@ -67,5 +63,48 @@ class SqfliteDatasource implements ISqfliteDatasource {
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  Future<Result<SQFArticle?>> deleteArticle(String articleId) async {
+    try {
+      final db = await _getArticleDatabase();
+      final data = await db.query(
+        _articleTableName,
+        where: articleId,
+        whereArgs: [SQFArticle.keyId],
+      );
+      if (data.isEmpty) {
+        return const Result.success(null);
+      } else {
+        await db.delete(
+          _articleTableName,
+          where: articleId,
+          whereArgs: [SQFArticle.keyId],
+        );
+        return const Result.success(null);
+      }
+    } catch (e) {
+      return Result.failure(Exception(e));
+    }
+  }
+
+  @override
+  Future<Result<SQFArticle?>> saveArticle(String articleId) async {
+    try {
+      final db = await _getArticleDatabase();
+      final article = SQFArticle(
+        id: articleId,
+        createdAt: DateTime.now(),
+      );
+      final data = article.toMap();
+      await db.insert(
+        _articleTableName,
+        data,
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+      return Result.success(article);
+    } catch (e) {}
+    throw Exception();
   }
 }

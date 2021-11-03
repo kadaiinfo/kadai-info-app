@@ -3,7 +3,7 @@ import 'package:kadai_info_flutter/domain/entity/article/article.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_author.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_category.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_collection.dart';
-import 'package:kadai_info_flutter/domain/repository/i_article_repository.dart';
+import 'package:kadai_info_flutter/domain/repository/article/i_article_repository.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/i_wordpress_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_author.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_post.dart';

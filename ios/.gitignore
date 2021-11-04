@@ -35,3 +35,6 @@ Runner/GeneratedPluginRegistrant.*
 
 # bundler
 vendor/
+
+# firebase
+**/GoogleService-Info.plist

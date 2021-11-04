@@ -23,6 +23,7 @@ dependencies:
   uuid: ^3.0.4
   dio: ^4.0.1
   webview_flutter: ^2.1.2
+  firebase_core: ^1.8.0
 
 dev_dependencies:
   flutter_test:

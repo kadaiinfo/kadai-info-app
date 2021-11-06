@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kadai_info_flutter/presentation/content/widget/content_list/content_list.dart';
 
 class ContentPage extends StatelessWidget {
   const ContentPage({Key? key}) : super(key: key);
@@ -6,7 +7,14 @@ class ContentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      body: Column(
+        children: [
+          /// コンテンツ一覧
+          ContentList(),
+
+          /// フッター
+        ],
+      ),
     );
   }
 }

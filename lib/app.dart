@@ -16,6 +16,7 @@ class App extends StatelessWidget {
         title: 'Flutter Demo', // FIXME: タイトル変更
         theme: FlexColorScheme.light(
           scheme: scheme,
+          scaffoldBackground: Colors.grey[100],
         ).toTheme,
         darkTheme: FlexColorScheme.dark(
           scheme: scheme,

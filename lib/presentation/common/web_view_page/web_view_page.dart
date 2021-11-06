@@ -6,9 +6,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewPage extends StatefulWidget {
-  const WebViewPage(this.url, {Key? key}) : super(key: key);
+  const WebViewPage(this.url, {Key? key, this.title = ''}) : super(key: key);
 
   final String url;
+  final String title;
 
   @override
   _WebViewPageState createState() => _WebViewPageState();
@@ -32,7 +33,9 @@ class _WebViewPageState extends State<WebViewPage> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
         body: Stack(
           children: [
             WebView(

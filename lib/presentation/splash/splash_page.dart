@@ -18,7 +18,7 @@ class SplashPage extends ConsumerWidget {
           }
           return const Center(
             child: Image(
-              image: AssetImage('asset/icon/icon.png'),
+              image: AssetImage('asset/icon/splash_icon.png'),
               fit: BoxFit.contain,
             ),
           );

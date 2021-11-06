@@ -13,18 +13,43 @@ class ContentList extends StatelessWidget {
         crossAxisCount: 3,
         shrinkWrap: true,
         children: const [
-          ContentItem(
-            imagePath: 'asset/image/no_image.png',
-            title: 'サークル',
-            page: CircleGenrePage(),
-          ),
-          ContentItem(
-            imagePath: 'asset/image/no_image.png',
-            title: '美男美女',
-            page: BinanBijoPage(),
-          ),
+          /// サークル
+          _CircleContent(),
+
+          /// 美男美女
+          _BinanBijoContent(),
         ],
       ),
+    );
+  }
+}
+
+class _BinanBijoContent extends StatelessWidget {
+  const _BinanBijoContent({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ContentItem(
+      imagePath: 'asset/image/no_image.png',
+      title: '美男美女',
+      page: BinanBijoPage(),
+    );
+  }
+}
+
+class _CircleContent extends StatelessWidget {
+  const _CircleContent({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ContentItem(
+      imagePath: 'asset/image/no_image.png',
+      title: 'サークル',
+      page: CircleGenrePage(),
     );
   }
 }

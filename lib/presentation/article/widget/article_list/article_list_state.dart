@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_collection.dart';
-import 'package:kadai_info_flutter/presentation/article/model/article_list_type.dart';
 import 'package:kadai_info_flutter/presentation/article/model/article_model.dart';
 
 part 'article_list_state.freezed.dart';

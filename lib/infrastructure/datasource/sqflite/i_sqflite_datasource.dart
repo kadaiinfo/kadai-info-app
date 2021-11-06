@@ -9,12 +9,12 @@ abstract class ISqfliteDatasource {
     required int offset,
   });
 
-  /// 記事
-  Future<Result<SQFArticle>> findArticle(String articleId);
-
   /// 記事の保存
   Future<Result<SQFArticle>> saveArticle(String articleId);
 
   /// 記事の削除
   Future<Result<SQFArticle>> deleteArticle(String articleId);
+
+  /// 記事の存在
+  Future<Result<SQFArticle?>> existArticle(String articleId);
 }

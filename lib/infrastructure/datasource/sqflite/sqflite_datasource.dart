@@ -21,7 +21,7 @@ class SqfliteDatasource implements ISqfliteDatasource {
       orderBy: SQFArticle.keyCreatedAt,
     );
     final allCount = Sqflite.firstIntValue(
-          await db.rawQuery('SELECT count(*) FROM $_articleTableName}'),
+          await db.rawQuery('SELECT count(*) FROM $_articleTableName'),
         ) ??
         0;
 
@@ -33,12 +33,6 @@ class SqfliteDatasource implements ISqfliteDatasource {
     return Result.success(table);
   }
 
-  @override
-  Future<Result<SQFArticle>> findArticle(String id) async {
-    // TODO: implement article
-    throw UnimplementedError();
-  }
-
   Future<Database> _getArticleDatabase() async {
     try {
       try {
@@ -48,11 +42,12 @@ class SqfliteDatasource implements ISqfliteDatasource {
           onCreate: (db, version) async {
             await db.execute(
               '''
-            CREATE TABLE $_articleTableName (
-            ${SQFArticle.keyId} TEXT PRIMARY KEY, 
-            ${SQFArticle.keyCreatedAt} TEXT, 
-            )
-            ''',
+              CREATE TABLE $_articleTableName (
+              ${SQFArticle.keyId} TEXT PRIMARY KEY, 
+              ${SQFArticle.keyCreatedAt} INTEGER,
+              ${SQFArticle.keyIsFavorite} INTEGER 
+              )
+              ''',
             );
           },
         );
@@ -71,8 +66,8 @@ class SqfliteDatasource implements ISqfliteDatasource {
       final db = await _getArticleDatabase();
       await db.delete(
         _articleTableName,
-        where: articleId,
-        whereArgs: [SQFArticle.keyId],
+        where: '${SQFArticle.keyId}=?',
+        whereArgs: [articleId],
       );
       final article = SQFArticle(
         id: articleId,
@@ -103,6 +98,19 @@ class SqfliteDatasource implements ISqfliteDatasource {
       return Result.success(article);
     } catch (e) {
       return Result.failure(Exception(e));
+    }
+  }
+
+  @override
+  Future<Result<SQFArticle?>> existArticle(String articleId) async {
+    final db = await _getArticleDatabase();
+    final data = await db.query(_articleTableName,
+        where: '${SQFArticle.keyId}=?', whereArgs: [articleId], limit: 1);
+    if (data.isEmpty) {
+      return const Result.success(null);
+    } else {
+      final article = SQFArticle.fromMap(data.first);
+      return Result.success(article);
     }
   }
 }

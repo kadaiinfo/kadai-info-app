@@ -23,7 +23,6 @@ class _$ArticleTearOff {
       required String? thumbnailUrl,
       required String link,
       required ArticleAuthor author,
-      required bool isFavorite,
       required DateTime publishedAt}) {
     return _Article(
       id: id,
@@ -31,7 +30,6 @@ class _$ArticleTearOff {
       thumbnailUrl: thumbnailUrl,
       link: link,
       author: author,
-      isFavorite: isFavorite,
       publishedAt: publishedAt,
     );
   }
@@ -47,7 +45,6 @@ mixin _$Article {
   String? get thumbnailUrl => throw _privateConstructorUsedError;
   String get link => throw _privateConstructorUsedError;
   ArticleAuthor get author => throw _privateConstructorUsedError;
-  bool get isFavorite => throw _privateConstructorUsedError;
   DateTime get publishedAt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -64,7 +61,6 @@ abstract class $ArticleCopyWith<$Res> {
       String? thumbnailUrl,
       String link,
       ArticleAuthor author,
-      bool isFavorite,
       DateTime publishedAt});
 
   $ArticleAuthorCopyWith<$Res> get author;
@@ -85,7 +81,6 @@ class _$ArticleCopyWithImpl<$Res> implements $ArticleCopyWith<$Res> {
     Object? thumbnailUrl = freezed,
     Object? link = freezed,
     Object? author = freezed,
-    Object? isFavorite = freezed,
     Object? publishedAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -109,10 +104,6 @@ class _$ArticleCopyWithImpl<$Res> implements $ArticleCopyWith<$Res> {
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
               as ArticleAuthor,
-      isFavorite: isFavorite == freezed
-          ? _value.isFavorite
-          : isFavorite // ignore: cast_nullable_to_non_nullable
-              as bool,
       publishedAt: publishedAt == freezed
           ? _value.publishedAt
           : publishedAt // ignore: cast_nullable_to_non_nullable
@@ -139,7 +130,6 @@ abstract class _$ArticleCopyWith<$Res> implements $ArticleCopyWith<$Res> {
       String? thumbnailUrl,
       String link,
       ArticleAuthor author,
-      bool isFavorite,
       DateTime publishedAt});
 
   @override
@@ -162,7 +152,6 @@ class __$ArticleCopyWithImpl<$Res> extends _$ArticleCopyWithImpl<$Res>
     Object? thumbnailUrl = freezed,
     Object? link = freezed,
     Object? author = freezed,
-    Object? isFavorite = freezed,
     Object? publishedAt = freezed,
   }) {
     return _then(_Article(
@@ -186,10 +175,6 @@ class __$ArticleCopyWithImpl<$Res> extends _$ArticleCopyWithImpl<$Res>
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
               as ArticleAuthor,
-      isFavorite: isFavorite == freezed
-          ? _value.isFavorite
-          : isFavorite // ignore: cast_nullable_to_non_nullable
-              as bool,
       publishedAt: publishedAt == freezed
           ? _value.publishedAt
           : publishedAt // ignore: cast_nullable_to_non_nullable
@@ -207,7 +192,6 @@ class _$_Article implements _Article {
       required this.thumbnailUrl,
       required this.link,
       required this.author,
-      required this.isFavorite,
       required this.publishedAt});
 
   @override
@@ -221,13 +205,11 @@ class _$_Article implements _Article {
   @override
   final ArticleAuthor author;
   @override
-  final bool isFavorite;
-  @override
   final DateTime publishedAt;
 
   @override
   String toString() {
-    return 'Article(id: $id, title: $title, thumbnailUrl: $thumbnailUrl, link: $link, author: $author, isFavorite: $isFavorite, publishedAt: $publishedAt)';
+    return 'Article(id: $id, title: $title, thumbnailUrl: $thumbnailUrl, link: $link, author: $author, publishedAt: $publishedAt)';
   }
 
   @override
@@ -245,9 +227,6 @@ class _$_Article implements _Article {
                 const DeepCollectionEquality().equals(other.link, link)) &&
             (identical(other.author, author) ||
                 const DeepCollectionEquality().equals(other.author, author)) &&
-            (identical(other.isFavorite, isFavorite) ||
-                const DeepCollectionEquality()
-                    .equals(other.isFavorite, isFavorite)) &&
             (identical(other.publishedAt, publishedAt) ||
                 const DeepCollectionEquality()
                     .equals(other.publishedAt, publishedAt)));
@@ -261,7 +240,6 @@ class _$_Article implements _Article {
       const DeepCollectionEquality().hash(thumbnailUrl) ^
       const DeepCollectionEquality().hash(link) ^
       const DeepCollectionEquality().hash(author) ^
-      const DeepCollectionEquality().hash(isFavorite) ^
       const DeepCollectionEquality().hash(publishedAt);
 
   @JsonKey(ignore: true)
@@ -277,7 +255,6 @@ abstract class _Article implements Article {
       required String? thumbnailUrl,
       required String link,
       required ArticleAuthor author,
-      required bool isFavorite,
       required DateTime publishedAt}) = _$_Article;
 
   @override
@@ -290,8 +267,6 @@ abstract class _Article implements Article {
   String get link => throw _privateConstructorUsedError;
   @override
   ArticleAuthor get author => throw _privateConstructorUsedError;
-  @override
-  bool get isFavorite => throw _privateConstructorUsedError;
   @override
   DateTime get publishedAt => throw _privateConstructorUsedError;
   @override

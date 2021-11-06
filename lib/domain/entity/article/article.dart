@@ -11,7 +11,6 @@ class Article with _$Article {
     required String? thumbnailUrl,
     required String link,
     required ArticleAuthor author,
-    required bool isFavorite,
     required DateTime publishedAt,
   }) = _Article;
 }

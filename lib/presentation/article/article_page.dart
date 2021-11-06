@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/presentation/article/model/article_list_type.dart';
 import 'package:kadai_info_flutter/presentation/article/widget/article_list/article_list.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ArticlePage extends HookConsumerWidget {
   const ArticlePage({Key? key}) : super(key: key);
@@ -32,7 +33,11 @@ class ArticlePage extends HookConsumerWidget {
         child: TabBarView(
           controller: tabController,
           children: types.map((type) {
-            return ArticleList(type: type);
+            return ArticleList(
+              type: type,
+              key: PageStorageKey(type),
+              refreshController: RefreshController(),
+            );
           }).toList(),
         ),
       ),

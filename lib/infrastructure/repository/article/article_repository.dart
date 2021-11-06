@@ -25,7 +25,6 @@ class ArticleRepository implements IArticleRepository {
       success: (data) {
         return Result.success(ArticleFavorite(
           articleId: data.id,
-          createdAt: data.createdAt,
           isFavorite: data.isFavorite,
         ));
       },
@@ -41,18 +40,54 @@ class ArticleRepository implements IArticleRepository {
     required int perPage,
     List<ArticleCategory> categories = const [],
     List<String> include = const [],
+    bool isFavorite = false,
   }) async {
+    if (isFavorite) {
+      final localResult =
+          await sqf.findAllArticles(limit: perPage, offset: page - 1);
+      return await localResult.when(
+        success: (localData) async {
+          final ids = localData.articles.map((e) => e.id).toList();
+          if (ids.isEmpty) {
+            return const Result.success(
+              ArticleCollection(),
+            );
+          }
+          final result = await wp.postList(include: ids, perPage: perPage);
+          return await result.when(
+            success: (data) {
+              final articles =
+                  data.body.map((e) => _toArticle(post: e)).toList();
+              final collection = ArticleCollection(
+                articles: articles,
+                hasNext: localData.hasNext,
+                hasPrevious: localData.hasPrevious,
+              );
+              return Result.success(collection);
+            },
+            failure: (error) {
+              return Result.failure(error);
+            },
+          );
+        },
+        failure: (error) {
+          return Result.failure(error);
+        },
+      );
+    }
     final result = await wp.postList(
       page: page,
       perPage: perPage,
       categories: categories,
+      include: include,
+      categoriesExclude: [48],
     );
     return result.when(
       success: (data) {
         final articles = data.body.map((e) => _toArticle(post: e)).toList();
         final header = data.header;
-        final hasNext = header.xWPTotalPages > page;
-        final hasPrevious = page > 1;
+        final hasNext = header.link.contains('rel="next"');
+        final hasPrevious = header.link.contains('rel="prev"');
         final collection = ArticleCollection(
           articles: articles,
           hasNext: hasNext,
@@ -73,7 +108,6 @@ class ArticleRepository implements IArticleRepository {
       success: (data) {
         final favorite = ArticleFavorite(
           articleId: articleId,
-          createdAt: data.createdAt,
           isFavorite: data.isFavorite,
         );
         return Result.success(favorite);
@@ -98,9 +132,25 @@ class ArticleRepository implements IArticleRepository {
       thumbnailUrl: post.embedded.medias.first.details.sizes.medium?.sourceUrl,
       link: post.link,
       author: _author,
-      isFavorite: false,
       publishedAt: post.date,
     );
     return _article;
+  }
+
+  @override
+  Future<Result<ArticleFavorite>> getFavorite(String articleId) async {
+    final result = await sqf.existArticle(articleId);
+    return result.when(
+      success: (data) {
+        final favorite = ArticleFavorite(
+          articleId: articleId,
+          isFavorite: data?.isFavorite ?? false,
+        );
+        return Result.success(favorite);
+      },
+      failure: (error) {
+        return Result.failure(Exception(error));
+      },
+    );
   }
 }

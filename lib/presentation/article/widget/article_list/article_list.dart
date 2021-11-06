@@ -31,6 +31,7 @@ class ArticleList extends HookConsumerWidget {
       controller: refreshController,
       onRefresh: () async {
         await controller.reload();
+        refreshController.refreshCompleted();
       },
       child: state.when(
         data: (data) {

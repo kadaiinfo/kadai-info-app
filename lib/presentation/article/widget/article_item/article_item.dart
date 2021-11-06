@@ -156,8 +156,8 @@ class _Thumbnail extends StatelessWidget {
           aspectRatio: 1.91 / 1,
           child: thumbnailUrl != null
               ? Image.network(thumbnailUrl!, fit: BoxFit.cover)
-              : Image.network(
-                  'https://i0.wp.com/www.communitycom.jp/shop/wp-content/uploads/2019/11/eyecatch_img_01.png?fit=1130%2C593&ssl=1',
+              : Image.asset(
+                  'asset/image/no_image.png',
                   fit: BoxFit.cover,
                 ),
         ),

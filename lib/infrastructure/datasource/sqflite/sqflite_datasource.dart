@@ -18,7 +18,7 @@ class SqfliteDatasource implements ISqfliteDatasource {
       _articleTableName,
       offset: offset,
       limit: limit,
-      orderBy: SQFArticle.keyCreatedAt,
+      orderBy: '${SQFArticle.keyCreatedAt} DESC',
     );
     final allCount = Sqflite.firstIntValue(
           await db.rawQuery('SELECT count(*) FROM $_articleTableName'),

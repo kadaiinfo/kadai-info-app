@@ -7,13 +7,18 @@ import 'package:sqflite/sqflite.dart';
 
 class SqfliteDatasource implements ISqfliteDatasource {
   static const _articleTableName = 'article';
+  static late final Database db;
+
+  /// 初期化
+  static Future<void> init() async {
+    db = await _getArticleDatabase();
+  }
 
   @override
   Future<Result<SQFArticleTable>> findAllArticles({
     required int limit,
     required int offset,
   }) async {
-    final db = await _getArticleDatabase();
     final articleMaps = await db.query(
       _articleTableName,
       offset: offset,
@@ -33,7 +38,7 @@ class SqfliteDatasource implements ISqfliteDatasource {
     return Result.success(table);
   }
 
-  Future<Database> _getArticleDatabase() async {
+  static Future<Database> _getArticleDatabase() async {
     try {
       try {
         final Database db = await openDatabase(
@@ -63,7 +68,6 @@ class SqfliteDatasource implements ISqfliteDatasource {
   @override
   Future<Result<SQFArticle>> deleteArticle(String articleId) async {
     try {
-      final db = await _getArticleDatabase();
       await db.delete(
         _articleTableName,
         where: '${SQFArticle.keyId}=?',
@@ -83,7 +87,6 @@ class SqfliteDatasource implements ISqfliteDatasource {
   @override
   Future<Result<SQFArticle>> saveArticle(String articleId) async {
     try {
-      final db = await _getArticleDatabase();
       final article = SQFArticle(
         id: articleId,
         createdAt: DateTime.now(),
@@ -103,7 +106,6 @@ class SqfliteDatasource implements ISqfliteDatasource {
 
   @override
   Future<Result<SQFArticle?>> existArticle(String articleId) async {
-    final db = await _getArticleDatabase();
     final data = await db.query(_articleTableName,
         where: '${SQFArticle.keyId}=?', whereArgs: [articleId], limit: 1);
     if (data.isEmpty) {

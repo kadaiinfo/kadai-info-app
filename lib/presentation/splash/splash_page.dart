@@ -16,7 +16,11 @@ class SplashPage extends ConsumerWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             return const HomePage();
           }
-          return Container();
+          return const Center(
+            child: Image(
+              image: AssetImage('asset/icon/icon.png'),
+            ),
+          );
         },
       ),
     );

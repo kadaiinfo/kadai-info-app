@@ -31,7 +31,7 @@ class _BinanBijoContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ContentItem(
+    return const ContentItem(
       imagePath: 'asset/image/no_image.png',
       title: '美男美女',
       page: BinanBijoPage(),
@@ -46,8 +46,8 @@ class _CircleContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ContentItem(
-      imagePath: 'asset/image/no_image.png',
+    return const ContentItem(
+      imagePath: 'asset/image/circle/artboard.png',
       title: 'サークル',
       page: CircleGenrePage(),
     );

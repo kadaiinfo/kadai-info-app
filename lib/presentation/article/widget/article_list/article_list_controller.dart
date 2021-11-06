@@ -32,17 +32,17 @@ class ArticleListController
           );
     result.when(
       success: (data) {
-        if (data.hasNext) {
-          _page++;
-        }
         final asyncData = state.asData;
         final List<ArticleModel> allArticles = [];
-        if (asyncData != null) {
+        if (asyncData != null && _page != 1) {
           final oldArticles = asyncData.value.articles;
           allArticles.addAll(oldArticles);
         }
         final newArticles = ArticleListState.from(data).articles;
         allArticles.addAll(newArticles);
+        if (data.hasNext) {
+          _page++;
+        }
         if (asyncData != null) {
           state = AsyncData(
               asyncData.value.copyWith(articles: allArticles.toSet().toList()));

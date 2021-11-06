@@ -18,7 +18,9 @@ class ArticleFavoriteButtonController
     final result = await app.isFavorite(articleId);
     result.when(
       success: (data) {
-        state = ArticleFavoriteButtonState(isFavorite: data.isFavorite);
+        if (mounted) {
+          state = ArticleFavoriteButtonState(isFavorite: data.isFavorite);
+        }
       },
       failure: (error) {},
     );
@@ -29,7 +31,9 @@ class ArticleFavoriteButtonController
     final result = await app.registerFavorite(articleId);
     result.when(
       success: (data) {
-        state = ArticleFavoriteButtonState(isFavorite: data.isFavorite);
+        if (mounted) {
+          state = ArticleFavoriteButtonState(isFavorite: data.isFavorite);
+        }
       },
       failure: (error) {},
     );
@@ -37,6 +41,14 @@ class ArticleFavoriteButtonController
 
   /// 記事のお気に入り解除
   Future<void> releaseFavorite() async {
-    state = ArticleFavoriteButtonState(isFavorite: false);
+    final result = await app.releaseFavorite(articleId);
+    result.when(
+      success: (data) {
+        if (mounted) {
+          state = ArticleFavoriteButtonState(isFavorite: data.isFavorite);
+        }
+      },
+      failure: (error) {},
+    );
   }
 }

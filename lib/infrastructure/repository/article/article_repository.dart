@@ -43,8 +43,8 @@ class ArticleRepository implements IArticleRepository {
     bool isFavorite = false,
   }) async {
     if (isFavorite) {
-      final localResult =
-          await sqf.findAllArticles(limit: perPage, offset: page - 1);
+      final localResult = await sqf.findAllArticles(
+          limit: perPage, offset: (page - 1) * perPage);
       return await localResult.when(
         success: (localData) async {
           final ids = localData.articles.map((e) => e.id).toList();

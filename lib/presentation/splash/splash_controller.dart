@@ -8,7 +8,7 @@ final splashController = Provider<SplashController>(
 class SplashController {
   Future<void> setup() async {
     await Future.wait([
-      Future.delayed(const Duration(seconds: 3)),
+      Future.delayed(const Duration(seconds: 1)),
       SqfliteDatasource.init(),
     ]);
   }

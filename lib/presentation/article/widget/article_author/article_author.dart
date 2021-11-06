@@ -75,8 +75,8 @@ class _AuthorThumbnail extends StatelessWidget {
               ? NetworkImage(
                   author.thumbnailUrl!,
                 )
-              : NetworkImage(
-                  'https://i0.wp.com/www.communitycom.jp/shop/wp-content/uploads/2019/11/eyecatch_img_01.png?fit=1130%2C593&ssl=1',
+              : const AssetImage(
+                  'asset/image/no_image.png',
                 ) as ImageProvider,
         ),
       ),

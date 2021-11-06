@@ -3,6 +3,7 @@ import 'package:kadai_info_flutter/domain/entity/article/article.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_author.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_category.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_collection.dart';
+import 'package:kadai_info_flutter/domain/entity/article/article_favorite.dart';
 import 'package:kadai_info_flutter/domain/repository/article/i_article_repository.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/i_sqflite_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/i_wordpress_datasource.dart';
@@ -18,9 +19,20 @@ class ArticleRepository implements IArticleRepository {
   final ISqfliteDatasource sqf;
 
   @override
-  Future<Result<Article>> deleteArticle(String articleId) {
-    // TODO: implement deleteArticle
-    throw UnimplementedError();
+  Future<Result<ArticleFavorite>> deleteArticle(String articleId) async {
+    final result = await sqf.deleteArticle(articleId);
+    return result.when(
+      success: (data) {
+        return Result.success(ArticleFavorite(
+          articleId: data.id,
+          createdAt: data.createdAt,
+          isFavorite: data.isFavorite,
+        ));
+      },
+      failure: (error) {
+        return Result.failure(Exception(error));
+      },
+    );
   }
 
   @override
@@ -28,6 +40,7 @@ class ArticleRepository implements IArticleRepository {
     required int page,
     required int perPage,
     List<ArticleCategory> categories = const [],
+    List<String> include = const [],
   }) async {
     final result = await wp.postList(
       page: page,
@@ -36,11 +49,7 @@ class ArticleRepository implements IArticleRepository {
     );
     return result.when(
       success: (data) {
-        final articles = data.body
-            .map(
-              (e) => _toArticle(post: e),
-            )
-            .toList();
+        final articles = data.body.map((e) => _toArticle(post: e)).toList();
         final header = data.header;
         final hasNext = header.xWPTotalPages > page;
         final hasPrevious = page > 1;
@@ -58,9 +67,21 @@ class ArticleRepository implements IArticleRepository {
   }
 
   @override
-  Future<Result<Article>> saveArticle(String articleId) async {
-    // await sqf.saveArticle(article);
-    throw Exception();
+  Future<Result<ArticleFavorite>> saveArticle(String articleId) async {
+    final result = await sqf.saveArticle(articleId);
+    return result.when(
+      success: (data) {
+        final favorite = ArticleFavorite(
+          articleId: articleId,
+          createdAt: data.createdAt,
+          isFavorite: data.isFavorite,
+        );
+        return Result.success(favorite);
+      },
+      failure: (error) {
+        return Result.failure(Exception(error));
+      },
+    );
   }
 
   Article _toArticle({required WPPost post}) {

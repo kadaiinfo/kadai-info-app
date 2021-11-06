@@ -5,6 +5,7 @@ import 'package:kadai_info_flutter/core/exception/network_exception.dart';
 import 'package:kadai_info_flutter/core/result/result.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_category.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/i_wordpress_datasource.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_post.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_post_list_response.dart';
 
 class WordpressDatasource implements IWordpressDatasource {
@@ -22,6 +23,7 @@ class WordpressDatasource implements IWordpressDatasource {
     int perPage = 10,
     List<ArticleCategory> categories = const [],
     List<int> categoriesExclude = const [],
+    List<String> include = const [],
   }) async {
     try {
       final categoriesString =
@@ -66,5 +68,11 @@ class WordpressDatasource implements IWordpressDatasource {
       default:
         return '';
     }
+  }
+
+  @override
+  Future<Result<WPPost>> post({required String articleId}) {
+    // TODO: implement post
+    throw UnimplementedError();
   }
 }

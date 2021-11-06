@@ -1,7 +1,7 @@
 import 'package:kadai_info_flutter/core/result/result.dart';
-import 'package:kadai_info_flutter/domain/entity/article/article.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_category.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_collection.dart';
+import 'package:kadai_info_flutter/domain/entity/article/article_favorite.dart';
 
 abstract class IArticleRepository {
   /// 記事ページの取得
@@ -9,11 +9,12 @@ abstract class IArticleRepository {
     required int page,
     required int perPage,
     List<ArticleCategory> categories = const [],
+    List<String> include = const [],
   });
 
   /// 記事の保存
-  Future<Result<Article>> saveArticle(String articleId);
+  Future<Result<ArticleFavorite>> saveArticle(String articleId);
 
   /// 記事の削除
-  Future<Result<Article>> deleteArticle(String articleId);
+  Future<Result<ArticleFavorite>> deleteArticle(String articleId);
 }

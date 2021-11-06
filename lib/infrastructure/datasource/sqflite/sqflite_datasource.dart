@@ -66,36 +66,33 @@ class SqfliteDatasource implements ISqfliteDatasource {
   }
 
   @override
-  Future<Result<SQFArticle?>> deleteArticle(String articleId) async {
+  Future<Result<SQFArticle>> deleteArticle(String articleId) async {
     try {
       final db = await _getArticleDatabase();
-      final data = await db.query(
+      await db.delete(
         _articleTableName,
         where: articleId,
         whereArgs: [SQFArticle.keyId],
       );
-      if (data.isEmpty) {
-        return const Result.success(null);
-      } else {
-        await db.delete(
-          _articleTableName,
-          where: articleId,
-          whereArgs: [SQFArticle.keyId],
-        );
-        return const Result.success(null);
-      }
+      final article = SQFArticle(
+        id: articleId,
+        createdAt: DateTime.now(),
+        isFavorite: false,
+      );
+      return Result.success(article);
     } catch (e) {
       return Result.failure(Exception(e));
     }
   }
 
   @override
-  Future<Result<SQFArticle?>> saveArticle(String articleId) async {
+  Future<Result<SQFArticle>> saveArticle(String articleId) async {
     try {
       final db = await _getArticleDatabase();
       final article = SQFArticle(
         id: articleId,
         createdAt: DateTime.now(),
+        isFavorite: true,
       );
       final data = article.toMap();
       await db.insert(
@@ -104,7 +101,8 @@ class SqfliteDatasource implements ISqfliteDatasource {
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
       return Result.success(article);
-    } catch (e) {}
-    throw Exception();
+    } catch (e) {
+      return Result.failure(Exception(e));
+    }
   }
 }

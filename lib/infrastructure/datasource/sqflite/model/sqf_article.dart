@@ -1,13 +1,16 @@
 class SQFArticle {
   static const keyId = 'id';
   static const keyCreatedAt = 'created_at';
+  static const keyIsFavorite = 'is_favorite';
 
   final String id;
   final DateTime createdAt;
+  final bool isFavorite;
 
   SQFArticle({
     required this.id,
     required this.createdAt,
+    required this.isFavorite,
   });
 
   /// データベースのデータから生成
@@ -15,6 +18,7 @@ class SQFArticle {
     return SQFArticle(
       id: map[keyId],
       createdAt: DateTime.fromMillisecondsSinceEpoch(map[keyCreatedAt]),
+      isFavorite: map[keyIsFavorite] == 1,
     );
   }
 
@@ -23,6 +27,7 @@ class SQFArticle {
     return {
       keyId: id,
       keyCreatedAt: createdAt.millisecondsSinceEpoch,
+      keyIsFavorite: isFavorite ? 1 : 0,
     };
   }
 }

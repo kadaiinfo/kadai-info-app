@@ -13,8 +13,8 @@ abstract class ISqfliteDatasource {
   Future<Result<SQFArticle>> findArticle(String articleId);
 
   /// 記事の保存
-  Future<Result<SQFArticle?>> saveArticle(String articleId);
+  Future<Result<SQFArticle>> saveArticle(String articleId);
 
   /// 記事の削除
-  Future<Result<SQFArticle?>> deleteArticle(String articleId);
+  Future<Result<SQFArticle>> deleteArticle(String articleId);
 }

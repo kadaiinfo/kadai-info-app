@@ -14,6 +14,7 @@ class ArticleApplication {
     required int page,
     required int perPage,
     List<ArticleCategory> categories = const [],
+    List<String> articleIds = const [],
   }) async {
     final result = await _repository.getArticleCollection(
       page: page,
@@ -38,5 +39,26 @@ class ArticleApplication {
   /// 記事のお気に入り解除
   Future<Result<Article>> releaseArticle(String articleId) async {
     throw Exception();
+  }
+
+  /// お気に入り記事一覧の取得
+  Future<Result<ArticleCollection>> getFavoriteArticleList({
+    required List<String> articleIds,
+    required int page,
+    required int perPage,
+  }) async {
+    final result = await getArticleList(
+      page: page,
+      perPage: perPage,
+      articleIds: articleIds,
+    );
+    return result.when(
+      success: (data) {
+        return Result.success(data);
+      },
+      failure: (error) {
+        return Result.failure(Exception(error));
+      },
+    );
   }
 }

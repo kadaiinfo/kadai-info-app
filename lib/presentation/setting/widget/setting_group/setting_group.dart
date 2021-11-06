@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kadai_info_flutter/presentation/setting/widget/setting_item/setting_navigation_item.dart';
+import 'package:kadai_info_flutter/presentation/setting/widget/setting_item/setting_notification_item.dart';
 import 'package:kadai_info_flutter/presentation/setting/widget/setting_item/setting_web_view_item.dart';
 
 class SettingGroup extends StatelessWidget {
@@ -36,7 +36,7 @@ class SettingGroup extends StatelessWidget {
 List<Widget> settingItems(String groupTitle) {
   if(groupTitle == '一般') {
     return const [
-      SettingNavigationItem(settingTitle: '通知')
+      SettingNotificationItem(settingTitle: '通知')
     ];
   } else if(groupTitle == 'このアプリについて') {
     return const [

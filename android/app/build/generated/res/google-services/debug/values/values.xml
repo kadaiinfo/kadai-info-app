@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">243267683169-vs3frmi6men92sjtel104q1js307pjni.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">243267683169</string>
+    <string name="google_api_key" translatable="false">AIzaSyDQ7dHYKIigwAutcwilqaD0xeA4gw2msnM</string>
+    <string name="google_app_id" translatable="false">1:243267683169:android:f461b962653a1018d0bb20</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDQ7dHYKIigwAutcwilqaD0xeA4gw2msnM</string>
+    <string name="google_storage_bucket" translatable="false">kadai-info-flutter.appspot.com</string>
+    <string name="project_id" translatable="false">kadai-info-flutter</string>
+</resources>

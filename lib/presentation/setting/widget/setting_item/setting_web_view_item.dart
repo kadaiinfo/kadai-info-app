@@ -16,9 +16,16 @@ class SettingWebViewItem extends StatelessWidget {
           color: Colors.white,
           width: double.maxFinite,
           padding: const EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 8.0),
-          child: Text(
-            settingTitle,
-            style: const TextStyle(color: Colors.black, fontSize: 18.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  settingTitle,
+                  style: const TextStyle(color: Colors.black, fontSize: 18.0),
+                ),
+              ),
+              const Icon(Icons.launch, size: 18.0, color: Colors.black26)
+            ],
           ),
         ),
         onTap: () {

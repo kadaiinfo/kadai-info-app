@@ -1,6 +1,6 @@
 name: kadai_info_flutter
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
@@ -26,6 +26,10 @@ dependencies:
   firebase_core: ^1.8.0
   firebase_messaging: ^10.0.9
   pull_to_refresh: ^2.0.0
+  android_intent: ^2.0.2
+  package_info: ^2.0.2
+  device_info_plus: ^3.1.1
+  app_settings: ^4.1.1
 
 dev_dependencies:
   flutter_test:

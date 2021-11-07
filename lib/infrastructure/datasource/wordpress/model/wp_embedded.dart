@@ -11,7 +11,8 @@ class WPEmbedded {
   WPEmbedded.fromMap(Map<String, dynamic> map)
       : authors =
             (map['author'] as List).map((e) => WPAuthor.fromMap(e)).toList(),
-        medias = (map['wp:featuredmedia'] as List)
-            .map((e) => WPFeatureMedia.fromMap(e))
-            .toList();
+        medias = (map['wp:featuredmedia'] as List?)
+                ?.map((e) => WPFeatureMedia.fromMap(e))
+                .toList() ??
+            [];
 }

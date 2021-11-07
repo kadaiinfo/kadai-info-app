@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:kadai_info_flutter/core/util/datetime_util.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article.dart';
 import 'package:kadai_info_flutter/presentation/article/model/article_author_model.dart';
 
-class ArticleModel {
+class ArticleModel extends Equatable {
   final String id;
   final String title;
   final String publishedAt;
@@ -10,7 +11,7 @@ class ArticleModel {
   final ArticleAuthorModel author;
   final String link;
 
-  ArticleModel._({
+  const ArticleModel._({
     required this.id,
     required this.title,
     required this.publishedAt,
@@ -29,4 +30,7 @@ class ArticleModel {
       link: article.link,
     );
   }
+
+  @override
+  List<Object?> get props => [id];
 }

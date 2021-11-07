@@ -44,7 +44,12 @@ class SplashPage extends ConsumerWidget {
             }
             return const HomePage();
           }
-          return Container();
+          return const Center(
+            child: Image(
+              image: AssetImage('asset/icon/splash_icon.png'),
+              fit: BoxFit.contain,
+            ),
+          );
         },
       ),
     );

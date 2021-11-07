@@ -11,7 +11,6 @@ class SettingGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 30.0),
-      color: Colors.grey[100],
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -25,7 +24,10 @@ class SettingGroup extends StatelessWidget {
                 border: Border(
                     top: BorderSide(width: 0.4, color: Colors.grey[400]!),
                     bottom: BorderSide(width: 0.4, color: Colors.grey[400]!))),
-            child: Column(children: settingItems(groupTitle, )),
+            child: Column(
+                children: settingItems(
+              groupTitle,
+            )),
           )
         ],
       ),
@@ -34,15 +36,16 @@ class SettingGroup extends StatelessWidget {
 }
 
 List<Widget> settingItems(String groupTitle) {
-  if(groupTitle == '一般') {
+  if (groupTitle == '一般') {
+    return const [SettingNotificationItem(settingTitle: '通知')];
+  } else if (groupTitle == 'このアプリについて') {
     return const [
-      SettingNotificationItem(settingTitle: '通知')
-    ];
-  } else if(groupTitle == 'このアプリについて') {
-    return const [
-      SettingWebViewItem(settingTitle: 'KADAI INFOについて', settingUrl: 'https://kadai-info.com/lp/about-us/'),
+      SettingWebViewItem(
+          settingTitle: 'KADAI INFOについて',
+          settingUrl: 'https://kadai-info.com/lp/about-us/'),
       Divider(height: 0.5, indent: 15.0, endIndent: 15.0),
-      SettingWebViewItem(settingTitle: 'お問い合わせ', settingUrl: 'https://kadai-info.com/contact/')
+      SettingWebViewItem(
+          settingTitle: 'お問い合わせ', settingUrl: 'https://kadai-info.com/contact/')
     ];
   } else {
     return [];

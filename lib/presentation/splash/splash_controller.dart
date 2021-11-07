@@ -3,19 +3,23 @@ import 'dart:io';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info/package_info.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/sqflite_datasource.dart';
 
 final splashController = Provider<SplashController>(
   (ref) => SplashController(),
 );
 
 class SplashController {
-  // Future<void> setup() async {
-  //   await Future.wait([
-  //     Future.delayed(const Duration(seconds: 1)),
-  //   ]);
-  // }
+  Future<Map<String, bool>> setup() async {
+    await Future.wait([
+      Future.delayed(const Duration(seconds: 1)),
+      SqfliteDatasource.init(),
+    ]);
+    final isShouldUpdate = await _shouldUpdate();
+    return {'shouldUpdate': isShouldUpdate};
+  }
 
-  Future<bool> shouldUpdate() async {
+  Future<bool> _shouldUpdate() async {
     final packageInfo = await PackageInfo.fromPlatform();
     final version = packageInfo.version;
 

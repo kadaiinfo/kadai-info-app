@@ -30,8 +30,9 @@ class WordpressDatasource implements IWordpressDatasource {
           categories.map((e) => _categoryToString(e)).toList();
       final categoriesParam = _listToString(categoriesString);
       final categoriesExcludeParam = _listToString(categoriesExclude);
+      final includeParam = _listToString(include);
       final url =
-          '$_baseUrl/posts?page=$page&per_page=$perPage&categories=$categoriesParam&categories_exclude=$categoriesExcludeParam&$_commonParams';
+          '$_baseUrl/posts?page=$page&per_page=$perPage&categories=$categoriesParam&categories_exclude=$categoriesExcludeParam&$_commonParams&include=$includeParam';
       final response = await _dio.get(url);
       if (response.statusCode == 200) {
         final data = WPPostListResponse.fromResponse(response);

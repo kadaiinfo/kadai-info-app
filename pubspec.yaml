@@ -25,12 +25,14 @@ dependencies:
   webview_flutter: ^2.1.2
   firebase_core: ^1.8.0
   firebase_messaging: ^10.0.9
+  pull_to_refresh: ^2.0.0
   android_intent: ^2.0.2
   package_info: ^2.0.2
   device_info_plus: ^3.1.1
   app_settings: ^4.1.1
   firebase_remote_config: ^0.11.0+2
   launch_review: ^3.0.1
+  url_launcher: ^6.0.6
 
 dev_dependencies:
   flutter_test:
@@ -43,8 +45,13 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "asset/image/icon.png"
+  image_path: "asset/icon/icon.png"
 
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - asset/
+    - asset/image/
+    - asset/icon/
+    - asset/image/circle/

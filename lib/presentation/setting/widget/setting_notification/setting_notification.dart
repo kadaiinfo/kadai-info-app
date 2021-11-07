@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:android_intent/android_intent.dart';
 import 'package:app_settings/app_settings.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:package_info/package_info.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:package_info/package_info.dart';
 
 class SettingNotification extends HookConsumerWidget {
   const SettingNotification({Key? key, required this.notificationSettings})
@@ -22,7 +22,7 @@ class SettingNotification extends HookConsumerWidget {
     //     : false);
 
     return Scaffold(
-      appBar: AppBar(toolbarHeight: 0),
+      appBar: AppBar(),
       body: SafeArea(
           child: Column(children: [
         Container(

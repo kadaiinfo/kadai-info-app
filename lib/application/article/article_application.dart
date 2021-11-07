@@ -1,7 +1,7 @@
 import 'package:kadai_info_flutter/core/result/result.dart';
-import 'package:kadai_info_flutter/domain/entity/article/article.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_category.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article_collection.dart';
+import 'package:kadai_info_flutter/domain/entity/article/article_favorite.dart';
 import 'package:kadai_info_flutter/domain/repository/article/i_article_repository.dart';
 
 class ArticleApplication {
@@ -32,25 +32,26 @@ class ArticleApplication {
   }
 
   /// 記事のお気に入り登録
-  Future<Result<Article>> favoriteArticle(String articleId) async {
-    throw Exception();
+  Future<Result<ArticleFavorite>> registerFavorite(String articleId) async {
+    final result = _repository.saveArticle(articleId);
+    return result;
   }
 
   /// 記事のお気に入り解除
-  Future<Result<Article>> releaseArticle(String articleId) async {
-    throw Exception();
+  Future<Result<ArticleFavorite>> releaseFavorite(String articleId) async {
+    final result = _repository.deleteArticle(articleId);
+    return result;
   }
 
   /// お気に入り記事一覧の取得
   Future<Result<ArticleCollection>> getFavoriteArticleList({
-    required List<String> articleIds,
     required int page,
     required int perPage,
   }) async {
-    final result = await getArticleList(
+    final result = await _repository.getArticleCollection(
       page: page,
       perPage: perPage,
-      articleIds: articleIds,
+      isFavorite: true,
     );
     return result.when(
       success: (data) {
@@ -60,5 +61,11 @@ class ArticleApplication {
         return Result.failure(Exception(error));
       },
     );
+  }
+
+  /// お気に入りか確認
+  Future<Result<ArticleFavorite>> isFavorite(String articleId) async {
+    final result = await _repository.getFavorite(articleId);
+    return result;
   }
 }

@@ -9,14 +9,14 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(toolbarHeight: 0),
-        body: SafeArea(
-          child: ListView.builder(
-            itemBuilder: (context, index) {
-              return SettingGroup(groupTitle: settingGroupTitleList[index]);
-            },
-            itemCount: settingGroupTitleList.length,
-          ),
-        ));
+      body: SafeArea(
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            return SettingGroup(groupTitle: settingGroupTitleList[index]);
+          },
+          itemCount: settingGroupTitleList.length,
+        ),
+      ),
+    );
   }
 }

@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NavigatorUtil {
+  NavigatorUtil._();
+
   static Future push({
     required BuildContext context,
     required Widget page,

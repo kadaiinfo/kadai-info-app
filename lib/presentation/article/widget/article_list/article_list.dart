@@ -5,6 +5,7 @@ import 'package:kadai_info_flutter/presentation/article/model/article_list_type.
 import 'package:kadai_info_flutter/presentation/article/widget/article_list/article_list_controller_provider.dart';
 import 'package:kadai_info_flutter/presentation/common/error_text/error_text.dart';
 import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../article_item/article_item.dart';
 
@@ -12,18 +13,25 @@ class ArticleList extends HookConsumerWidget {
   const ArticleList({
     Key? key,
     required this.type,
+    required this.refreshController,
   }) : super(key: key);
 
   final ArticleListType type;
+  final RefreshController refreshController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(articleListControllerProvider(type));
     final controller = ref.read(articleListControllerProvider(type).notifier);
     final scrollController = useScrollController();
-    return RefreshIndicator(
+    useEffect(() {
+      scrollController.addListener(() => _listener(scrollController, ref.read));
+    }, const []);
+    return SmartRefresher(
+      controller: refreshController,
       onRefresh: () async {
         await controller.reload();
+        refreshController.refreshCompleted();
       },
       child: state.when(
         data: (data) {
@@ -50,5 +58,14 @@ class ArticleList extends HookConsumerWidget {
         error: (error, stack, _) => ErrorText(error),
       ),
     );
+  }
+
+  /// スクロール位置によって更新するためのリスナー
+  void _listener(ScrollController controller, Reader reader) {
+    final maxScrollExtent = controller.position.maxScrollExtent;
+    final currentPosition = controller.position.pixels;
+    if (maxScrollExtent > 0 && (maxScrollExtent - 20.0) <= currentPosition) {
+      reader(articleListControllerProvider(type).notifier).load();
+    }
   }
 }

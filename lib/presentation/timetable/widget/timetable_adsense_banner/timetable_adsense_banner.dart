@@ -10,7 +10,7 @@ class TimetableAdsenseBanner extends StatelessWidget {
       aspectRatio: 520 / 100,
       child: Container(
         color: Colors.blue,
-        child: Text('広告バナー'),
+        child: const Text('広告バナー'),
       ),
     );
   }

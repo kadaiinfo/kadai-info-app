@@ -12,13 +12,12 @@ class SplashPage extends ConsumerWidget {
     final controller = ref.read(splashController);
     return Scaffold(
       body: FutureBuilder(
-        future: controller.shouldUpdate(),
-        builder: (context, snapshot) {
+        future: controller.setup(),
+        builder: (context, AsyncSnapshot<Map<String, bool>> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            if (!snapshot.hasData || snapshot.hasError) {
-              return Container(color: Colors.white);
-            }
-            if (snapshot.data == true) {
+            if (!snapshot.hasData || snapshot.hasError) return Container(color: Colors.white);
+            if (snapshot.data == null) return Container(color: Colors.white);
+            if (snapshot.data!['shouldUpdate'] == true) {
               WidgetsBinding.instance!.addPostFrameCallback((_) async {
                 await showDialog(
                     context: context,

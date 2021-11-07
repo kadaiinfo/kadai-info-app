@@ -38,3 +38,6 @@ vendor/
 
 # firebase
 **/GoogleService-Info.plist
+
+# provisioningFile
+**/*.mobileprovision

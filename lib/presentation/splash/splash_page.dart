@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:launch_review/launch_review.dart';
 import 'package:kadai_info_flutter/presentation/home/home_page.dart';
+import 'package:kadai_info_flutter/presentation/splash/model/setup_model.dart';
 import 'package:kadai_info_flutter/presentation/splash/splash_controller.dart';
+import 'package:launch_review/launch_review.dart';
 
 class SplashPage extends ConsumerWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -13,11 +14,9 @@ class SplashPage extends ConsumerWidget {
     return Scaffold(
       body: FutureBuilder(
         future: controller.setup(),
-        builder: (context, AsyncSnapshot<Map<String, bool>> snapshot) {
+        builder: (context, AsyncSnapshot<SetupModel> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            if (!snapshot.hasData || snapshot.hasError) return Container(color: Colors.white);
-            if (snapshot.data == null) return Container(color: Colors.white);
-            if (snapshot.data!['shouldUpdate'] == true) {
+            if (snapshot.data?.shouldUpdate ?? false) {
               WidgetsBinding.instance!.addPostFrameCallback((_) async {
                 await showDialog(
                     context: context,

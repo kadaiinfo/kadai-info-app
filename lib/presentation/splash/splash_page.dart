@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/presentation/splash/widget/update_dialog.dart';
 import 'package:kadai_info_flutter/presentation/home/home_page.dart';
+import 'package:kadai_info_flutter/presentation/splash/model/setup_model.dart';
 import 'package:kadai_info_flutter/presentation/splash/splash_controller.dart';
 
 class SplashPage extends ConsumerWidget {
@@ -13,7 +14,7 @@ class SplashPage extends ConsumerWidget {
     return Scaffold(
       body: FutureBuilder(
         future: controller.setup(),
-        builder: (context, AsyncSnapshot<Map<String, bool>> snapshot) {
+        builder: (context, AsyncSnapshot<SetupModel> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (!snapshot.hasData || snapshot.hasError) {
               return const Center(child: CircularProgressIndicator());
@@ -21,7 +22,7 @@ class SplashPage extends ConsumerWidget {
             if (snapshot.data == null) {
               return const Center(child: CircularProgressIndicator());
             }
-            if (snapshot.data!['shouldUpdate'] == true) {
+            if (snapshot.data?.shouldUpdate ?? false) {
               WidgetsBinding.instance!.addPostFrameCallback((_) async {
                 await showDialog(
                     context: context,

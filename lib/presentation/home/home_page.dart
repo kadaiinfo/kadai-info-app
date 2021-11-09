@@ -1,7 +1,9 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/presentation/article/article_page.dart';
 import 'package:kadai_info_flutter/presentation/balance/balance_page.dart';
+import 'package:kadai_info_flutter/presentation/binan_bijo/binan_bijo_page.dart';
 import 'package:kadai_info_flutter/presentation/content/content_page.dart';
 import 'package:kadai_info_flutter/presentation/home/home_controller.dart';
 import 'package:kadai_info_flutter/presentation/setting/setting_page.dart';
@@ -52,17 +54,25 @@ class HomePage extends ConsumerWidget {
         onTap: controller.selectTab,
         type: BottomNavigationBarType.fixed,
       ),
-      floatingActionButton: FloatingActionButton.large(
-          backgroundColor: const Color(0xFFF6D968),
-          child: const CircleAvatar(
-              minRadius: 24.0,
-              backgroundColor: Color(0xFFF6D968),
+      floatingActionButton: OpenContainer(
+        transitionType: ContainerTransitionType.fade,
+        transitionDuration: const Duration(milliseconds: 400),
+        openBuilder: (context, action) {
+          return const BinanBijoPage();
+        },
+        closedElevation: 8.0,
+        closedColor: const Color(0xFFF6D967),
+        closedShape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(50.0))),
+        closedBuilder: (context, action) {
+          return const CircleAvatar(
+              maxRadius: 50.0,
+              minRadius: 35.0,
+              backgroundColor: Color(0xFFF6D967),
               backgroundImage:
-                  AssetImage('asset/logo/binanbijo2021/binanbijo2021logo.png')),
-          onPressed: () {
-            print('tap');
-          }),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+                  AssetImage('asset/logo/binanbijo2021/binanbijo2021logo.png'));
+        },
+      ),
     );
   }
 }

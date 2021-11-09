@@ -33,6 +33,7 @@ dependencies:
   firebase_remote_config: ^0.11.0+2
   launch_review: ^3.0.1
   url_launcher: ^6.0.6
+  animations: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -55,4 +56,5 @@ flutter:
     - asset/image/
     - asset/icon/
     - asset/image/circle/
+    - asset/image/binanbijo2021/
     - asset/logo/binanbijo2021/

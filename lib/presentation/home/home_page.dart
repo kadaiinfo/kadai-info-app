@@ -52,6 +52,17 @@ class HomePage extends ConsumerWidget {
         onTap: controller.selectTab,
         type: BottomNavigationBarType.fixed,
       ),
+      floatingActionButton: FloatingActionButton.large(
+          backgroundColor: const Color(0xFFF6D968),
+          child: const CircleAvatar(
+              minRadius: 24.0,
+              backgroundColor: Color(0xFFF6D968),
+              backgroundImage:
+                  AssetImage('asset/logo/binanbijo2021/binanbijo2021logo.png')),
+          onPressed: () {
+            print('tap');
+          }),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

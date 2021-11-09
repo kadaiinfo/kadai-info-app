@@ -10,7 +10,7 @@ class ContentFooter extends StatelessWidget {
       aspectRatio: 520 / 100,
       child: Container(
         color: Colors.blue,
-        child: Text('フッター'),
+        child: const Text('フッター'),
       ),
     );
   }

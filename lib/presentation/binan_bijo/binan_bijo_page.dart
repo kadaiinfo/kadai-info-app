@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kadai_info_flutter/presentation/binan_bijo/widget/binanbijo_description.dart';
+import 'package:kadai_info_flutter/presentation/binan_bijo/widget/binanbijo_tabs/binanbijo_tabs.dart';
 
 /// 美男美女投票画面
 class BinanBijoPage extends StatelessWidget {
@@ -14,10 +15,13 @@ class BinanBijoPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('美男美女SNAP2021'),
       ),
-      body: Column(
-        children: const [
-          BinanBijoDescription()
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            BinanBijoDescription(),
+            BinanBijoTabs()
+          ],
+        ),
       ),
     );
   }

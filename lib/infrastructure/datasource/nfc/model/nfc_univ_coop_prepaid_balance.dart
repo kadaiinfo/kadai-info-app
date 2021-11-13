@@ -1,5 +1,7 @@
 import 'dart:typed_data';
 
+import 'package:kadai_info_flutter/core/extension/uint8list_extension.dart';
+
 /// 大学生協の残額情報
 class NfcUnivCoopPrepaidBalance {
   /// 残額
@@ -14,12 +16,11 @@ class NfcUnivCoopPrepaidBalance {
   });
 
   factory NfcUnivCoopPrepaidBalance.from(Uint8List block) {
-    final balanceData =
-        Uint8List.fromList(block.sublist(0, 4).reversed.toList());
-    final countData = block.sublist(13, 17);
+    final balanceData = block.sublist(0, 4);
+    final countData = block.sublist(13, 16);
     return NfcUnivCoopPrepaidBalance(
-      balance: balanceData.buffer.asByteData().getInt32(0),
-      count: int.parse(countData.join()),
+      balance: balanceData.toNumberFromLittleEndian,
+      count: countData.toNumberFromHex,
     );
   }
 }

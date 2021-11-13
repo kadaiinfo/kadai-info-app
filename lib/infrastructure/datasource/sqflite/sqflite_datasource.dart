@@ -7,7 +7,7 @@ import 'package:sqflite/sqflite.dart';
 
 class SqfliteDatasource implements ISqfliteDatasource {
   static const _articleTableName = 'article';
-  static late final Database db;
+  static late Database db;
 
   /// 初期化
   static Future<void> init() async {

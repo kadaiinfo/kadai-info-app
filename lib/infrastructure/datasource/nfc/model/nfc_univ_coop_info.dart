@@ -1,3 +1,7 @@
+import 'dart:typed_data';
+
+import 'package:kadai_info_flutter/core/extension/uint8list_extension.dart';
+import 'package:kadai_info_flutter/core/util/datetime_util.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_member_type.dart';
 
 /// 大学生協の基本情報
@@ -28,4 +32,29 @@ class NfcUnivCoopInfo {
     required this.point,
     required this.isMealUser,
   });
+
+  factory NfcUnivCoopInfo.from(List<Uint8List> blockData) {
+    final idData = blockData[0].sublist(0, 6);
+    final memberTypeData = blockData[0][6];
+    final isMealUserData = blockData[1][0];
+    final yearData = blockData[1].sublist(2, 3);
+    final monthData = blockData[1].sublist(3, 4);
+    final dayData = blockData[1].sublist(4, 5);
+    final amountData = blockData[1].sublist(5, 8);
+    final pointData = blockData[2].sublist(0, 4);
+    final updatedAt = DateTime(
+      yearData.toNumberFromHex + 2000,
+      monthData.toNumberFromHex,
+      dayData.toNumberFromHex,
+    );
+    return NfcUnivCoopInfo(
+      amount: amountData.toNumberFromHex,
+      id: '${idData.toNumberFromHex}',
+      memberType: memberTypeData.toMemberShip,
+      updatedAt: updatedAt,
+      point: pointData.toNumberFromBigEndian,
+      isMealUser:
+          isMealUserData == 1 && DateTimeUtil.isThisSchoolYear(updatedAt),
+    );
+  }
 }

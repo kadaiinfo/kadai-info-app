@@ -36,11 +36,11 @@ class NfcFeliCaReadWithoutEncryptionResponse {
     const blockSize = 16;
     final List<Uint8List> blockData = [];
     for (int i = 0; i < allBlockData.length; i += blockSize) {
-      final List<int> block = allBlockData.sublist(i, i + blockSize);
+      final block = allBlockData.sublist(i, i + blockSize);
       blockData.add(Uint8List.fromList(block));
     }
     return NfcFeliCaReadWithoutEncryptionResponse(
-      statusFlag2: data[10] == 0,
+      statusFlag2: data[11] == 0,
       statusFlag1: data[10] == 0,
       idm: data.sublist(2, 10),
       responseCode: data.sublist(1, 1),

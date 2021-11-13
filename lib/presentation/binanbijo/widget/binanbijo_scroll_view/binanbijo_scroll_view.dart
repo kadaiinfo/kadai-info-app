@@ -15,50 +15,48 @@ class BinanBijoScrollView extends HookConsumerWidget {
     final _tabColorState = ref.watch(tabBarColorControllerProvider);
     final _tabColorController =
         ref.watch(tabBarColorControllerProvider.notifier);
+    final _tabTextStyle = DefaultTextStyle.of(context)
+        .style
+        .apply(fontWeightDelta: 3, fontSizeFactor: 1.8);
+    final _width = MediaQuery.of(context).size.width;
     return NestedScrollView(
       controller: _scrollController,
       headerSliverBuilder: (context, value) {
         return [
           const SliverToBoxAdapter(child: BinanBijoDescription()),
           SliverToBoxAdapter(
-            child: Row(
-              children: [
-                Expanded(flex: 1, child: Container()),
-                Expanded(
-                  flex: 5,
-                  child: TabBar(
-                    labelStyle: const TextStyle(
-                        fontSize: 22.0, fontWeight: FontWeight.bold),
-                    unselectedLabelStyle:
-                        const TextStyle(fontWeight: FontWeight.bold),
-                    indicatorColor: _tabColorState.indicatorColor,
-                    indicatorWeight: 3.0,
-                    controller: _tabController,
-                    tabs: [
-                      Tab(
-                          child: Text('Girls',
-                              style:
-                                  TextStyle(color: _tabColorState.girlsColor))),
-                      Tab(
-                          child: Text('Boys',
-                              style:
-                                  TextStyle(color: _tabColorState.boysColor)))
-                    ],
-                    onTap: (index) {
-                      _tabColorController.onTap(index);
-                    },
-                  ),
-                ),
-                Expanded(flex: 1, child: Container())
-              ],
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: _width * 0.14),
+              child: TabBar(
+                unselectedLabelStyle: _tabTextStyle,
+                indicatorColor: _tabColorState.indicatorColor,
+                indicatorWeight: 3.0,
+                controller: _tabController,
+                tabs: [
+                  Tab(
+                      child: Text('Girls',
+                          style: _tabTextStyle.apply(
+                              color: _tabColorState.girlsColor))),
+                  Tab(
+                      child: Text('Boys',
+                          style: _tabTextStyle.apply(
+                              color: _tabColorState.boysColor)))
+                ],
+                onTap: (index) {
+                  _tabColorController.onTap(index);
+                },
+              ),
             ),
           )
         ];
       },
-      body: TabBarView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: _tabController,
-          children: const [BinanBijoCandidates(), BinanBijoCandidates()]),
+      body: Padding(
+        padding: EdgeInsets.only(top: _width * 0.05),
+        child: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: _tabController,
+            children: const [BinanBijoCandidates(), BinanBijoCandidates()]),
+      ),
     );
   }
 }

@@ -10,7 +10,7 @@ class BinanBijoCandidates extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final width = MediaQuery.of(context).size.width;
+    final _width = MediaQuery.of(context).size.width;
     final _candidateProvider = ref.watch(binanbijoCandidatesControllerProvider);
     return _candidateProvider.when(
         error: ((_, __, ___) =>
@@ -27,11 +27,11 @@ class BinanBijoCandidates extends HookConsumerWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    crossAxisSpacing: width * 0.04,
-                    mainAxisSpacing: width * 0.02),
+                    crossAxisSpacing: _width * 0.04,
+                    mainAxisSpacing: _width * 0.02),
                 children: [
                   for (final candidate in candidates)
-                    if (candidate.canVoted) _canVotedTile(candidate, width),
+                    if (candidate.canVoted) _canVotedTile(candidate, _width),
                 ]),
             const BinanbijoExternalLinkButton()
           ]);

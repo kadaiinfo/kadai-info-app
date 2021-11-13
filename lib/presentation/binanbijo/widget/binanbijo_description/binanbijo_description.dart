@@ -8,6 +8,9 @@ class BinanBijoDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _defaultTextStyle =
+        DefaultTextStyle.of(context).style.apply(color: bbsBlack);
+    // final _width = MediaQuery.of(context).size.width;
     return Column(
       children: [
         Container(
@@ -17,47 +20,49 @@ class BinanBijoDescription extends StatelessWidget {
               'asset/logo/binanbijo2021/binanbijo2021logo-alpha.png'),
           height: 160.0,
         ),
-        const Padding(
-          padding: EdgeInsets.only(top: 10.0, bottom: 6.0),
+        Padding(
+          padding: EdgeInsets.only(
+              top: _defaultTextStyle.fontSize! * 0.8,
+              bottom: _defaultTextStyle.fontSize! * 0.4),
           child: Text('美男美女SNAP2021',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17.0,
-                  color: bbsBlack)),
+              style: _defaultTextStyle.apply(
+                  fontWeightDelta: 2, fontSizeFactor: 1.2)),
         ),
         Container(
-            padding:
-                const EdgeInsets.symmetric(vertical: 6.0, horizontal: 28.0),
+            padding: EdgeInsets.symmetric(
+                vertical: _defaultTextStyle.fontSize! * 0.25,
+                horizontal: _defaultTextStyle.fontSize! * 2.0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24.0), color: bbsYellow),
-            child: const Text(
+            child: Text(
               '投票ページ',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 24.0, color: bbsBlack),
+              style: _defaultTextStyle.apply(
+                  fontWeightDelta: 2, fontSizeFactor: 1.8),
             )),
-        const Padding(
-          padding: EdgeInsets.only(top: 12.0),
-          child: Text('頑張る鹿大生を応援しよう！', style: TextStyle(color: bbsBlack)),
+        Padding(
+          padding: EdgeInsets.only(top: _defaultTextStyle.fontSize! * 1.0),
+          child: Text('頑張る鹿大生を応援しよう！', style: _defaultTextStyle),
         ),
-        const Padding(
-          padding: EdgeInsets.only(bottom: 12.0),
-          child: Text('１日男女２票ずつ投票できます！', style: TextStyle(color: bbsBlack)),
+        Padding(
+          padding: EdgeInsets.only(bottom: _defaultTextStyle.fontSize! * 0.5),
+          child: Text('１日男女２票ずつ投票できます！', style: _defaultTextStyle),
         ),
         Row(children: [
-          Expanded(flex: 6, child: Container()),
+          Expanded(flex: 3, child: Container()),
           Expanded(
-              flex: 10,
+              flex: 5,
               child:
                   Image.asset('asset/image/binanbijo2021/student_heart.png')),
           Expanded(flex: 1, child: Container()),
           Expanded(
-              flex: 10,
+              flex: 5,
               child:
                   Image.asset('asset/image/binanbijo2021/general_heart.png')),
-          Expanded(flex: 6, child: Container())
+          Expanded(flex: 3, child: Container())
         ]),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5.0),
+          padding:
+              EdgeInsets.symmetric(vertical: _defaultTextStyle.fontSize! * 0.5),
           child: OutlinedButton.icon(
               style: ButtonStyle(
                   side: MaterialStateProperty.all(
@@ -65,7 +70,7 @@ class BinanBijoDescription extends StatelessWidget {
                   foregroundColor: MaterialStateProperty.all(bbsBlack),
                   overlayColor: MaterialStateProperty.all(Colors.black12),
                   textStyle: MaterialStateProperty.all(
-                      const TextStyle(fontWeight: FontWeight.bold))),
+                      _defaultTextStyle.apply(fontWeightDelta: 2))),
               onPressed: () {},
               icon: const Icon(Icons.expand_less),
               label: const Text('鹿大生登録の方法を見る')),

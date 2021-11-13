@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:kadai_info_flutter/core/util/datetime_util.dart';
+import 'package:kadai_info_flutter/core/extension/datetime_extension.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article.dart';
 import 'package:kadai_info_flutter/presentation/article/model/article_author_model.dart';
 
@@ -24,7 +24,7 @@ class ArticleModel extends Equatable {
     return ArticleModel._(
       id: article.id,
       title: article.title,
-      publishedAt: DateTimeUtil.toDot(article.publishedAt),
+      publishedAt: article.publishedAt.toDot,
       thumbnailUrl: article.thumbnailUrl,
       author: ArticleAuthorModel.from(article.author),
       link: article.link,

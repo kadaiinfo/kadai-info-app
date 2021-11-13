@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/presentation/article/article_page.dart';
 import 'package:kadai_info_flutter/presentation/balance/balance_page.dart';
-import 'package:kadai_info_flutter/presentation/binan_bijo/binan_bijo_page.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/binanbijo_page.dart';
 import 'package:kadai_info_flutter/presentation/content/content_page.dart';
 import 'package:kadai_info_flutter/presentation/home/home_controller.dart';
 import 'package:kadai_info_flutter/presentation/setting/setting_page.dart';
@@ -58,7 +58,7 @@ class HomePage extends ConsumerWidget {
         transitionType: ContainerTransitionType.fade,
         transitionDuration: const Duration(milliseconds: 400),
         openBuilder: (context, action) {
-          return const BinanBijoPage();
+          return const BinanbijoPage();
         },
         closedElevation: 8.0,
         closedColor: const Color(0xFFF6D967),

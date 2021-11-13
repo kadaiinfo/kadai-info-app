@@ -40,11 +40,17 @@ class SplashController {
       fetchTimeout: const Duration(seconds: 10),
       minimumFetchInterval: Duration.zero,
     ));
-    await remoteConfig.fetchAndActivate();
 
-    final iosOrAndroid = Platform.isIOS ? 'ios_version' : 'android_version';
-    final requiredVersion = remoteConfig.getString(iosOrAndroid);
-    final flag = version != requiredVersion;
+    bool flag = false;
+    try {
+      await remoteConfig.fetchAndActivate();
+    } catch (e) {
+      print(e);
+    } finally {
+      final iosOrAndroid = Platform.isIOS ? 'ios_version' : 'android_version';
+      final requiredVersion = remoteConfig.getString(iosOrAndroid);
+      flag = version != requiredVersion;
+    }
     return (flag) ? true : false;
   }
 }

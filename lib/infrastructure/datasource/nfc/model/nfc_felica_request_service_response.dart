@@ -10,10 +10,10 @@ class NfcFeliCaRequestServiceResponse {
     required this.statusFlag1,
   });
 
-  factory NfcFeliCaRequestServiceResponse.from(Uint8List block) {
+  factory NfcFeliCaRequestServiceResponse.from(Uint8List data) {
     return NfcFeliCaRequestServiceResponse(
-      statusFlag2: block[11] == 0,
-      statusFlag1: block[12] == 0,
+      statusFlag2: data[11] == 0,
+      statusFlag1: data[12] == 0,
     );
   }
 }

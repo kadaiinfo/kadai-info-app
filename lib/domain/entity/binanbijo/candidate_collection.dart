@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kadai_info_flutter/domain/entity/binanbijo2021/candidate.dart';
+import 'package:kadai_info_flutter/domain/entity/binanbijo/candidate.dart';
 
 part 'candidate_collection.freezed.dart';
 

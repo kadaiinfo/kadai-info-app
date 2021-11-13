@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidates/external_link_button.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidates/binanbijo_external_link_button.dart';
 
 class BinanBijoCandidates extends HookConsumerWidget {
   const BinanBijoCandidates({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class BinanBijoCandidates extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ListView(physics: const ClampingScrollPhysics(), children: [
       for (final string in ['a', 'b', 'c', 'd', 'e']) row(),
-      const ExternalLinkButton()
+      const BinanbijoExternalLinkButton()
     ]);
   }
 }

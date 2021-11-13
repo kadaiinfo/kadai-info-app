@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_description/binanbijo_description.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidates/binanbijo_candidates.dart';
-import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_tabs/controller/tab_bar_color_controller_provider.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_scroll_view/controller/tab_bar_color_controller_provider.dart';
 
 class BinanBijoScrollView extends HookConsumerWidget {
   const BinanBijoScrollView({Key? key}) : super(key: key);

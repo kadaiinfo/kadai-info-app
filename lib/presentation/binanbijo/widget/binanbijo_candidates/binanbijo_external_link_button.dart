@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ExternalLinkButton extends StatelessWidget {
-  const ExternalLinkButton({Key? key}) : super(key: key);
+class BinanbijoExternalLinkButton extends StatelessWidget {
+  const BinanbijoExternalLinkButton({Key? key}) : super(key: key);
 
   static const bbsBlack = Color(0xFF250B0D);
 

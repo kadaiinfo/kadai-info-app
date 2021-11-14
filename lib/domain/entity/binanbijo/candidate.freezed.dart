@@ -22,13 +22,15 @@ class _$CandidateTearOff {
       required int entryNumber,
       required String pictureUrl,
       required String description,
-      required bool canVoted}) {
+      required bool canVoted,
+      required String gender}) {
     return _Candidate(
       name: name,
       entryNumber: entryNumber,
       pictureUrl: pictureUrl,
       description: description,
       canVoted: canVoted,
+      gender: gender,
     );
   }
 }
@@ -43,6 +45,7 @@ mixin _$Candidate {
   String get pictureUrl => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   bool get canVoted => throw _privateConstructorUsedError;
+  String get gender => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CandidateCopyWith<Candidate> get copyWith =>
@@ -58,7 +61,8 @@ abstract class $CandidateCopyWith<$Res> {
       int entryNumber,
       String pictureUrl,
       String description,
-      bool canVoted});
+      bool canVoted,
+      String gender});
 }
 
 /// @nodoc
@@ -76,6 +80,7 @@ class _$CandidateCopyWithImpl<$Res> implements $CandidateCopyWith<$Res> {
     Object? pictureUrl = freezed,
     Object? description = freezed,
     Object? canVoted = freezed,
+    Object? gender = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -98,6 +103,10 @@ class _$CandidateCopyWithImpl<$Res> implements $CandidateCopyWith<$Res> {
           ? _value.canVoted
           : canVoted // ignore: cast_nullable_to_non_nullable
               as bool,
+      gender: gender == freezed
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -113,7 +122,8 @@ abstract class _$CandidateCopyWith<$Res> implements $CandidateCopyWith<$Res> {
       int entryNumber,
       String pictureUrl,
       String description,
-      bool canVoted});
+      bool canVoted,
+      String gender});
 }
 
 /// @nodoc
@@ -132,6 +142,7 @@ class __$CandidateCopyWithImpl<$Res> extends _$CandidateCopyWithImpl<$Res>
     Object? pictureUrl = freezed,
     Object? description = freezed,
     Object? canVoted = freezed,
+    Object? gender = freezed,
   }) {
     return _then(_Candidate(
       name: name == freezed
@@ -154,6 +165,10 @@ class __$CandidateCopyWithImpl<$Res> extends _$CandidateCopyWithImpl<$Res>
           ? _value.canVoted
           : canVoted // ignore: cast_nullable_to_non_nullable
               as bool,
+      gender: gender == freezed
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -166,7 +181,8 @@ class _$_Candidate implements _Candidate {
       required this.entryNumber,
       required this.pictureUrl,
       required this.description,
-      required this.canVoted});
+      required this.canVoted,
+      required this.gender});
 
   @override
   final String name;
@@ -178,10 +194,12 @@ class _$_Candidate implements _Candidate {
   final String description;
   @override
   final bool canVoted;
+  @override
+  final String gender;
 
   @override
   String toString() {
-    return 'Candidate(name: $name, entryNumber: $entryNumber, pictureUrl: $pictureUrl, description: $description, canVoted: $canVoted)';
+    return 'Candidate(name: $name, entryNumber: $entryNumber, pictureUrl: $pictureUrl, description: $description, canVoted: $canVoted, gender: $gender)';
   }
 
   @override
@@ -201,7 +219,9 @@ class _$_Candidate implements _Candidate {
                     .equals(other.description, description)) &&
             (identical(other.canVoted, canVoted) ||
                 const DeepCollectionEquality()
-                    .equals(other.canVoted, canVoted)));
+                    .equals(other.canVoted, canVoted)) &&
+            (identical(other.gender, gender) ||
+                const DeepCollectionEquality().equals(other.gender, gender)));
   }
 
   @override
@@ -211,7 +231,8 @@ class _$_Candidate implements _Candidate {
       const DeepCollectionEquality().hash(entryNumber) ^
       const DeepCollectionEquality().hash(pictureUrl) ^
       const DeepCollectionEquality().hash(description) ^
-      const DeepCollectionEquality().hash(canVoted);
+      const DeepCollectionEquality().hash(canVoted) ^
+      const DeepCollectionEquality().hash(gender);
 
   @JsonKey(ignore: true)
   @override
@@ -225,7 +246,8 @@ abstract class _Candidate implements Candidate {
       required int entryNumber,
       required String pictureUrl,
       required String description,
-      required bool canVoted}) = _$_Candidate;
+      required bool canVoted,
+      required String gender}) = _$_Candidate;
 
   @override
   String get name => throw _privateConstructorUsedError;
@@ -237,6 +259,8 @@ abstract class _Candidate implements Candidate {
   String get description => throw _privateConstructorUsedError;
   @override
   bool get canVoted => throw _privateConstructorUsedError;
+  @override
+  String get gender => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CandidateCopyWith<_Candidate> get copyWith =>

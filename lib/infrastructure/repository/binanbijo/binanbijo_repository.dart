@@ -22,6 +22,7 @@ class BinanbijoRepository implements IBinanbijoRepository {
         entryNumber: post.entryNumber,
         pictureUrl: post.picture.url,
         description: post.description,
-        canVoted: post.canVoted);
+        canVoted: post.canVoted,
+        gender: post.gender.first);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:kadai_info_flutter/domain/entity/binanbijo/candidate.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_gender_model.dart';
 
 class BinanbijoCandidateModel extends Equatable {
   final String name;
@@ -7,13 +8,15 @@ class BinanbijoCandidateModel extends Equatable {
   final String pictureUrl;
   final String description;
   final bool canVoted;
+  final Gender gender;
 
   const BinanbijoCandidateModel._(
       {required this.name,
       required this.entryNumber,
       required this.pictureUrl,
       required this.description,
-      required this.canVoted});
+      required this.canVoted,
+      required this.gender});
 
   factory BinanbijoCandidateModel.from(Candidate candidate) {
     return BinanbijoCandidateModel._(
@@ -21,7 +24,9 @@ class BinanbijoCandidateModel extends Equatable {
         entryNumber: candidate.entryNumber,
         pictureUrl: candidate.pictureUrl,
         description: candidate.description,
-        canVoted: candidate.canVoted);
+        canVoted: candidate.canVoted,
+        gender:
+            (candidate.gender == Gender.male.jp) ? Gender.male : Gender.female);
   }
 
   @override

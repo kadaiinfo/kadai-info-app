@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_gender_model.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidate_tile/binanbijo_candidate_tile.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidates/binanbijo_candidates_controller_provider.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidates/binanbijo_external_link_button.dart';
 import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
 
 class BinanBijoCandidates extends ConsumerWidget {
-  const BinanBijoCandidates({Key? key}) : super(key: key);
+  const BinanBijoCandidates({Key? key, required this.gender}) : super(key: key);
+
+  final Gender gender;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,7 +33,7 @@ class BinanBijoCandidates extends ConsumerWidget {
                     mainAxisSpacing: _width * 0.02),
                 children: [
                   for (final candidate in candidates)
-                    if (candidate.canVoted)
+                    if (candidate.canVoted && candidate.gender == gender)
                       BinanbijoCandidateTile(candidate: candidate),
                 ]),
             const BinanbijoExternalLinkButton()

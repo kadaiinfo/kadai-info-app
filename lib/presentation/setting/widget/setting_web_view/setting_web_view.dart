@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SettingWebView extends ConsumerWidget {
@@ -21,7 +22,7 @@ class SettingWebView extends ConsumerWidget {
                 future: _check,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const LoadingIndicator();
                   } else {
                     return WebView(
                         initialUrl: url,

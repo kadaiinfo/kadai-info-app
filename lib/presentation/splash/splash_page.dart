@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
 import 'package:kadai_info_flutter/presentation/splash/widget/update_dialog.dart';
 import 'package:kadai_info_flutter/presentation/home/home_page.dart';
 import 'package:kadai_info_flutter/presentation/splash/model/setup_model.dart';
@@ -17,10 +18,10 @@ class SplashPage extends ConsumerWidget {
         builder: (context, AsyncSnapshot<SetupModel> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (!snapshot.hasData || snapshot.hasError) {
-              return const Center(child: CircularProgressIndicator());
+              return const LoadingIndicator();
             }
             if (snapshot.data == null) {
-              return const Center(child: CircularProgressIndicator());
+              return const LoadingIndicator();
             }
             if (snapshot.data?.shouldUpdate ?? false) {
               WidgetsBinding.instance!.addPostFrameCallback((_) async {

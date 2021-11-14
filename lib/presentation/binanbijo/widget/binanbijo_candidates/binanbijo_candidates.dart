@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidate_tile/binanbijo_candidate_tile.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidates/binanbijo_candidates_controller_provider.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidates/binanbijo_external_link_button.dart';
+import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
 
 class BinanBijoCandidates extends ConsumerWidget {
   const BinanBijoCandidates({Key? key}) : super(key: key);
@@ -12,12 +13,11 @@ class BinanBijoCandidates extends ConsumerWidget {
     final _width = MediaQuery.of(context).size.width;
     final _candidateProvider = ref.watch(binanbijoCandidatesControllerProvider);
     return _candidateProvider.when(
-        error: ((_, __, ___) =>
-            const Center(child: CircularProgressIndicator())),
-        loading: ((_) => const Center(child: CircularProgressIndicator())),
+        error: ((_, __, ___) => const LoadingIndicator()),
+        loading: ((_) => const LoadingIndicator()),
         data: ((candidates) {
           if (candidates == null) {
-            return const Center(child: CircularProgressIndicator());
+            return const LoadingIndicator();
           }
           candidates.shuffle();
           return ListView(physics: const ClampingScrollPhysics(), children: [

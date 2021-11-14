@@ -4,7 +4,7 @@ import 'package:kadai_info_flutter/infrastructure/datasource/micro_cms/i_micro_c
 import 'package:kadai_info_flutter/infrastructure/datasource/micro_cms/model/mc_binanbijo_list_response.dart';
 
 class MicroCmsDatasource implements IMicroCmsDatasource {
-  static const _baseUrl = 'https://bbs2021.microcms.io/api/v1/app';
+  static const _baseUrl = 'https://bbs2021.microcms.io/api/v1/app?limit=12';
   static const _defaultHeaders = {
     'X-MICROCMS-API-KEY': 'f6b8cde361284e42a2a402d1405a4055289e'
   };

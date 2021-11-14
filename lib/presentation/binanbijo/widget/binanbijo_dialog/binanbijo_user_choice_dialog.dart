@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kadai_info_flutter/core/util/navigator_util.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/controller/binanbijo_dialog_display_controller_provider.dart';
 
 class BinanbijoUserChoiceDialog extends ConsumerWidget {
   const BinanbijoUserChoiceDialog({Key? key}) : super(key: key);
@@ -11,6 +11,7 @@ class BinanbijoUserChoiceDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _width = MediaQuery.of(context).size.width;
+    final _displayController = ref.read(binanbijoDialogDisplayControllerProvider.notifier);
     return Dialog(
         shape: RoundedRectangleBorder(
             side: const BorderSide(color: _dialogBorderColor, width: 2.0),
@@ -42,7 +43,7 @@ class BinanbijoUserChoiceDialog extends ConsumerWidget {
                         child: Image.asset(
                             'asset/image/binanbijo2021/student_vote.png'),
                         onTap: () {
-                          Navigator.pop(context);
+                          _displayController.choiceUser();
                         },
                       )),
                   Expanded(
@@ -50,7 +51,9 @@ class BinanbijoUserChoiceDialog extends ConsumerWidget {
                       child: InkWell(
                           child: Image.asset(
                               'asset/image/binanbijo2021/general_vote.png'),
-                          onTap: () {})),
+                          onTap: () {
+                            _displayController.choiceUser();
+                          })),
                   Expanded(flex: 1, child: Container()),
                 ]),
               )

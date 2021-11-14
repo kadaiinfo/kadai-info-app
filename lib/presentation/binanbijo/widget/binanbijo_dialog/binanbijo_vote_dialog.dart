@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/controller/binanbijo_dialog_display_controller_provider.dart';
 
-class BinanbijoVoteDialog extends StatelessWidget {
+class BinanbijoVoteDialog extends ConsumerWidget {
   const BinanbijoVoteDialog({Key? key}) : super(key: key);
 
   static const _dialogBaseColor = Color(0xFFF8F8F8);
@@ -8,10 +10,11 @@ class BinanbijoVoteDialog extends StatelessWidget {
   static const _bbsBlack = Color(0xFF250B0D);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final _width = MediaQuery.of(context).size.width;
     final _defaultTextStyle =
         DefaultTextStyle.of(context).style.apply(fontWeightDelta: 2);
+    final _displayController = ref.read(binanbijoDialogDisplayControllerProvider.notifier);
     return Dialog(
       shape: RoundedRectangleBorder(
           side: const BorderSide(color: _dialogBorderColor),
@@ -38,15 +41,19 @@ class BinanbijoVoteDialog extends StatelessWidget {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _voteButton('はい', _defaultTextStyle),
-                    _voteButton('いいえ', _defaultTextStyle)
+                    _voteButton('はい', _defaultTextStyle, () {
+                      _displayController.vote();
+                    }),
+                    _voteButton('いいえ', _defaultTextStyle, () {
+                      _displayController.vote();
+                    })
                   ]))
         ]),
       ),
     );
   }
 
-  Widget _voteButton(String text, TextStyle textStyle) {
+  Widget _voteButton(String text, TextStyle textStyle, void Function() onTap) {
     return OutlinedButton(
         style: ButtonStyle(
           padding: MaterialStateProperty.all(
@@ -57,7 +64,7 @@ class BinanbijoVoteDialog extends StatelessWidget {
           foregroundColor: MaterialStateProperty.all(_bbsBlack),
           overlayColor: MaterialStateProperty.all(Colors.black12),
         ),
-        onPressed: () {},
+        onPressed: onTap,
         child: Text(text));
   }
 }

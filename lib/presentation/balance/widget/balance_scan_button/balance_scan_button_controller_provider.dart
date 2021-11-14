@@ -7,5 +7,6 @@ final balanceScanButtonControllerProvider =
     StateNotifierProvider<BalanceScanButtonController, BalanceScanButtonState>(
   (ref) => BalanceScanButtonController(
     app: ref.read(univCoopApplicationProvider),
+    reader: ref.read,
   ),
 );

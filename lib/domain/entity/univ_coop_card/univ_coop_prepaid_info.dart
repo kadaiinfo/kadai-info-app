@@ -5,11 +5,14 @@ class UnivCoopPrepaidInfo {
   /// 残高
   final int balance;
 
+  final int point;
+
   /// 利用履歴
   final List<UnivCoopPrepaidTransaction> transactions;
 
   UnivCoopPrepaidInfo({
     required this.balance,
     required this.transactions,
+    required this.point,
   });
 }

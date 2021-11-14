@@ -54,8 +54,8 @@ class ArticleList extends HookConsumerWidget {
             itemCount: articles.length,
           );
         },
-        loading: (_) => const LoadingIndicator(),
-        error: (error, stack, _) => ErrorText(error),
+        loading: () => const LoadingIndicator(),
+        error: (error, stack) => ErrorText(error),
       ),
     );
   }

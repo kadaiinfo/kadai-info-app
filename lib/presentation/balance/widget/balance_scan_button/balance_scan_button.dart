@@ -10,16 +10,13 @@ class BalanceScanButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isRunning = ref.watch(balanceScanButtonControllerProvider).isRunning;
     final controller = ref.read(balanceScanButtonControllerProvider.notifier);
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: isRunning
-            ? null
-            : () async {
-                await controller.scanBalance();
-              },
+        onPressed: () async {
+          await controller.scanICCard();
+        },
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.all(10),
           shape: RoundedRectangleBorder(

@@ -18,9 +18,9 @@ class App extends StatelessWidget {
           scheme: scheme,
           scaffoldBackground: Colors.grey[100],
         ).toTheme,
-        darkTheme: FlexColorScheme.dark(
-          scheme: scheme,
-        ).toTheme,
+        // darkTheme: FlexColorScheme.dark(
+        //   scheme: scheme,
+        // ).toTheme,
         themeMode: themeMode,
         home: const SplashPage(),
       ),

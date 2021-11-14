@@ -3,11 +3,10 @@ class UnivCoopMealPrepaidInfo {
   /// 残額
   final int balance;
 
-  /// 利用限度額
-  final int limit;
+  final bool isMealUser;
 
   UnivCoopMealPrepaidInfo({
     required this.balance,
-    required this.limit,
+    required this.isMealUser,
   });
 }

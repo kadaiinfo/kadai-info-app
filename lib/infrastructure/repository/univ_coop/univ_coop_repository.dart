@@ -1,4 +1,5 @@
 import 'package:kadai_info_flutter/core/result/result.dart';
+import 'package:kadai_info_flutter/core/util/datetime_util.dart';
 import 'package:kadai_info_flutter/domain/entity/univ_coop_card/univ_coop_card.dart';
 import 'package:kadai_info_flutter/domain/entity/univ_coop_card/univ_coop_meal_prepaid_info.dart';
 import 'package:kadai_info_flutter/domain/entity/univ_coop_card/univ_coop_prepaid_info.dart';
@@ -16,12 +17,19 @@ class UnivCoopRepository implements IUnivCoopRepository {
     try {
       final prepaidBalance = await _nfc.univCoopPrepaidBalance(tag);
       final info = await _nfc.univCoopInfo(tag);
-      final transactions = await _nfc.univCoopPrepaidTransactions(tag);
+      final transactions = await _nfc.univCoopPrepaidTransactions(
+        tag,
+        count: prepaidBalance.count > 10 ? 10 : prepaidBalance.count,
+      );
       final card = UnivCoopCard(
-        mealPrepaidInfo:
-            UnivCoopMealPrepaidInfo(balance: 1300 - info.point, limit: 1300),
+        mealPrepaidInfo: UnivCoopMealPrepaidInfo(
+          balance: 1300 -
+              (DateTimeUtil.isThisSchoolYear(info.updatedAt) ? info.amount : 0),
+          isMealUser: info.isMealUser,
+        ),
         prepaidInfo: UnivCoopPrepaidInfo(
           balance: prepaidBalance.balance,
+          point: info.point,
           transactions: transactions
               .map(
                 (e) => UnivCoopPrepaidTransaction(

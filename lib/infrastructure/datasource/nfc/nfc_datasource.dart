@@ -5,6 +5,7 @@ import 'package:kadai_info_flutter/infrastructure/datasource/nfc/i_nfc_datasourc
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_felica_polling_response.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_felica_read_without_encryption_response.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_felica_request_service_response.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_felica_type.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_info.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_prepaid_balance.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_prepaid_transaction.dart';
@@ -15,15 +16,15 @@ class NfcDatasource implements INfcDatasource {
   @override
   Future<NfcUnivCoopInfo> univCoopInfo(NfcTag tag) async {
     try {
-      final systemCode = [0xFE, 0x00];
       final serviceCode = [0x50, 0xCB];
-      final pollingRes = await _polling(tag: tag, systemCode: systemCode);
+      final pollingResponse = await _polling(tag, type: NfcFeliCaType.univ);
       final readWithoutEncryptionRes = await _readWithoutEncryption(
         tag: tag,
-        idm: pollingRes.idm,
+        idm: pollingResponse.idm,
         serviceCode: serviceCode,
         blockCount: 6,
       );
+      await _resetMode(tag: tag, idm: pollingResponse.idm);
       return NfcUnivCoopInfo.from(readWithoutEncryptionRes.blockData);
     } catch (e) {
       rethrow;
@@ -33,16 +34,16 @@ class NfcDatasource implements INfcDatasource {
   @override
   Future<NfcUnivCoopPrepaidBalance> univCoopPrepaidBalance(NfcTag tag) async {
     try {
-      final systemCode = [0xFE, 0x00];
       final serviceCode = [0x50, 0xD7];
-      final pollingRes = await _polling(tag: tag, systemCode: systemCode);
+      final pollingResponse = await _polling(tag, type: NfcFeliCaType.univ);
       final readWithoutEncryptionRes = await _readWithoutEncryption(
         tag: tag,
-        idm: pollingRes.idm,
+        idm: pollingResponse.idm,
         serviceCode: serviceCode,
         blockCount: 1,
       );
       final targetBlockData = readWithoutEncryptionRes.blockData.first;
+      await _resetMode(tag: tag, idm: pollingResponse.idm);
       return NfcUnivCoopPrepaidBalance.from(targetBlockData);
     } catch (e) {
       rethrow;
@@ -51,18 +52,19 @@ class NfcDatasource implements INfcDatasource {
 
   @override
   Future<List<NfcUnivCoopPrepaidTransaction>> univCoopPrepaidTransactions(
-    NfcTag tag,
-  ) async {
+    NfcTag tag, {
+    int count = 10,
+  }) async {
     try {
-      final systemCode = [0xFE, 0x00];
       final serviceCode = [0x50, 0xCF];
-      final pollingRes = await _polling(tag: tag, systemCode: systemCode);
+      final pollingResponse = await _polling(tag, type: NfcFeliCaType.univ);
       final readWithoutEncryptionRes = await _readWithoutEncryption(
         tag: tag,
-        idm: pollingRes.idm,
+        idm: pollingResponse.idm,
         serviceCode: serviceCode,
-        blockCount: 10,
+        blockCount: count,
       );
+      await _resetMode(tag: tag, idm: pollingResponse.idm);
       return readWithoutEncryptionRes.blockData
           .map((e) => NfcUnivCoopPrepaidTransaction.from(e))
           .toList();
@@ -72,33 +74,29 @@ class NfcDatasource implements INfcDatasource {
   }
 
   /// Polling
-  Future<NfcFeliCaPollingResponse> _polling({
-    required NfcTag tag,
-    required List<int> systemCode,
+  Future<NfcFeliCaPollingResponse> _polling(
+    NfcTag tag, {
+    required NfcFeliCaType type,
   }) async {
-    try {
-      final List<int> packet = [];
-      if (Platform.isAndroid) {
-        packet.add(0x06);
-      }
-      packet.add(0x00); // コマンドコード
-      packet.add(systemCode[0]);
-      packet.add(systemCode[1]);
-      packet.add(0x01); // リクエストコード
-      packet.add(0x0F);
+    final List<int> packet = [];
+    if (Platform.isAndroid) {
+      packet.add(0x06);
+    }
+    packet.add(0x00); // コマンドコード
+    packet.add(type.systemCode[0]);
+    packet.add(type.systemCode[1]);
+    packet.add(0x01); // リクエストコード
+    packet.add(0x0F);
 
-      final command = Uint8List.fromList(packet);
-      if (NfcF.from(tag) != null) {
-        final nfcF = NfcF.from(tag)!;
-        final block = await nfcF.transceive(data: command);
-        return NfcFeliCaPollingResponse.from(block);
-      } else if (FeliCa.from(tag) != null) {
-        final feliCa = FeliCa.from(tag)!;
-        final block = await feliCa.sendFeliCaCommand(command);
-        return NfcFeliCaPollingResponse.from(block);
-      }
-    } catch (e) {
-      rethrow;
+    final command = Uint8List.fromList(packet);
+    if (NfcF.from(tag) != null) {
+      final nfcF = NfcF.from(tag)!;
+      final block = await nfcF.transceive(data: command);
+      return NfcFeliCaPollingResponse.from(block);
+    } else if (FeliCa.from(tag) != null) {
+      final feliCa = FeliCa.from(tag)!;
+      final block = await feliCa.sendFeliCaCommand(command);
+      return NfcFeliCaPollingResponse.from(block);
     }
     throw Exception();
   }
@@ -109,30 +107,26 @@ class NfcDatasource implements INfcDatasource {
     required List<int> serviceCode,
     required NfcTag tag,
   }) async {
-    try {
-      final Uint8List nodeCodeList = Uint8List.fromList(serviceCode);
-      final List<int> packet = [];
-      if (Platform.isAndroid) {
-        packet.add(0x06);
-      }
-      packet.add(0x02);
-      packet.addAll(idm);
-      packet.add(nodeCodeList.elementSizeInBytes);
-      packet.add(serviceCode[1]);
-      packet.add(serviceCode[0]);
+    final Uint8List nodeCodeList = Uint8List.fromList(serviceCode);
+    final List<int> packet = [];
+    if (Platform.isAndroid) {
+      packet.add(0x06);
+    }
+    packet.add(0x02);
+    packet.addAll(idm);
+    packet.add(nodeCodeList.elementSizeInBytes);
+    packet.add(serviceCode[1]);
+    packet.add(serviceCode[0]);
 
-      final command = Uint8List.fromList(packet);
-      if (NfcF.from(tag) != null) {
-        final nfcF = NfcF.from(tag)!;
-        final block = await nfcF.transceive(data: command);
-        return NfcFeliCaRequestServiceResponse.from(block);
-      } else if (FeliCa.from(tag) != null) {
-        final feliCa = FeliCa.from(tag)!;
-        final block = await feliCa.sendFeliCaCommand(command);
-        return NfcFeliCaRequestServiceResponse.from(block);
-      }
-    } catch (e) {
-      rethrow;
+    final command = Uint8List.fromList(packet);
+    if (NfcF.from(tag) != null) {
+      final nfcF = NfcF.from(tag)!;
+      final block = await nfcF.transceive(data: command);
+      return NfcFeliCaRequestServiceResponse.from(block);
+    } else if (FeliCa.from(tag) != null) {
+      final feliCa = FeliCa.from(tag)!;
+      final block = await feliCa.sendFeliCaCommand(command);
+      return NfcFeliCaRequestServiceResponse.from(block);
     }
     throw Exception();
   }
@@ -144,40 +138,62 @@ class NfcDatasource implements INfcDatasource {
     required List<int> serviceCode,
     required int blockCount,
   }) async {
-    try {
-      final List<int> packet = [];
-      if (Platform.isAndroid) {
-        packet.add(0);
-      }
-      packet.add(0x06);
-      packet.addAll(idm);
-      packet.add(serviceCode.length ~/ 2);
+    final List<int> packet = [];
+    if (Platform.isAndroid) {
+      packet.add(0);
+    }
+    packet.add(0x06);
+    packet.addAll(idm);
+    packet.add(serviceCode.length ~/ 2);
 
-      packet.add(serviceCode[1]);
-      packet.add(serviceCode[0]);
-      packet.add(blockCount);
+    packet.add(serviceCode[1]);
+    packet.add(serviceCode[0]);
+    packet.add(blockCount);
 
-      for (int i = 0; i < blockCount; i++) {
-        packet.add(0x80);
-        packet.add(i);
-      }
-      if (Platform.isAndroid) {
-        packet[0] = packet.length;
-      }
+    for (int i = 0; i < blockCount; i++) {
+      packet.add(0x80);
+      packet.add(i);
+    }
+    if (Platform.isAndroid) {
+      packet[0] = packet.length;
+    }
 
-      final command = Uint8List.fromList(packet);
-      if (NfcF.from(tag) != null) {
-        final nfcF = NfcF.from(tag)!;
-        final data = await nfcF.transceive(data: command);
-        return NfcFeliCaReadWithoutEncryptionResponse.from(data);
-      } else if (FeliCa.from(tag) != null) {
-        final feliCa = FeliCa.from(tag)!;
-        final data = await feliCa.sendFeliCaCommand(command);
-        return NfcFeliCaReadWithoutEncryptionResponse.from(data);
-      }
-    } catch (e) {
-      rethrow;
+    final command = Uint8List.fromList(packet);
+    if (NfcF.from(tag) != null) {
+      final nfcF = NfcF.from(tag)!;
+      final data = await nfcF.transceive(data: command);
+      return NfcFeliCaReadWithoutEncryptionResponse.from(data);
+    } else if (FeliCa.from(tag) != null) {
+      final feliCa = FeliCa.from(tag)!;
+      final data = await feliCa.sendFeliCaCommand(command);
+      return NfcFeliCaReadWithoutEncryptionResponse.from(data);
     }
     throw Exception();
+  }
+
+  /// ResetMode
+  Future<void> _resetMode({
+    required NfcTag tag,
+    required Uint8List idm,
+  }) async {
+    final List<int> packet = [];
+
+    if (Platform.isAndroid) {
+      packet.add(5);
+    }
+    packet.add(0x3E);
+    packet.addAll(idm);
+    packet.add(0x00);
+    packet.add(0x00);
+
+    final command = Uint8List.fromList(packet);
+
+    if (NfcF.from(tag) != null) {
+      final nfcF = NfcF.from(tag)!;
+      await nfcF.transceive(data: command);
+    } else if (FeliCa.from(tag) != null) {
+      final feliCa = FeliCa.from(tag)!;
+      await feliCa.sendFeliCaCommand(command);
+    }
   }
 }

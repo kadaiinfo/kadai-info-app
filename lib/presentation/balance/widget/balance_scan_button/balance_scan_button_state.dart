@@ -1,5 +1,5 @@
 class BalanceScanButtonState {
-  /// 実行中か
+  /// スキャン中であるか
   final bool isRunning;
 
   BalanceScanButtonState({

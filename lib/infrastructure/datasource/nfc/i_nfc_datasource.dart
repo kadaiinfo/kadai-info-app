@@ -9,7 +9,9 @@ abstract class INfcDatasource {
 
   /// 大学生協のプリペイド利用履歴の取得
   Future<List<NfcUnivCoopPrepaidTransaction>> univCoopPrepaidTransactions(
-      NfcTag tag);
+    NfcTag tag, {
+    int count = 10,
+  });
 
   /// 大学生協のプリペイド残高情報の取得
   Future<NfcUnivCoopPrepaidBalance> univCoopPrepaidBalance(NfcTag tag);

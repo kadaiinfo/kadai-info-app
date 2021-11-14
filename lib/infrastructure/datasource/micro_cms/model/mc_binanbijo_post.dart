@@ -7,6 +7,7 @@ class McBinanbijoPost {
   final McPicture picture;
   final String description;
   final bool canVoted;
+  final List<String> gender;
 
   McBinanbijoPost.fromMap(Map<String, dynamic> map)
       : id = map['id'],
@@ -14,5 +15,6 @@ class McBinanbijoPost {
         entryNumber = map['entryNumber'],
         picture = McPicture.fromMap(map['picture']),
         description = map['description'],
-        canVoted = map['canVoted'];
+        canVoted = map['canVoted'],
+        gender = (map['gender'] as List).map((e) => e.toString()).toList();
 }

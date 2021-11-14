@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_tabs/model/tab_bar_color_model.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_scroll_view/model/tab_bar_color_model.dart';
 
 class TabBarColorController extends StateNotifier<TabBarColorModel> {
   TabBarColorController() : super(TabBarColorModel());

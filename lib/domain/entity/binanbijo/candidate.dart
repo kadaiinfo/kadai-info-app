@@ -9,6 +9,7 @@ class Candidate with _$Candidate {
     required int entryNumber,
     required String pictureUrl,
     required String description,
-    required bool canVoted
+    required bool canVoted,
+    required String gender
   }) = _Candidate;
 }

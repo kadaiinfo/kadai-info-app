@@ -15,8 +15,8 @@ class BinanbijoDialog extends ConsumerWidget {
     final _displayController =
         ref.watch(binanbijoDialogDisplayControllerProvider);
     return _displayController.when(
-        error: (_, __, ___) => const LoadingIndicator(),
-        loading: (_) => const LoadingIndicator(),
+        error: (_, __) => const LoadingIndicator(),
+        loading: () => const LoadingIndicator(),
         data: (display) {
           if (display == const BinanbijoDialogDisplayModel.choiceUser()) {
             return const BinanbijoUserChoiceDialog();

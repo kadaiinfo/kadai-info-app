@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidate_tile/binanbijo_candidate_tile_controller_provider.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/controller/binanbijo_dialog_display_controller_provider.dart';
 
 class BinanbijoVoteDialog extends ConsumerWidget {
@@ -14,7 +15,9 @@ class BinanbijoVoteDialog extends ConsumerWidget {
     final _width = MediaQuery.of(context).size.width;
     final _defaultTextStyle =
         DefaultTextStyle.of(context).style.apply(fontWeightDelta: 2);
-    final _displayController = ref.read(binanbijoDialogDisplayControllerProvider.notifier);
+    final _displayController = ref.watch(binanbijoDialogDisplayControllerProvider.notifier);
+    final _tileState = ref.read(binanbijoCandidateTileControllerProvider);
+
     return Dialog(
       shape: RoundedRectangleBorder(
           side: const BorderSide(color: _dialogBorderColor),
@@ -29,7 +32,7 @@ class BinanbijoVoteDialog extends ConsumerWidget {
           Expanded(
             flex: 2,
             child: Center(
-              child: Text('沙耶さんに投票しますか？',
+              child: Text('${_tileState.name}さんに投票しますか？',
                   style: DefaultTextStyle.of(context).style.apply(
                         fontWeightDelta: 2,
                         decoration: TextDecoration.underline,

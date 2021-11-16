@@ -18,6 +18,14 @@ class BinanbijoCandidateModel extends Equatable {
       required this.canVoted,
       required this.gender});
 
+  const BinanbijoCandidateModel.dummy(
+      {this.name = '',
+      this.entryNumber = 0,
+      this.pictureUrl = '',
+      this.description = '',
+      this.canVoted = false,
+      this.gender = Gender.male});
+
   factory BinanbijoCandidateModel.from(Candidate candidate) {
     return BinanbijoCandidateModel._(
         name: candidate.name,

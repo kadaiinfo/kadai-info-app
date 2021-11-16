@@ -6,19 +6,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/app.dart';
 
 Future<void> main() async {
-  try {
-    WidgetsFlutterBinding.ensureInitialized();
-    await SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp, //縦固定
-    ]);
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-    await Firebase.initializeApp();
-    // await FirebaseMessaging.instance.subscribeToTopic('article');
-  } catch (e) {
-    print(e);
-  } finally {
-    runApp(const ProviderScope(child: App()));
-  }
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp, //縦固定
+  ]);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await Firebase.initializeApp();
+  await FirebaseMessaging.instance.subscribeToTopic('article');
+  runApp(const ProviderScope(child: App()));
 }
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {

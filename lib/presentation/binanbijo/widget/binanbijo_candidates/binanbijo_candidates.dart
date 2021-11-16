@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_gender_model.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidate_tile/binanbijo_candidate_tile.dart';
-import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidates/binanbijo_candidates_controller_provider.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidates/binanbijo_candidates_provider.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidates/binanbijo_external_link_button.dart';
 import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
 
@@ -14,8 +14,8 @@ class BinanBijoCandidates extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _width = MediaQuery.of(context).size.width;
-    final _candidateProvider = ref.watch(binanbijoCandidatesControllerProvider);
-    return _candidateProvider.when(
+    final _candidatesProvider = ref.watch(binanbijoCandidatesProvider);
+    return _candidatesProvider.when(
         error: ((_, __) => const LoadingIndicator()),
         loading: (() => const LoadingIndicator()),
         data: ((candidates) {

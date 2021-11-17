@@ -2,10 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:kadai_info_flutter/core/exception/network_exception.dart';
-import 'package:kadai_info_flutter/core/result/result.dart';
-import 'package:kadai_info_flutter/domain/entity/article/article_category.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/i_wordpress_datasource.dart';
-import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_post.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_post_list_response.dart';
 
 class WordpressDatasource implements IWordpressDatasource {
@@ -18,62 +15,35 @@ class WordpressDatasource implements IWordpressDatasource {
   static final _dio = Dio()..options.headers = _defaultHeaders;
 
   @override
-  Future<Result<WPPostListResponse>> postList({
+  Future<WPPostListResponse> postList({
     int page = 1,
     int perPage = 10,
-    List<ArticleCategory> categories = const [],
-    List<int> categoriesExclude = const [],
+    List<String> categories = const [],
+    List<String> categoriesExclude = const [],
     List<String> include = const [],
+    List<String> tags = const [],
   }) async {
     try {
-      final categoriesString =
-          categories.map((e) => _categoryToString(e)).toList();
-      final categoriesParam = _listToString(categoriesString);
+      final categoriesParam = _listToString(categories);
       final categoriesExcludeParam = _listToString(categoriesExclude);
       final includeParam = _listToString(include);
+      final tagsParam = _listToString(tags);
       final url =
-          '$_baseUrl/posts?page=$page&per_page=$perPage&categories=$categoriesParam&categories_exclude=$categoriesExcludeParam&$_commonParams&include=$includeParam';
+          '$_baseUrl/posts?page=$page&per_page=$perPage&categories=$categoriesParam&categories_exclude=$categoriesExcludeParam&$_commonParams&include=$includeParam&tags=$tagsParam';
       final response = await _dio.get(url);
       if (response.statusCode == 200) {
         final data = WPPostListResponse.fromResponse(response);
-        return Result.success(data);
+        return data;
       } else {
-        return Result.failure(NetworkException());
+        throw NetworkException();
       }
     } catch (e) {
-      return Result.failure(Exception(e));
+      rethrow;
     }
   }
 
   /// [List]から[String]に変換
   String _listToString(List value) {
     return value.join(',');
-  }
-
-  String _categoryToString(ArticleCategory? category) {
-    switch (category) {
-      case ArticleCategory.snap:
-        return '40';
-      case ArticleCategory.interview:
-        return '42';
-      case ArticleCategory.challenge:
-        return '479';
-      case ArticleCategory.gourmet:
-        return '4';
-      case ArticleCategory.outdoor:
-        return '6';
-      case ArticleCategory.entertainment:
-        return '46';
-      case ArticleCategory.recruit:
-        return '184';
-      default:
-        return '';
-    }
-  }
-
-  @override
-  Future<Result<WPPost>> post({required String articleId}) {
-    // TODO: implement post
-    throw UnimplementedError();
   }
 }

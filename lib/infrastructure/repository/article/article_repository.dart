@@ -7,6 +7,7 @@ import 'package:kadai_info_flutter/domain/entity/article/article_favorite.dart';
 import 'package:kadai_info_flutter/domain/repository/article/i_article_repository.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/i_sqflite_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/i_wordpress_datasource.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_category.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_post.dart';
 
 class ArticleRepository implements IArticleRepository {
@@ -53,52 +54,37 @@ class ArticleRepository implements IArticleRepository {
               ArticleCollection(),
             );
           }
-          final result = await wp.postList(include: ids, perPage: perPage);
-          return await result.when(
-            success: (data) {
-              final articles =
-                  data.body.map((e) => _toArticle(post: e)).toList();
-              final collection = ArticleCollection(
-                articles: articles,
-                hasNext: localData.hasNext,
-                hasPrevious: localData.hasPrevious,
-              );
-              return Result.success(collection);
-            },
-            failure: (error) {
-              return Result.failure(error);
-            },
+          final data = await wp.postList(include: ids, perPage: perPage);
+          final articles = data.body.map((e) => _toArticle(post: e)).toList();
+          final collection = ArticleCollection(
+            articles: articles,
+            hasNext: localData.hasNext,
+            hasPrevious: localData.hasPrevious,
           );
+          return Result.success(collection);
         },
         failure: (error) {
           return Result.failure(error);
         },
       );
     }
-    final result = await wp.postList(
+    final data = await wp.postList(
       page: page,
       perPage: perPage,
-      categories: categories,
+      categories: categories.map((e) => e.toCategoryId).toList(),
       include: include,
-      categoriesExclude: [48],
+      categoriesExclude: [WPCategory.circleInfo.toCategoryId],
     );
-    return result.when(
-      success: (data) {
-        final articles = data.body.map((e) => _toArticle(post: e)).toList();
-        final header = data.header;
-        final hasNext = header.link.contains('rel="next"');
-        final hasPrevious = header.link.contains('rel="prev"');
-        final collection = ArticleCollection(
-          articles: articles,
-          hasNext: hasNext,
-          hasPrevious: hasPrevious,
-        );
-        return Result.success(collection);
-      },
-      failure: (error) {
-        return Result.failure(error);
-      },
+    final articles = data.body.map((e) => _toArticle(post: e)).toList();
+    final header = data.header;
+    final hasNext = header.link.contains('rel="next"');
+    final hasPrevious = header.link.contains('rel="prev"');
+    final collection = ArticleCollection(
+      articles: articles,
+      hasNext: hasNext,
+      hasPrevious: hasPrevious,
     );
+    return Result.success(collection);
   }
 
   @override
@@ -152,5 +138,28 @@ class ArticleRepository implements IArticleRepository {
         return Result.failure(Exception(error));
       },
     );
+  }
+}
+
+extension on ArticleCategory {
+  String get toCategoryId {
+    switch (this) {
+      case ArticleCategory.snap:
+        return '40';
+      case ArticleCategory.interview:
+        return '42';
+      case ArticleCategory.challenge:
+        return '479';
+      case ArticleCategory.gourmet:
+        return '4';
+      case ArticleCategory.outdoor:
+        return '6';
+      case ArticleCategory.entertainment:
+        return '46';
+      case ArticleCategory.recruit:
+        return '184';
+      default:
+        return '';
+    }
   }
 }

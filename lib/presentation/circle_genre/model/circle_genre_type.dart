@@ -1,87 +1,33 @@
 /// サークルジャンル
 enum CircleGenreType {
-  /// テニス
   tennis,
-
-  /// バスケ
   basketball,
-
-  /// サッカー
   soccer,
-
-  /// 野球
   baseball,
-
-  /// ハンドボール
+  rugby,
   handball,
-
-  /// バドミントン
   badminton,
-
-  /// バレー
   volleyball,
-
-  /// 卓球
   tableTennis,
-
-  /// 陸上
   land,
-
-  /// 武術
   martial,
-
-  /// ダンス
   dance,
-
-  /// マリン
   marin,
-
-  /// サイクリング
   bicycle,
-
-  /// マイナー
-  minor,
-
-  /// オールラウンド
-  allRounder,
-
-  /// 音楽
+  minorSports,
+  allRound,
   music,
-
-  /// 文化
   culture,
-
-  /// 自然・科学
   nature,
-
-  /// コミュニケーション
   communication,
-
-  /// 情報・メディア
   media,
-
-  /// ボランティア
   volunteer,
-
-  /// 写真
   photo,
-
-  /// ゲーム
   game,
-
-  /// 美術
   art,
-
-  /// イベント
   event,
-
-  /// 飲み
   drink,
-
-  /// アウトドア
   outdoor,
-
-  /// その他
   other,
 }
 
@@ -124,7 +70,7 @@ extension CircleGenreTypeExt on CircleGenreType {
         return '武術・武道・射的';
       case CircleGenreType.media:
         return 'メディア・情報';
-      case CircleGenreType.minor:
+      case CircleGenreType.minorSports:
         return 'マイナースポーツ';
       case CircleGenreType.music:
         return '音楽';
@@ -142,10 +88,10 @@ extension CircleGenreTypeExt on CircleGenreType {
         return 'バレーボール';
       case CircleGenreType.volunteer:
         return 'ボランティア';
-      case CircleGenreType.allRounder:
+      case CircleGenreType.allRound:
         return 'オールラウンド';
-      default:
-        return 'その他';
+      case CircleGenreType.rugby:
+        return 'ラグビー・アメフト';
     }
   }
 }

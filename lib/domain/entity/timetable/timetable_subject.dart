@@ -14,7 +14,7 @@ class TimetableSubject extends Equatable {
   /// 概要
   final String description;
 
-  TimetableSubject({
+  const TimetableSubject({
     required this.id,
     required this.name,
     required this.description,

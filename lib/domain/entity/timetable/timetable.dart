@@ -15,7 +15,7 @@ class Timetable extends Equatable {
   /// 登録区間
   final int term;
 
-  Timetable({
+  const Timetable({
     required this.id,
     required this.year,
     required this.lessons,

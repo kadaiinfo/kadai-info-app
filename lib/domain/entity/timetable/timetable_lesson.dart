@@ -18,7 +18,7 @@ class TimetableLesson extends Equatable {
   /// 時間割ID
   final String timetableId;
 
-  TimetableLesson({
+  const TimetableLesson({
     required this.id,
     required this.subject,
     required this.day,

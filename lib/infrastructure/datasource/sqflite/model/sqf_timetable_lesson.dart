@@ -4,6 +4,7 @@ import '../sqflite_extension.dart';
 
 /// 授業
 class SQFTimetableLesson {
+  static const keyId = 'id';
   static const keyTimetableId = 'timetable_id';
   static const keyDay = 'day';
   static const keyPeriod = 'period';
@@ -14,6 +15,9 @@ class SQFTimetableLesson {
   static const keyAttendance = 'attendance';
   static const keyCreatedAt = 'created_at';
   static const keyUpdatedAt = 'updated_at';
+
+  /// ID
+  final String id;
 
   /// 時間割ID
   final String timetableId;
@@ -56,6 +60,7 @@ class SQFTimetableLesson {
     required this.teacher,
     required this.updatedAt,
     required this.createdAt,
+    required this.id,
   });
 
   factory SQFTimetableLesson.from(Map<String, dynamic> map) {
@@ -70,6 +75,7 @@ class SQFTimetableLesson {
       teacher: map[keyTeacher],
       updatedAt: (map[keyUpdatedAt] as int).toDateTime,
       createdAt: (map[keyCreatedAt] as int).toDateTime,
+      id: map[keyId],
     );
   }
 
@@ -85,6 +91,7 @@ class SQFTimetableLesson {
       keyTimetableId: timetableId,
       keyCreatedAt: createdAt.toInt,
       keyUpdatedAt: updatedAt.toInt,
+      keyId: id,
     };
   }
 }

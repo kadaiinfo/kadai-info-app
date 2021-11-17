@@ -3,6 +3,7 @@ import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/i_sqflite_d
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_article.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_article_table.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_lesson.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_lesson_save_input.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_term.dart';
 import 'package:path/path.dart';
@@ -10,16 +11,21 @@ import 'package:sqflite/sqflite.dart';
 
 class SqfliteDatasource implements ISqfliteDatasource {
   /// 記事関連
+  static const _articleDBName = 'article.db';
   static const _articleTableName = 'article';
-  static late Database db;
+  static late Database _articleDB;
+  static const _articleVersion = 1;
 
   /// 時間割関連
+  static const _timetableDBName = 'timetable.db';
   static const _timetableTableName = 'timetable';
   static late Database _timetableDB;
+  static const _timetableVersion = 1;
+  static const _timetableLessonTableName = 'lesson';
 
   /// 初期化
   static Future<void> init() async {
-    db = await _getArticleDatabase();
+    _articleDB = await _getArticleDatabase();
     _timetableDB = await _getTimetableDatabase();
   }
 
@@ -28,14 +34,14 @@ class SqfliteDatasource implements ISqfliteDatasource {
     required int limit,
     required int offset,
   }) async {
-    final articleMaps = await db.query(
+    final articleMaps = await _articleDB.query(
       _articleTableName,
       offset: offset,
       limit: limit,
       orderBy: '${SQFArticle.keyCreatedAt} DESC',
     );
     final allCount = Sqflite.firstIntValue(
-          await db.rawQuery('SELECT count(*) FROM $_articleTableName'),
+          await _articleDB.rawQuery('SELECT count(*) FROM $_articleTableName'),
         ) ??
         0;
 
@@ -51,8 +57,8 @@ class SqfliteDatasource implements ISqfliteDatasource {
     try {
       try {
         final Database db = await openDatabase(
-          join(await getDatabasesPath(), _articleTableName),
-          version: 1,
+          join(await getDatabasesPath(), _articleDBName),
+          version: _articleVersion,
           onCreate: (db, version) async {
             await db.execute(
               '''
@@ -78,8 +84,8 @@ class SqfliteDatasource implements ISqfliteDatasource {
     try {
       try {
         final Database db = await openDatabase(
-          join(await getDatabasesPath(), _timetableTableName),
-          version: 1,
+          join(await getDatabasesPath(), _timetableDBName),
+          version: _timetableVersion,
           onCreate: (db, version) async {
             await db.execute(
               '''
@@ -106,7 +112,7 @@ class SqfliteDatasource implements ISqfliteDatasource {
   @override
   Future<Result<SQFArticle>> deleteArticle(String articleId) async {
     try {
-      await db.delete(
+      await _articleDB.delete(
         _articleTableName,
         where: '${SQFArticle.keyId}=?',
         whereArgs: [articleId],
@@ -131,7 +137,7 @@ class SqfliteDatasource implements ISqfliteDatasource {
         isFavorite: true,
       );
       final data = article.toMap();
-      await db.insert(
+      await _articleDB.insert(
         _articleTableName,
         data,
         conflictAlgorithm: ConflictAlgorithm.replace,
@@ -144,7 +150,7 @@ class SqfliteDatasource implements ISqfliteDatasource {
 
   @override
   Future<Result<SQFArticle?>> existArticle(String articleId) async {
-    final data = await db.query(_articleTableName,
+    final data = await _articleDB.query(_articleTableName,
         where: '${SQFArticle.keyId}=?', whereArgs: [articleId], limit: 1);
     if (data.isEmpty) {
       return const Result.success(null);
@@ -155,21 +161,48 @@ class SqfliteDatasource implements ISqfliteDatasource {
   }
 
   @override
-  Future<void> deleteTimetable(String timetableId) {
-    // TODO: implement deleteTimetable
-    throw UnimplementedError();
+  Future<void> deleteTimetable(String timetableId) async {
+    try {
+      await _timetableDB.delete(
+        _timetableTableName,
+        where: '${SQFTimetable.keyId}=?',
+        whereArgs: [timetableId],
+      );
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<void> deleteTimetableLesson(String lessonId) {
-    // TODO: implement deleteTimetableLesson
-    throw UnimplementedError();
+  Future<void> deleteTimetableLesson(String lessonId) async {
+    try {
+      await _timetableDB.delete(
+        _timetableLessonTableName,
+        where: '${SQFTimetableLesson.keyId}=?',
+        whereArgs: [lessonId],
+      );
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<SQFTimetable> findTimetable(String timetableId) {
-    // TODO: implement findTimetable
-    throw UnimplementedError();
+  Future<SQFTimetable> findTimetable(String timetableId) async {
+    try {
+      final dataList = await _timetableDB.query(
+        _timetableTableName,
+        where: '${SQFTimetable.keyId}=?',
+        whereArgs: [timetableId],
+      );
+      if (dataList.isEmpty) {
+        // TODO: 新規作成
+      }
+      final data = dataList.first;
+      final timetable = SQFTimetable.from(data);
+      return timetable;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override

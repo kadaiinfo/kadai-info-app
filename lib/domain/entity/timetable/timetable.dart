@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:kadai_info_flutter/domain/entity/timetable/timetable_lesson.dart';
 
 /// 時間割
-class Timetable {
+class Timetable extends Equatable {
   /// ID
   final String id;
 
@@ -20,4 +21,7 @@ class Timetable {
     required this.lessons,
     required this.term,
   });
+
+  @override
+  List<Object?> get props => [id];
 }

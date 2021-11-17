@@ -1,5 +1,7 @@
+import 'package:equatable/equatable.dart';
+
 /// 教科
-class TimetableSubject {
+class TimetableSubject extends Equatable {
   /// ID
   final String id;
 
@@ -18,4 +20,7 @@ class TimetableSubject {
     required this.description,
     required this.teachers,
   });
+
+  @override
+  List<Object?> get props => [id];
 }

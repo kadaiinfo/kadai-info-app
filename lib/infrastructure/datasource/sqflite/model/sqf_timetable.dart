@@ -1,4 +1,5 @@
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_lesson.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_term.dart';
 
 import '../sqflite_extension.dart';
 
@@ -18,7 +19,7 @@ class SQFTimetable {
   final int year;
 
   /// 期間
-  final int term;
+  final SQFTimetableTerm term;
 
   /// 授業一覧
   final List<SQFTimetableLesson> lessons;
@@ -43,7 +44,7 @@ class SQFTimetable {
     return SQFTimetable._(
       id: map[keyId],
       year: map[keyYear],
-      term: map[keyTerm],
+      term: SQFTimetableTerm.values[map[keyTerm]],
       lessons: (map[keyLessons] as List)
           .map((e) => SQFTimetableLesson.from(e))
           .toList(),
@@ -57,7 +58,7 @@ class SQFTimetable {
     return {
       keyId: id,
       keyYear: year,
-      keyTerm: term,
+      keyTerm: term.index,
       keyLessons: lessons.map((e) => e.toMap()).toList(),
       keyCreatedAt: createdAt.toInt,
       keyUpdatedAt: updatedAt.toInt,

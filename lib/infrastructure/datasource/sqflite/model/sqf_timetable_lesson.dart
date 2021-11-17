@@ -78,7 +78,6 @@ class SQFTimetableLesson {
     return {
       keyName: name,
       keyDescription: description,
-      keyAttendance: attendance.toMap(),
       keyDay: day,
       keyPeriod: period,
       keyTeacher: teacher,

@@ -59,7 +59,6 @@ class SQFTimetable {
       keyId: id,
       keyYear: year,
       keyTerm: term.index,
-      keyLessons: lessons.map((e) => e.toMap()).toList(),
       keyCreatedAt: createdAt.toInt,
       keyUpdatedAt: updatedAt.toInt,
     };

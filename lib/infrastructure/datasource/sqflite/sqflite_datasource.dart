@@ -2,16 +2,25 @@ import 'package:kadai_info_flutter/core/result/result.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/i_sqflite_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_article.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_article_table.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_lesson_save_input.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_term.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SqfliteDatasource implements ISqfliteDatasource {
+  /// 記事関連
   static const _articleTableName = 'article';
   static late Database db;
+
+  /// 時間割関連
+  static const _timetableTableName = 'timetable';
+  static late Database _timetableDB;
 
   /// 初期化
   static Future<void> init() async {
     db = await _getArticleDatabase();
+    _timetableDB = await _getTimetableDatabase();
   }
 
   @override
@@ -51,6 +60,35 @@ class SqfliteDatasource implements ISqfliteDatasource {
               ${SQFArticle.keyId} TEXT PRIMARY KEY, 
               ${SQFArticle.keyCreatedAt} INTEGER,
               ${SQFArticle.keyIsFavorite} INTEGER 
+              )
+              ''',
+            );
+          },
+        );
+        return db;
+      } catch (e) {
+        rethrow;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<Database> _getTimetableDatabase() async {
+    try {
+      try {
+        final Database db = await openDatabase(
+          join(await getDatabasesPath(), _timetableTableName),
+          version: 1,
+          onCreate: (db, version) async {
+            await db.execute(
+              '''
+              CREATE TABLE $_timetableDB (
+              ${SQFTimetable.keyId} TEXT PRIMARY KEY, 
+              ${SQFTimetable.keyTerm} INTEGER, 
+              ${SQFTimetable.keyYear} INTEGER, 
+              ${SQFTimetable.keyCreatedAt} INTEGER, 
+              ${SQFTimetable.keyUpdatedAt} INTEGER 
               )
               ''',
             );
@@ -114,5 +152,48 @@ class SqfliteDatasource implements ISqfliteDatasource {
       final article = SQFArticle.fromMap(data.first);
       return Result.success(article);
     }
+  }
+
+  @override
+  Future<void> deleteTimetable(String timetableId) {
+    // TODO: implement deleteTimetable
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteTimetableLesson(String lessonId) {
+    // TODO: implement deleteTimetableLesson
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<SQFTimetable> findTimetable(String timetableId) {
+    // TODO: implement findTimetable
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> saveTimetable(
+      {required int year, required SQFTimetableTerm term}) {
+    // TODO: implement saveTimetable
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> saveTimetableLesson(SQFTimetableLessonSaveInput input) {
+    // TODO: implement saveTimetableLesson
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteTimetableAttendance(String attendanceId) {
+    // TODO: implement deleteTimetableAttendance
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> saveTimetableAttendance() {
+    // TODO: implement saveTimetableAttendance
+    throw UnimplementedError();
   }
 }

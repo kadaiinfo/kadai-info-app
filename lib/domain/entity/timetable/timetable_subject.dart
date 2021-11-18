@@ -14,11 +14,15 @@ class TimetableSubject extends Equatable {
   /// 概要
   final String description;
 
+  /// 授業ID
+  final String timetableLessonId;
+
   const TimetableSubject({
     required this.id,
     required this.name,
     required this.description,
     required this.teachers,
+    required this.timetableLessonId,
   });
 
   @override

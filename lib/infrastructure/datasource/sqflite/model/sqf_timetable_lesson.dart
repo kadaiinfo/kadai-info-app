@@ -1,5 +1,3 @@
-import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_attendance.dart';
-
 import '../sqflite_extension.dart';
 
 /// 授業
@@ -12,7 +10,6 @@ class SQFTimetableLesson {
   static const keyTeacher = 'teacher';
   static const keyDescription = 'description';
   static const keyMemo = 'memo';
-  static const keyAttendance = 'attendance';
   static const keyCreatedAt = 'created_at';
   static const keyUpdatedAt = 'updated_at';
 
@@ -40,17 +37,13 @@ class SQFTimetableLesson {
   /// メモ
   final String memo;
 
-  /// 出席情報
-  final SQFTimetableAttendance attendance;
-
   /// 作成日時
   final DateTime createdAt;
 
   /// 更新日時
   final DateTime updatedAt;
 
-  SQFTimetableLesson._({
-    required this.attendance,
+  SQFTimetableLesson({
     required this.name,
     required this.timetableId,
     required this.description,
@@ -64,8 +57,7 @@ class SQFTimetableLesson {
   });
 
   factory SQFTimetableLesson.from(Map<String, dynamic> map) {
-    return SQFTimetableLesson._(
-      attendance: SQFTimetableAttendance.from(map[keyAttendance]),
+    return SQFTimetableLesson(
       name: map[keyName],
       timetableId: map[keyTimetableId],
       description: map[keyDescription],

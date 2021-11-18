@@ -2,12 +2,6 @@ class SQFTimetableLessonSaveInput {
   /// 時間割ID
   final String timetableId;
 
-  /// 曜日
-  final int day;
-
-  /// 時限
-  final int period;
-
   /// 名前
   final String name;
 
@@ -23,8 +17,6 @@ class SQFTimetableLessonSaveInput {
   SQFTimetableLessonSaveInput({
     required this.timetableId,
     required this.teacher,
-    required this.period,
-    required this.day,
     required this.description,
     required this.memo,
     required this.name,

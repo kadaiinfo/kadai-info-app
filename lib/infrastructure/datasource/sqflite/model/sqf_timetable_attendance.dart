@@ -25,7 +25,7 @@ class SQFTimetableAttendance {
   /// 更新日時
   final DateTime updatedAt;
 
-  SQFTimetableAttendance._({
+  SQFTimetableAttendance({
     required this.lessonId,
     required this.updatedAt,
     required this.createdAt,
@@ -35,7 +35,7 @@ class SQFTimetableAttendance {
 
   /// [Map] to [SQFTimetableAttendance]
   factory SQFTimetableAttendance.from(Map<String, dynamic> map) {
-    return SQFTimetableAttendance._(
+    return SQFTimetableAttendance(
       type: SQFTimetableAttendanceType.values[map[keyType]],
       lessonId: map[keyLessonId],
       updatedAt: (map[keyUpdatedAt] as int).toDateTime,

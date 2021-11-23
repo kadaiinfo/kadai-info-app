@@ -2,6 +2,9 @@ import 'package:kadai_info_flutter/core/result/result.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_article.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_article_table.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_attendance.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_attendance_type.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_lesson.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_lesson_save_input.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_term.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_binanbijo_vote.dart';
@@ -28,20 +31,44 @@ abstract class ISqfliteDatasource {
   /// 時間割の削除
   Future<void> deleteTimetable(String timetableId);
 
-  /// 時間割の保存
-  Future<void> saveTimetable({
+  /// 時間割の作成
+  Future<SQFTimetable> createTimetable({
     required int year,
     required SQFTimetableTerm term,
   });
 
-  /// 授業の保存
-  Future<void> saveTimetableLesson(SQFTimetableLessonSaveInput input);
+  /// 授業の取得
+  Future<SQFTimetableLesson> findTimetableLesson(String lessonId);
+
+  /// 授業の作成
+  Future<SQFTimetableLesson> createTimetableLesson({
+    required SQFTimetableLessonSaveInput input,
+  });
+
+  /// 授業の更新
+  Future<SQFTimetableLesson> updateTimetableLesson({
+    required String lessonId,
+    required SQFTimetableLessonSaveInput input,
+  });
 
   /// 授業の削除
   Future<void> deleteTimetableLesson(String lessonId);
 
-  /// 出欠情報の保存
-  Future<void> saveTimetableAttendance();
+  /// 出欠情報の取得
+  Future<SQFTimetableAttendance> findTimetableAttendance(String attendanceId);
+
+  /// 出欠情報の作成
+  Future<SQFTimetableAttendance> createTimetableAttendance({
+    required String lessonId,
+    required SQFTimetableAttendanceType type,
+  });
+
+  /// 出欠情報の更新
+  Future<SQFTimetableAttendance> updateTimetableAttendance({
+    required String attendanceId,
+    required String lessonId,
+    required SQFTimetableAttendanceType type,
+  });
 
   /// 出欠情報の削除
   Future<void> deleteTimetableAttendance(String attendanceId);

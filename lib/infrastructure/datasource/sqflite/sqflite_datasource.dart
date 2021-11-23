@@ -1,13 +1,18 @@
+import 'package:kadai_info_flutter/core/exception/not_found_exception.dart';
 import 'package:kadai_info_flutter/core/result/result.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/i_sqflite_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_article.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_article_table.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_attendance.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_attendance_type.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_lesson.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_lesson_save_input.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_term.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_binanbijo_vote.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:uuid/uuid.dart';
 
 class SqfliteDatasource implements ISqfliteDatasource {
   /// 記事関連
@@ -28,6 +33,7 @@ class SqfliteDatasource implements ISqfliteDatasource {
   static const _voteTableName = 'vote';
   static late Database _voteDB;
   static const _voteVersion = 1;
+  static const _timetableAttendanceTableName = 'attendance';
 
   /// 初期化
   static Future<void> init() async {
@@ -62,26 +68,22 @@ class SqfliteDatasource implements ISqfliteDatasource {
 
   static Future<Database> _getArticleDatabase() async {
     try {
-      try {
-        final Database db = await openDatabase(
-          join(await getDatabasesPath(), _articleTableName),
-          version: 1,
-          onCreate: (db, version) async {
-            await db.execute(
-              '''
-              CREATE TABLE $_articleTableName (
-              ${SQFArticle.keyId} TEXT PRIMARY KEY, 
-              ${SQFArticle.keyCreatedAt} INTEGER,
-              ${SQFArticle.keyIsFavorite} INTEGER 
-              )
-              ''',
-            );
-          },
-        );
-        return db;
-      } catch (e) {
-        rethrow;
-      }
+      final Database db = await openDatabase(
+        join(await getDatabasesPath(), _articleDBName),
+        version: _articleVersion,
+        onCreate: (db, version) async {
+          await db.execute(
+            '''
+            CREATE TABLE $_articleTableName (
+            ${SQFArticle.keyId} TEXT PRIMARY KEY, 
+            ${SQFArticle.keyCreatedAt} INTEGER,
+            ${SQFArticle.keyIsFavorite} INTEGER 
+            )
+            ''',
+          );
+        },
+      );
+      return db;
     } catch (e) {
       rethrow;
     }
@@ -89,28 +91,24 @@ class SqfliteDatasource implements ISqfliteDatasource {
 
   static Future<Database> _getTimetableDatabase() async {
     try {
-      try {
-        final Database db = await openDatabase(
-          join(await getDatabasesPath(), _timetableTableName),
-          version: 1,
-          onCreate: (db, version) async {
-            await db.execute(
-              '''
-              CREATE TABLE $_timetableDB (
-              ${SQFTimetable.keyId} TEXT PRIMARY KEY, 
-              ${SQFTimetable.keyTerm} INTEGER, 
-              ${SQFTimetable.keyYear} INTEGER, 
-              ${SQFTimetable.keyCreatedAt} INTEGER, 
-              ${SQFTimetable.keyUpdatedAt} INTEGER 
-              )
-              ''',
-            );
-          },
-        );
-        return db;
-      } catch (e) {
-        rethrow;
-      }
+      final Database db = await openDatabase(
+        join(await getDatabasesPath(), _timetableDBName),
+        version: _timetableVersion,
+        onCreate: (db, version) async {
+          await db.execute(
+            '''
+            CREATE TABLE $_timetableTableName (
+            ${SQFTimetable.keyId} TEXT PRIMARY KEY, 
+            ${SQFTimetable.keyTerm} INTEGER, 
+            ${SQFTimetable.keyYear} INTEGER, 
+            ${SQFTimetable.keyCreatedAt} INTEGER, 
+            ${SQFTimetable.keyUpdatedAt} INTEGER 
+            )
+            ''',
+          );
+        },
+      );
+      return db;
     } catch (e) {
       rethrow;
     }
@@ -193,43 +191,224 @@ class SqfliteDatasource implements ISqfliteDatasource {
 
   @override
   Future<void> deleteTimetable(String timetableId) async {
-    // TODO: implement deleteTimetable
+    try {
+      await _timetableDB.delete(
+        _timetableTableName,
+        where: '${SQFTimetable.keyId}=?',
+        whereArgs: [timetableId],
+      );
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<void> deleteTimetableLesson(String lessonId) {
-    // TODO: implement deleteTimetableLesson
-    throw UnimplementedError();
+  Future<void> deleteTimetableLesson(String lessonId) async {
+    try {
+      await _timetableDB.delete(
+        _timetableLessonTableName,
+        where: '${SQFTimetableLesson.keyId}=?',
+        whereArgs: [lessonId],
+      );
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<SQFTimetable> findTimetable(String timetableId) {
-    // TODO: implement findTimetable
-    throw UnimplementedError();
+  Future<SQFTimetable> findTimetable(String timetableId) async {
+    try {
+      final dataList = await _timetableDB.query(
+        _timetableTableName,
+        where: '${SQFTimetable.keyId}=?',
+        whereArgs: [timetableId],
+      );
+      late final Map<String, dynamic> data;
+      if (dataList.isEmpty) {
+        throw NotFoundException();
+      }
+      data = dataList.first;
+      final timetable = SQFTimetable.from(data);
+      return timetable;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<void> saveTimetable(
-      {required int year, required SQFTimetableTerm term}) {
-    // TODO: implement saveTimetable
-    throw UnimplementedError();
+  Future<SQFTimetableLesson> createTimetableLesson({
+    required SQFTimetableLessonSaveInput input,
+  }) async {
+    try {
+      final id = const Uuid().v4();
+      final now = DateTime.now();
+      final lesson = SQFTimetableLesson(
+        name: input.name,
+        timetableId: input.timetableId,
+        description: input.description,
+        day: 1,
+        memo: input.memo,
+        period: 1,
+        teacher: input.teacher,
+        updatedAt: now,
+        createdAt: now,
+        id: id,
+      );
+      final values = lesson.toMap();
+      await _timetableDB.insert(_timetableLessonTableName, values);
+      final result = await _timetableDB.query(
+        _timetableLessonTableName,
+        where: '${SQFTimetableLesson.keyId}=?',
+        whereArgs: [id],
+      );
+      return SQFTimetableLesson.from(result.first);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<void> saveTimetableLesson(SQFTimetableLessonSaveInput input) {
-    // TODO: implement saveTimetableLesson
-    throw UnimplementedError();
+  Future<void> deleteTimetableAttendance(String attendanceId) async {
+    try {
+      await _timetableDB.delete(
+        _timetableAttendanceTableName,
+        whereArgs: [attendanceId],
+        where: '${SQFTimetableAttendance.keyId}=?',
+      );
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<void> deleteTimetableAttendance(String attendanceId) {
-    // TODO: implement deleteTimetableAttendance
-    throw UnimplementedError();
+  Future<SQFTimetable> createTimetable({
+    required int year,
+    required SQFTimetableTerm term,
+  }) async {
+    try {
+      final id = const Uuid().v4();
+      final now = DateTime.now();
+      final timetable = SQFTimetable(
+        id: id,
+        year: year,
+        term: term,
+        updatedAt: now,
+        createdAt: now,
+      );
+      final values = timetable.toMap();
+      await _timetableDB.insert(
+        _timetableTableName,
+        values,
+      );
+      final result = await findTimetable(id);
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<SQFTimetableAttendance> updateTimetableAttendance({
+    required String attendanceId,
+    required String lessonId,
+    required SQFTimetableAttendanceType type,
+  }) async {
+    try {
+      final oldData = await findTimetableAttendance(attendanceId);
+      final now = DateTime.now();
+      final values = SQFTimetableAttendance(
+        lessonId: lessonId,
+        updatedAt: now,
+        createdAt: oldData.createdAt,
+        id: attendanceId,
+        type: oldData.type,
+      ).toMap();
+      await _timetableDB.update(
+        _timetableAttendanceTableName,
+        values,
+        where: '${SQFTimetableAttendance.keyId}=?',
+        whereArgs: [attendanceId],
+      );
+      final result = await findTimetableAttendance(attendanceId);
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<SQFTimetableLesson> updateTimetableLesson({
+    required String lessonId,
+    required SQFTimetableLessonSaveInput input,
+  }) async {
+    try {
+      final oldData = await findTimetableLesson(lessonId);
+      final now = DateTime.now();
+      final values = SQFTimetableLesson(
+        name: input.name,
+        timetableId: oldData.timetableId,
+        description: input.description,
+        day: oldData.day,
+        memo: input.memo,
+        period: oldData.period,
+        teacher: input.teacher,
+        updatedAt: now,
+        createdAt: oldData.createdAt,
+        id: lessonId,
+      ).toMap();
+      await _timetableDB.update(
+        _timetableLessonTableName,
+        values,
+        where: '${SQFTimetableLesson.keyId}=?',
+        whereArgs: [lessonId],
+      );
+      final result = findTimetableLesson(lessonId);
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<SQFTimetableAttendance> createTimetableAttendance({
+    required String lessonId,
+    required SQFTimetableAttendanceType type,
+  }) async {
+    try {
+      final id = const Uuid().v4();
+      final now = DateTime.now();
+      final values = SQFTimetableAttendance(
+        lessonId: lessonId,
+        updatedAt: now,
+        createdAt: now,
+        id: id,
+        type: type,
+      ).toMap();
+      await _timetableDB.insert(_timetableAttendanceTableName, values);
+      final result = await findTimetableAttendance(id);
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<SQFTimetableAttendance> findTimetableAttendance(
+      String attendanceId) async {
+    try {
+      final result = await _timetableDB.query(
+        _timetableAttendanceTableName,
+        where: '${SQFTimetableAttendance.keyId}=?',
+        whereArgs: [attendanceId],
+      );
+      return SQFTimetableAttendance.from(result.first);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future<void> saveTimetableAttendance() async {
-    // TODO: implement saveTimetableAttendance
   }
 
   @override
@@ -250,6 +429,21 @@ class SqfliteDatasource implements ISqfliteDatasource {
         data,
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
+    }
+    catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<SQFTimetableLesson> findTimetableLesson(String lessonId) async {
+    try {
+      final result = await _timetableDB.query(
+        _timetableLessonTableName,
+        where: '${SQFTimetableLesson.keyId}=?',
+        whereArgs: [lessonId],
+      );
+      return SQFTimetableLesson.from(result.first);
     } catch (e) {
       rethrow;
     }

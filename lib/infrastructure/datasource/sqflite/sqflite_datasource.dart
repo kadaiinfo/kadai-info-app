@@ -5,22 +5,35 @@ import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_a
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_lesson_save_input.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_term.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_binanbijo_vote.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SqfliteDatasource implements ISqfliteDatasource {
   /// 記事関連
+  static const _articleDBName = 'article.db';
   static const _articleTableName = 'article';
-  static late Database db;
+  static late Database _articleDB;
+  static const _articleVersion = 1;
 
   /// 時間割関連
+  static const _timetableDBName = 'timetable.db';
   static const _timetableTableName = 'timetable';
   static late Database _timetableDB;
+  static const _timetableVersion = 1;
+  static const _timetableLessonTableName = 'lesson';
+
+  // 美男美女投票関連
+  static const _voteDBName = 'vote.db';
+  static const _voteTableName = 'vote';
+  static late Database _voteDB;
+  static const _voteVersion = 1;
 
   /// 初期化
   static Future<void> init() async {
-    db = await _getArticleDatabase();
+    _articleDB = await _getArticleDatabase();
     _timetableDB = await _getTimetableDatabase();
+    _voteDB = await _getVoteDatabase();
   }
 
   @override
@@ -28,14 +41,14 @@ class SqfliteDatasource implements ISqfliteDatasource {
     required int limit,
     required int offset,
   }) async {
-    final articleMaps = await db.query(
+    final articleMaps = await _articleDB.query(
       _articleTableName,
       offset: offset,
       limit: limit,
       orderBy: '${SQFArticle.keyCreatedAt} DESC',
     );
     final allCount = Sqflite.firstIntValue(
-          await db.rawQuery('SELECT count(*) FROM $_articleTableName'),
+          await _articleDB.rawQuery('SELECT count(*) FROM $_articleTableName'),
         ) ??
         0;
 
@@ -103,10 +116,34 @@ class SqfliteDatasource implements ISqfliteDatasource {
     }
   }
 
+  static Future<Database> _getVoteDatabase() async {
+    try {
+      final Database db = await openDatabase(
+        join(await getDatabasesPath(), _voteTableName),
+        version: 1,
+        onCreate: (db, version) async {
+          await db.execute(
+            '''
+              CREATE TABLE $_voteDB (
+              ${SQFBinanbijoVote.keyEntryNumber} INTEGER PRIMARY KEY, 
+              ${SQFBinanbijoVote.keyGender} TEXT, 
+              ${SQFBinanbijoVote.keyIsStudent} INTEGER, 
+              ${SQFBinanbijoVote.keyCreatedAt} INTEGER, 
+              )
+              ''',
+          );
+        },
+      );
+      return db;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   @override
   Future<Result<SQFArticle>> deleteArticle(String articleId) async {
     try {
-      await db.delete(
+      await _articleDB.delete(
         _articleTableName,
         where: '${SQFArticle.keyId}=?',
         whereArgs: [articleId],
@@ -131,7 +168,7 @@ class SqfliteDatasource implements ISqfliteDatasource {
         isFavorite: true,
       );
       final data = article.toMap();
-      await db.insert(
+      await _articleDB.insert(
         _articleTableName,
         data,
         conflictAlgorithm: ConflictAlgorithm.replace,
@@ -144,7 +181,7 @@ class SqfliteDatasource implements ISqfliteDatasource {
 
   @override
   Future<Result<SQFArticle?>> existArticle(String articleId) async {
-    final data = await db.query(_articleTableName,
+    final data = await _articleDB.query(_articleTableName,
         where: '${SQFArticle.keyId}=?', whereArgs: [articleId], limit: 1);
     if (data.isEmpty) {
       return const Result.success(null);
@@ -155,9 +192,8 @@ class SqfliteDatasource implements ISqfliteDatasource {
   }
 
   @override
-  Future<void> deleteTimetable(String timetableId) {
+  Future<void> deleteTimetable(String timetableId) async {
     // TODO: implement deleteTimetable
-    throw UnimplementedError();
   }
 
   @override
@@ -192,8 +228,30 @@ class SqfliteDatasource implements ISqfliteDatasource {
   }
 
   @override
-  Future<void> saveTimetableAttendance() {
+  Future<void> saveTimetableAttendance() async {
     // TODO: implement saveTimetableAttendance
-    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<SQFBinanbijoVote>> fetchDailyVote(DateTime now) async {
+    final voteMaps = await _voteDB.query(
+      _voteTableName,
+      where: '${SQFBinanbijoVote.keyCreatedAt} '
+    );
+    return [];
+  }
+
+  @override
+  Future<void> saveVote(SQFBinanbijoVote vote) async {
+    try {
+      final data = vote.toMap();
+      await _voteDB.insert(
+        _voteTableName,
+        data,
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    } catch (e) {
+      rethrow;
+    }
   }
 }

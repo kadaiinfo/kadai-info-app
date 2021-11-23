@@ -31,7 +31,10 @@ const $CircleListState = _$CircleListStateTearOff();
 
 /// @nodoc
 mixin _$CircleListState {
+  /// サークル一覧
   List<CircleModel> get circles => throw _privateConstructorUsedError;
+
+  /// 次のページの有無
   bool get hasNext => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -120,9 +123,13 @@ class _$_CircleListState implements _CircleListState {
 
   @JsonKey(defaultValue: const [])
   @override
+
+  /// サークル一覧
   final List<CircleModel> circles;
   @JsonKey(defaultValue: false)
   @override
+
+  /// 次のページの有無
   final bool hasNext;
 
   @override
@@ -158,8 +165,12 @@ abstract class _CircleListState implements CircleListState {
       _$_CircleListState;
 
   @override
+
+  /// サークル一覧
   List<CircleModel> get circles => throw _privateConstructorUsedError;
   @override
+
+  /// 次のページの有無
   bool get hasNext => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

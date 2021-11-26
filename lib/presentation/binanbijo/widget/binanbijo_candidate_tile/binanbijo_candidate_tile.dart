@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_candidate_model.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidate_tile/binanbijo_candidate_picture_stack.dart';
-import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidate_tile/binanbijo_candidate_tile_controller_provider.dart';
 
 class BinanbijoCandidateTile extends HookConsumerWidget {
   const BinanbijoCandidateTile({Key? key, required this.candidate})
@@ -13,15 +12,15 @@ class BinanbijoCandidateTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // candidateを保存
-    final _tileController = ref.watch(binanbijoCandidateTileControllerProvider.notifier);
-    _tileController.store(candidate);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _topString(candidate.description),
         (candidate.canVoted)
-            ? BinanbijoCandidatePictureStack(pictureUrl: candidate.pictureUrl)
+            ? BinanbijoCandidatePictureStack(
+                pictureUrl: candidate.pictureUrl,
+                candidate: candidate,
+              )
             : Image.network(candidate.pictureUrl),
         _bottomString(candidate.entryNumber, candidate.name)
       ],

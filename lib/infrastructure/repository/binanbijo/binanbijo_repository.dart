@@ -5,6 +5,7 @@ import 'package:kadai_info_flutter/domain/repository/binanbijo/i_binanbijo_repos
 import 'package:kadai_info_flutter/infrastructure/datasource/micro_cms/i_micro_cms_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/micro_cms/model/mc_binanbijo_post.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/i_sqflite_datasource.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_binanbijo_vote.dart';
 
 class BinanbijoRepository implements IBinanbijoRepository {
   BinanbijoRepository({required this.mc, required this.sqf});
@@ -30,11 +31,34 @@ class BinanbijoRepository implements IBinanbijoRepository {
   }
 
   @override
-  Future<bool> pushVote(Vote vote) async {
-    final daily = await sqf.fetchDailyVote(DateTime.now());
-    // daily.map((e) {
+  Future<bool> fetchVote(Vote vote) async {
+    try {
+      final daily = await sqf.fetchDailyVote(DateTime.now());
+      int maleNum = 0;
+      int femaleNum = 0;
+      for (var voted in daily) {
+        (voted.gender == '男') ? maleNum++ : femaleNum++;
+      }
+      if(maleNum >= 2 && vote.gender == '男') {
+        return false;
+      }
+      else if(femaleNum >= 2 && vote.gender == '女') {
+        return false;
+      }
+      else {
+        await sqf.saveVote(_toSQFBinanbijoVote(vote));
+        return true;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 
-    // });
-    return false;
+  SQFBinanbijoVote _toSQFBinanbijoVote(Vote vote) {
+    return SQFBinanbijoVote(
+        entryNumber: vote.entryNumber,
+        gender: vote.gender,
+        isStudent: vote.isStudent,
+        createdAt: DateTime.now());
   }
 }

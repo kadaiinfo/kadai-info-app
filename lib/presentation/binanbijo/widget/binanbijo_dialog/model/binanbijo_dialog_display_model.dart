@@ -10,8 +10,10 @@ class BinanbijoDialogDisplayModel extends Equatable {
 
   const BinanbijoDialogDisplayModel.voted({this.display = DisplayState.voted});
 
+  const BinanbijoDialogDisplayModel.cantVote({this.display = DisplayState.cantVote});
+
   @override
   List<Object?> get props => [display];
 }
 
-enum DisplayState { choiceUser, vote, voted }
+enum DisplayState { choiceUser, vote, voted, cantVote }

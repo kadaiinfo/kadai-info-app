@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidate_tile/binanbijo_candidate_tile_controller_provider.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_candidate_model.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/controller/binanbijo_dialog_display_controller_provider.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/controller/binanbijo_vote_provider.dart';
 
 class BinanbijoVoteDialog extends ConsumerWidget {
-  const BinanbijoVoteDialog({Key? key}) : super(key: key);
+  const BinanbijoVoteDialog({Key? key, required this.candidate})
+      : super(key: key);
 
   static const _dialogBaseColor = Color(0xFFF8F8F8);
   static const _dialogBorderColor = Color(0xFF707070);
   static const _bbsBlack = Color(0xFF250B0D);
+  final BinanbijoCandidateModel candidate;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _width = MediaQuery.of(context).size.width;
     final _defaultTextStyle =
         DefaultTextStyle.of(context).style.apply(fontWeightDelta: 2);
-    final _displayController = ref.watch(binanbijoDialogDisplayControllerProvider.notifier);
-    final _tileState = ref.read(binanbijoCandidateTileControllerProvider);
+    final _displayController =
+        ref.watch(binanbijoDialogDisplayControllerProvider.notifier);
 
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -32,7 +35,7 @@ class BinanbijoVoteDialog extends ConsumerWidget {
           Expanded(
             flex: 2,
             child: Center(
-              child: Text('${_tileState.name}さんに投票しますか？',
+              child: Text('${candidate.name}さんに投票しますか？',
                   style: DefaultTextStyle.of(context).style.apply(
                         fontWeightDelta: 2,
                         decoration: TextDecoration.underline,
@@ -44,11 +47,17 @@ class BinanbijoVoteDialog extends ConsumerWidget {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _voteButton('はい', _defaultTextStyle, () {
-                      _displayController.vote();
+                    _voteButton('はい', _defaultTextStyle, () async {
+                      final result =
+                          await ref.read(binanbijoVoteProvider(candidate));
+                      if (!result) {
+                        _displayController.cantVote();
+                      } else {
+                        _displayController.vote();
+                      }
                     }),
                     _voteButton('いいえ', _defaultTextStyle, () {
-                      _displayController.vote();
+                      Navigator.pop(context);
                     })
                   ]))
         ]),

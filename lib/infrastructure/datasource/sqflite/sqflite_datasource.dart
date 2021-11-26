@@ -27,13 +27,13 @@ class SqfliteDatasource implements ISqfliteDatasource {
   static late Database _timetableDB;
   static const _timetableVersion = 1;
   static const _timetableLessonTableName = 'lesson';
+  static const _timetableAttendanceTableName = 'attendance';
 
   // 美男美女投票関連
   static const _voteDBName = 'vote.db';
   static const _voteTableName = 'vote';
   static late Database _voteDB;
   static const _voteVersion = 1;
-  static const _timetableAttendanceTableName = 'attendance';
 
   /// 初期化
   static Future<void> init() async {
@@ -117,16 +117,16 @@ class SqfliteDatasource implements ISqfliteDatasource {
   static Future<Database> _getVoteDatabase() async {
     try {
       final Database db = await openDatabase(
-        join(await getDatabasesPath(), _voteTableName),
-        version: 1,
+        join(await getDatabasesPath(), _voteDBName),
+        version: _voteVersion,
         onCreate: (db, version) async {
           await db.execute(
-            '''
-              CREATE TABLE $_voteDB (
-              ${SQFBinanbijoVote.keyEntryNumber} INTEGER PRIMARY KEY, 
+              '''
+              CREATE TABLE $_voteTableName (
+              ${SQFBinanbijoVote.keyEntryNumber} INTEGER, 
               ${SQFBinanbijoVote.keyGender} TEXT, 
               ${SQFBinanbijoVote.keyIsStudent} INTEGER, 
-              ${SQFBinanbijoVote.keyCreatedAt} INTEGER, 
+              ${SQFBinanbijoVote.keyCreatedAt} INTEGER PRIMARY KEY
               )
               ''',
           );
@@ -407,17 +407,40 @@ class SqfliteDatasource implements ISqfliteDatasource {
     }
   }
 
+  Future<void> saveTimetableAttendance() async {}
+
   @override
-  Future<void> saveTimetableAttendance() async {
+  Future<SQFTimetableLesson> findTimetableLesson(String lessonId) async {
+    try {
+      final result = await _timetableDB.query(
+        _timetableLessonTableName,
+        where: '${SQFTimetableLesson.keyId}=?',
+        whereArgs: [lessonId],
+      );
+      return SQFTimetableLesson.from(result.first);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future<List<SQFBinanbijoVote>> fetchDailyVote(DateTime now) async {
-    final voteMaps = await _voteDB.query(
-      _voteTableName,
-      where: '${SQFBinanbijoVote.keyCreatedAt} '
-    );
-    return [];
+    try {
+      final firstTime =
+          DateTime(now.year, now.month, now.day).millisecondsSinceEpoch;
+      final lastTime =
+          DateTime(now.year, now.month, now.day + 1).millisecondsSinceEpoch;
+      final voteMaps = await _voteDB.query(
+        _voteTableName,
+        where:
+            '${SQFBinanbijoVote.keyCreatedAt} BETWEEN $firstTime AND $lastTime',
+      );
+      final result =
+          voteMaps.map((map) => SQFBinanbijoVote.fromMap(map)).toList();
+      return result;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
@@ -429,21 +452,6 @@ class SqfliteDatasource implements ISqfliteDatasource {
         data,
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
-    }
-    catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<SQFTimetableLesson> findTimetableLesson(String lessonId) async {
-    try {
-      final result = await _timetableDB.query(
-        _timetableLessonTableName,
-        where: '${SQFTimetableLesson.keyId}=?',
-        whereArgs: [lessonId],
-      );
-      return SQFTimetableLesson.from(result.first);
     } catch (e) {
       rethrow;
     }

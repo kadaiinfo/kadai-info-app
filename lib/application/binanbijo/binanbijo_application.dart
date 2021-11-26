@@ -18,7 +18,12 @@ class BinanbijoApplication {
   }
 
   //  投票
-  Future<bool> fetchVote(Vote vote) {
-    return Future.delayed(Duration.zero, () => false);
+  Future<bool> fetchVote(Vote vote) async {
+    try {
+      final result = await _repository.fetchVote(vote);
+      return result;
+    } catch (e) {
+      return false;
+    }
   }
 }

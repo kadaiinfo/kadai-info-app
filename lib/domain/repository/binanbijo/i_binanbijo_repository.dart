@@ -6,5 +6,5 @@ abstract class IBinanbijoRepository {
   Future<CandidateCollection> getCandidateCollection();
 
   // 投票
-  Future<bool> pushVote(Vote vote);
+  Future<bool> fetchVote(Vote vote);
 }

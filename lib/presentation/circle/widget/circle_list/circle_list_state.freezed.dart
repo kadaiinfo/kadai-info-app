@@ -31,7 +31,10 @@ const $CircleListState = _$CircleListStateTearOff();
 
 /// @nodoc
 mixin _$CircleListState {
+  /// サークル一覧
   List<CircleModel> get circles => throw _privateConstructorUsedError;
+
+  /// 次のページの有無
   bool get hasNext => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -120,9 +123,13 @@ class _$_CircleListState implements _CircleListState {
 
   @JsonKey(defaultValue: const [])
   @override
+
+  /// サークル一覧
   final List<CircleModel> circles;
   @JsonKey(defaultValue: false)
   @override
+
+  /// 次のページの有無
   final bool hasNext;
 
   @override
@@ -133,19 +140,15 @@ class _$_CircleListState implements _CircleListState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _CircleListState &&
-            (identical(other.circles, circles) ||
-                const DeepCollectionEquality()
-                    .equals(other.circles, circles)) &&
-            (identical(other.hasNext, hasNext) ||
-                const DeepCollectionEquality().equals(other.hasNext, hasNext)));
+        (other.runtimeType == runtimeType &&
+            other is _CircleListState &&
+            const DeepCollectionEquality().equals(other.circles, circles) &&
+            (identical(other.hasNext, hasNext) || other.hasNext == hasNext));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(circles) ^
-      const DeepCollectionEquality().hash(hasNext);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(circles), hasNext);
 
   @JsonKey(ignore: true)
   @override
@@ -158,9 +161,13 @@ abstract class _CircleListState implements CircleListState {
       _$_CircleListState;
 
   @override
-  List<CircleModel> get circles => throw _privateConstructorUsedError;
+
+  /// サークル一覧
+  List<CircleModel> get circles;
   @override
-  bool get hasNext => throw _privateConstructorUsedError;
+
+  /// 次のページの有無
+  bool get hasNext;
   @override
   @JsonKey(ignore: true)
   _$CircleListStateCopyWith<_CircleListState> get copyWith =>

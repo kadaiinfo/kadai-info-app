@@ -205,34 +205,23 @@ class _$_Candidate implements _Candidate {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Candidate &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
+        (other.runtimeType == runtimeType &&
+            other is _Candidate &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.entryNumber, entryNumber) ||
-                const DeepCollectionEquality()
-                    .equals(other.entryNumber, entryNumber)) &&
+                other.entryNumber == entryNumber) &&
             (identical(other.pictureUrl, pictureUrl) ||
-                const DeepCollectionEquality()
-                    .equals(other.pictureUrl, pictureUrl)) &&
+                other.pictureUrl == pictureUrl) &&
             (identical(other.description, description) ||
-                const DeepCollectionEquality()
-                    .equals(other.description, description)) &&
+                other.description == description) &&
             (identical(other.canVoted, canVoted) ||
-                const DeepCollectionEquality()
-                    .equals(other.canVoted, canVoted)) &&
-            (identical(other.gender, gender) ||
-                const DeepCollectionEquality().equals(other.gender, gender)));
+                other.canVoted == canVoted) &&
+            (identical(other.gender, gender) || other.gender == gender));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(entryNumber) ^
-      const DeepCollectionEquality().hash(pictureUrl) ^
-      const DeepCollectionEquality().hash(description) ^
-      const DeepCollectionEquality().hash(canVoted) ^
-      const DeepCollectionEquality().hash(gender);
+  int get hashCode => Object.hash(runtimeType, name, entryNumber, pictureUrl,
+      description, canVoted, gender);
 
   @JsonKey(ignore: true)
   @override
@@ -250,17 +239,17 @@ abstract class _Candidate implements Candidate {
       required String gender}) = _$_Candidate;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  int get entryNumber => throw _privateConstructorUsedError;
+  int get entryNumber;
   @override
-  String get pictureUrl => throw _privateConstructorUsedError;
+  String get pictureUrl;
   @override
-  String get description => throw _privateConstructorUsedError;
+  String get description;
   @override
-  bool get canVoted => throw _privateConstructorUsedError;
+  bool get canVoted;
   @override
-  String get gender => throw _privateConstructorUsedError;
+  String get gender;
   @override
   @JsonKey(ignore: true)
   _$CandidateCopyWith<_Candidate> get copyWith =>

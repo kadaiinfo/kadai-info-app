@@ -9,7 +9,7 @@ extension NfcFeliCaTypeExt on NfcFeliCaType {
       case NfcFeliCaType.univ:
         return [0xFE, 0x00];
       default:
-        return [];
+        return [0xFF];
     }
   }
 }

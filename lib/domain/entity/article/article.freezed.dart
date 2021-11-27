@@ -215,32 +215,21 @@ class _$_Article implements _Article {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Article &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)) &&
+        (other.runtimeType == runtimeType &&
+            other is _Article &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
             (identical(other.thumbnailUrl, thumbnailUrl) ||
-                const DeepCollectionEquality()
-                    .equals(other.thumbnailUrl, thumbnailUrl)) &&
-            (identical(other.link, link) ||
-                const DeepCollectionEquality().equals(other.link, link)) &&
-            (identical(other.author, author) ||
-                const DeepCollectionEquality().equals(other.author, author)) &&
+                other.thumbnailUrl == thumbnailUrl) &&
+            (identical(other.link, link) || other.link == link) &&
+            (identical(other.author, author) || other.author == author) &&
             (identical(other.publishedAt, publishedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.publishedAt, publishedAt)));
+                other.publishedAt == publishedAt));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(thumbnailUrl) ^
-      const DeepCollectionEquality().hash(link) ^
-      const DeepCollectionEquality().hash(author) ^
-      const DeepCollectionEquality().hash(publishedAt);
+  int get hashCode => Object.hash(
+      runtimeType, id, title, thumbnailUrl, link, author, publishedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -258,17 +247,17 @@ abstract class _Article implements Article {
       required DateTime publishedAt}) = _$_Article;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
-  String? get thumbnailUrl => throw _privateConstructorUsedError;
+  String? get thumbnailUrl;
   @override
-  String get link => throw _privateConstructorUsedError;
+  String get link;
   @override
-  ArticleAuthor get author => throw _privateConstructorUsedError;
+  ArticleAuthor get author;
   @override
-  DateTime get publishedAt => throw _privateConstructorUsedError;
+  DateTime get publishedAt;
   @override
   @JsonKey(ignore: true)
   _$ArticleCopyWith<_Article> get copyWith =>

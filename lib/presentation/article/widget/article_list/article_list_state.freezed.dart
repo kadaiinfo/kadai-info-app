@@ -133,19 +133,15 @@ class _$_ArticleListState implements _ArticleListState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ArticleListState &&
-            (identical(other.articles, articles) ||
-                const DeepCollectionEquality()
-                    .equals(other.articles, articles)) &&
-            (identical(other.hasNext, hasNext) ||
-                const DeepCollectionEquality().equals(other.hasNext, hasNext)));
+        (other.runtimeType == runtimeType &&
+            other is _ArticleListState &&
+            const DeepCollectionEquality().equals(other.articles, articles) &&
+            (identical(other.hasNext, hasNext) || other.hasNext == hasNext));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(articles) ^
-      const DeepCollectionEquality().hash(hasNext);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(articles), hasNext);
 
   @JsonKey(ignore: true)
   @override
@@ -158,9 +154,9 @@ abstract class _ArticleListState implements ArticleListState {
       _$_ArticleListState;
 
   @override
-  List<ArticleModel> get articles => throw _privateConstructorUsedError;
+  List<ArticleModel> get articles;
   @override
-  bool get hasNext => throw _privateConstructorUsedError;
+  bool get hasNext;
   @override
   @JsonKey(ignore: true)
   _$ArticleListStateCopyWith<_ArticleListState> get copyWith =>

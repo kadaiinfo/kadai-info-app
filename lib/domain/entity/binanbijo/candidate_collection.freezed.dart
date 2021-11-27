@@ -117,15 +117,15 @@ class _$_CandidateCollection implements _CandidateCollection {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _CandidateCollection &&
-            (identical(other.candidates, candidates) ||
-                const DeepCollectionEquality()
-                    .equals(other.candidates, candidates)));
+        (other.runtimeType == runtimeType &&
+            other is _CandidateCollection &&
+            const DeepCollectionEquality()
+                .equals(other.candidates, candidates));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(candidates);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(candidates));
 
   @JsonKey(ignore: true)
   @override
@@ -139,7 +139,7 @@ abstract class _CandidateCollection implements CandidateCollection {
       _$_CandidateCollection;
 
   @override
-  List<Candidate> get candidates => throw _privateConstructorUsedError;
+  List<Candidate> get candidates;
   @override
   @JsonKey(ignore: true)
   _$CandidateCollectionCopyWith<_CandidateCollection> get copyWith =>

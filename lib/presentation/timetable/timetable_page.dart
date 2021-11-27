@@ -17,10 +17,7 @@ class TimetablePage extends StatelessWidget {
         child: Column(
           children: const [
             /// 授業一覧
-            TimetableLessonList(),
-
-            /// 余白
-            Spacer(),
+            TimetableLessonList(year: 2021),
 
             /// 広告バナー
             TimetableAdsenseBanner(),

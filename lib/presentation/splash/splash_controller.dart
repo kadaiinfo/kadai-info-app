@@ -22,7 +22,7 @@ class SplashController {
     ]);
     final data = SetupModel(
       /// アプリ更新
-      shouldUpdate: await _shouldUpdate(),
+      shouldUpdate: true,
     );
     return data;
   }

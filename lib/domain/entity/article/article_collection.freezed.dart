@@ -153,24 +153,17 @@ class _$_ArticleCollection implements _ArticleCollection {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ArticleCollection &&
-            (identical(other.articles, articles) ||
-                const DeepCollectionEquality()
-                    .equals(other.articles, articles)) &&
-            (identical(other.hasNext, hasNext) ||
-                const DeepCollectionEquality()
-                    .equals(other.hasNext, hasNext)) &&
+        (other.runtimeType == runtimeType &&
+            other is _ArticleCollection &&
+            const DeepCollectionEquality().equals(other.articles, articles) &&
+            (identical(other.hasNext, hasNext) || other.hasNext == hasNext) &&
             (identical(other.hasPrevious, hasPrevious) ||
-                const DeepCollectionEquality()
-                    .equals(other.hasPrevious, hasPrevious)));
+                other.hasPrevious == hasPrevious));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(articles) ^
-      const DeepCollectionEquality().hash(hasNext) ^
-      const DeepCollectionEquality().hash(hasPrevious);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(articles), hasNext, hasPrevious);
 
   @JsonKey(ignore: true)
   @override
@@ -185,11 +178,11 @@ abstract class _ArticleCollection implements ArticleCollection {
       bool hasPrevious}) = _$_ArticleCollection;
 
   @override
-  List<Article> get articles => throw _privateConstructorUsedError;
+  List<Article> get articles;
   @override
-  bool get hasNext => throw _privateConstructorUsedError;
+  bool get hasNext;
   @override
-  bool get hasPrevious => throw _privateConstructorUsedError;
+  bool get hasPrevious;
   @override
   @JsonKey(ignore: true)
   _$ArticleCollectionCopyWith<_ArticleCollection> get copyWith =>

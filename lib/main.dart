@@ -12,7 +12,7 @@ Future<void> main() async {
   ]);
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await Firebase.initializeApp();
-  await FirebaseMessaging.instance.subscribeToTopic('article');
+  // await FirebaseMessaging.instance.subscribeToTopic('article');
   runApp(const ProviderScope(child: App()));
 }
 

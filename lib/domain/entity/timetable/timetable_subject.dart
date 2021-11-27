@@ -9,20 +9,23 @@ class TimetableSubject extends Equatable {
   final String name;
 
   /// 教師
-  final List<String> teachers;
+  final String? teacher;
 
   /// 概要
-  final String description;
+  final String? description;
 
   /// 授業ID
   final String timetableLessonId;
 
+  final String? room;
+
   const TimetableSubject({
     required this.id,
     required this.name,
-    required this.description,
-    required this.teachers,
+    this.description,
+    this.teacher,
     required this.timetableLessonId,
+    this.room,
   });
 
   @override

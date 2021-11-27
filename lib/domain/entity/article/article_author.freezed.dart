@@ -166,25 +166,17 @@ class _$_ArticleAuthor implements _ArticleAuthor {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ArticleAuthor &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
+        (other.runtimeType == runtimeType &&
+            other is _ArticleAuthor &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.thumbnailUrl, thumbnailUrl) ||
-                const DeepCollectionEquality()
-                    .equals(other.thumbnailUrl, thumbnailUrl)) &&
-            (identical(other.link, link) ||
-                const DeepCollectionEquality().equals(other.link, link)));
+                other.thumbnailUrl == thumbnailUrl) &&
+            (identical(other.link, link) || other.link == link));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(thumbnailUrl) ^
-      const DeepCollectionEquality().hash(link);
+  int get hashCode => Object.hash(runtimeType, id, name, thumbnailUrl, link);
 
   @JsonKey(ignore: true)
   @override
@@ -200,13 +192,13 @@ abstract class _ArticleAuthor implements ArticleAuthor {
       required String link}) = _$_ArticleAuthor;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String? get thumbnailUrl => throw _privateConstructorUsedError;
+  String? get thumbnailUrl;
   @override
-  String get link => throw _privateConstructorUsedError;
+  String get link;
   @override
   @JsonKey(ignore: true)
   _$ArticleAuthorCopyWith<_ArticleAuthor> get copyWith =>

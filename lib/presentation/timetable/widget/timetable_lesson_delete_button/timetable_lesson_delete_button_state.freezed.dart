@@ -17,9 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$TimetableLessonDeleteButtonStateTearOff {
   const _$TimetableLessonDeleteButtonStateTearOff();
 
-  _TimetableLessonDeleteButtonState call({String text = '削除'}) {
+  _TimetableLessonDeleteButtonState call(
+      {String text = '削除', bool isConfirmed = false}) {
     return _TimetableLessonDeleteButtonState(
       text: text,
+      isConfirmed: isConfirmed,
     );
   }
 }
@@ -31,6 +33,7 @@ const $TimetableLessonDeleteButtonState =
 /// @nodoc
 mixin _$TimetableLessonDeleteButtonState {
   String get text => throw _privateConstructorUsedError;
+  bool get isConfirmed => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TimetableLessonDeleteButtonStateCopyWith<TimetableLessonDeleteButtonState>
@@ -43,7 +46,7 @@ abstract class $TimetableLessonDeleteButtonStateCopyWith<$Res> {
           TimetableLessonDeleteButtonState value,
           $Res Function(TimetableLessonDeleteButtonState) then) =
       _$TimetableLessonDeleteButtonStateCopyWithImpl<$Res>;
-  $Res call({String text});
+  $Res call({String text, bool isConfirmed});
 }
 
 /// @nodoc
@@ -58,12 +61,17 @@ class _$TimetableLessonDeleteButtonStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? text = freezed,
+    Object? isConfirmed = freezed,
   }) {
     return _then(_value.copyWith(
       text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
+      isConfirmed: isConfirmed == freezed
+          ? _value.isConfirmed
+          : isConfirmed // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -76,7 +84,7 @@ abstract class _$TimetableLessonDeleteButtonStateCopyWith<$Res>
           $Res Function(_TimetableLessonDeleteButtonState) then) =
       __$TimetableLessonDeleteButtonStateCopyWithImpl<$Res>;
   @override
-  $Res call({String text});
+  $Res call({String text, bool isConfirmed});
 }
 
 /// @nodoc
@@ -95,12 +103,17 @@ class __$TimetableLessonDeleteButtonStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? text = freezed,
+    Object? isConfirmed = freezed,
   }) {
     return _then(_TimetableLessonDeleteButtonState(
       text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
+      isConfirmed: isConfirmed == freezed
+          ? _value.isConfirmed
+          : isConfirmed // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -109,15 +122,19 @@ class __$TimetableLessonDeleteButtonStateCopyWithImpl<$Res>
 
 class _$_TimetableLessonDeleteButtonState
     implements _TimetableLessonDeleteButtonState {
-  _$_TimetableLessonDeleteButtonState({this.text = '削除'});
+  _$_TimetableLessonDeleteButtonState(
+      {this.text = '削除', this.isConfirmed = false});
 
   @JsonKey(defaultValue: '削除')
   @override
   final String text;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool isConfirmed;
 
   @override
   String toString() {
-    return 'TimetableLessonDeleteButtonState(text: $text)';
+    return 'TimetableLessonDeleteButtonState(text: $text, isConfirmed: $isConfirmed)';
   }
 
   @override
@@ -125,11 +142,13 @@ class _$_TimetableLessonDeleteButtonState
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _TimetableLessonDeleteButtonState &&
-            (identical(other.text, text) || other.text == text));
+            (identical(other.text, text) || other.text == text) &&
+            (identical(other.isConfirmed, isConfirmed) ||
+                other.isConfirmed == isConfirmed));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, text);
+  int get hashCode => Object.hash(runtimeType, text, isConfirmed);
 
   @JsonKey(ignore: true)
   @override
@@ -140,11 +159,13 @@ class _$_TimetableLessonDeleteButtonState
 
 abstract class _TimetableLessonDeleteButtonState
     implements TimetableLessonDeleteButtonState {
-  factory _TimetableLessonDeleteButtonState({String text}) =
+  factory _TimetableLessonDeleteButtonState({String text, bool isConfirmed}) =
       _$_TimetableLessonDeleteButtonState;
 
   @override
   String get text;
+  @override
+  bool get isConfirmed;
   @override
   @JsonKey(ignore: true)
   _$TimetableLessonDeleteButtonStateCopyWith<_TimetableLessonDeleteButtonState>

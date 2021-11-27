@@ -6,15 +6,13 @@ class TimetableLessonDeleteButtonController
   TimetableLessonDeleteButtonController()
       : super(TimetableLessonDeleteButtonState());
 
-  bool _isConfirmed = false;
-
   /// 授業を削除
-  Future<void> deleteLesson() async {
-    if (_isConfirmed) {
-      // TODO: 削除処理
-    } else {
-      _isConfirmed = true;
-      state = state.copyWith(text: 'もう一度\nタップで削除');
-    }
+  Future<void> deleteLesson() async {}
+
+  Future<void> showConfirmText() async {
+    state = state.copyWith(
+      text: 'もう一度\nタップで削除',
+      isConfirmed: true,
+    );
   }
 }

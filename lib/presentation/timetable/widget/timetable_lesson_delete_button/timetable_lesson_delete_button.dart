@@ -8,15 +8,24 @@ class TimetableLessonDeleteButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final text = ref.watch(timetableLessonDeleteButtonControllerProvider).text;
+    final isConfirmed =
+        ref.watch(timetableLessonDeleteButtonControllerProvider).isConfirmed;
     final controller =
         ref.read(timetableLessonDeleteButtonControllerProvider.notifier);
     return Expanded(
       child: ElevatedButton(
         onPressed: () async {
-          await controller.deleteLesson();
-          Navigator.pop(context); // ダイアログを閉じる
+          if (isConfirmed) {
+            await controller.deleteLesson();
+            Navigator.pop(context); // ダイアログを閉じる
+          } else {
+            await controller.showConfirmText();
+          }
         },
-        child: Text(text),
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }

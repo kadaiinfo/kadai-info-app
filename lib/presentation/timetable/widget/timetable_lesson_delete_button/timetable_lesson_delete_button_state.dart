@@ -6,5 +6,6 @@ part 'timetable_lesson_delete_button_state.freezed.dart';
 class TimetableLessonDeleteButtonState with _$TimetableLessonDeleteButtonState {
   factory TimetableLessonDeleteButtonState({
     @Default('削除') String text,
+    @Default(false) bool isConfirmed,
   }) = _TimetableLessonDeleteButtonState;
 }

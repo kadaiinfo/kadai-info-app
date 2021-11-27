@@ -24,7 +24,12 @@ class TimetableLessonItemController
   Future<void> _fetch() async {}
 
   /// コマの更新
-  void updateLesson() {}
+  Future<void> updateLesson() async {}
+
+  /// コマの削除
+  Future<void> deleteLesson() async {
+    state = const TimetableLessonItemState();
+  }
 }
 
 class TimetableLessonItemArgument extends Equatable {

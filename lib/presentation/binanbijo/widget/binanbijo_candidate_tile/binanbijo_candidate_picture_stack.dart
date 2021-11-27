@@ -8,10 +8,9 @@ import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading
 
 class BinanbijoCandidatePictureStack extends ConsumerWidget {
   const BinanbijoCandidatePictureStack(
-      {Key? key, required this.pictureUrl, required this.candidate})
+      {Key? key, required this.candidate})
       : super(key: key);
 
-  final String pictureUrl;
   final BinanbijoCandidateModel candidate;
 
   @override
@@ -20,7 +19,7 @@ class BinanbijoCandidatePictureStack extends ConsumerWidget {
     final _manager = ref.read(customCacheManagerProvider);
     return Stack(clipBehavior: Clip.none, children: [
       CachedNetworkImage(
-        imageUrl: pictureUrl,
+        imageUrl: '${candidate.pictureUrl}?w=900&h=600',
         placeholder: (context, url) => const LoadingIndicator(),
         errorWidget: (context, url, error) => const Icon(Icons.error),
         cacheManager: _manager,

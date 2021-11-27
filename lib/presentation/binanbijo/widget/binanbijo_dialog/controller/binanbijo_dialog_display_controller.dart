@@ -21,4 +21,9 @@ class BinanbijoDialogDisplayController
   void vote() {
     state = const AsyncData(BinanbijoDialogDisplayModel.voted());
   }
+
+  // エラー
+  void cantVote() {
+    state = const AsyncData(BinanbijoDialogDisplayModel.cantVote());
+  }
 }

@@ -35,6 +35,9 @@ class BinanBijoCandidates extends ConsumerWidget {
                   for (final candidate in candidates)
                     if (candidate.canVoted && candidate.gender == gender)
                       BinanbijoCandidateTile(candidate: candidate),
+                  for (final candidate in candidates)
+                    if (!candidate.canVoted && candidate.gender == gender)
+                      BinanbijoCandidateTile(candidate: candidate)
                 ]),
             const BinanbijoExternalLinkButton()
           ]);

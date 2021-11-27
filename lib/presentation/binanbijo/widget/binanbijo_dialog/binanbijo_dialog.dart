@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_candidate_model.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/binanbijo_cant_vote_dialog.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/binanbijo_user_choice_dialog.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/binanbijo_vote_dialog.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/binanbijo_voted_dialog.dart';
@@ -8,7 +10,9 @@ import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialo
 import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
 
 class BinanbijoDialog extends ConsumerWidget {
-  const BinanbijoDialog({Key? key}) : super(key: key);
+  const BinanbijoDialog({Key? key, required this.candidate}) : super(key: key);
+
+  final BinanbijoCandidateModel candidate;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,11 +23,13 @@ class BinanbijoDialog extends ConsumerWidget {
         loading: () => const LoadingIndicator(),
         data: (display) {
           if (display == const BinanbijoDialogDisplayModel.choiceUser()) {
-            return const BinanbijoUserChoiceDialog();
+            return BinanbijoUserChoiceDialog(candidate: candidate);
           } else if (display == const BinanbijoDialogDisplayModel.vote()) {
-            return const BinanbijoVoteDialog();
+            return BinanbijoVoteDialog(candidate: candidate);
           } else if (display == const BinanbijoDialogDisplayModel.voted()) {
-            return const BinanbijoVotedDialog();
+            return BinanbijoVotedDialog(candidate: candidate);
+          } else if (display == const BinanbijoDialogDisplayModel.cantVote()) {
+            return const BinanbijoCantVoteDialog();
           } else {
             return const LoadingIndicator();
           }

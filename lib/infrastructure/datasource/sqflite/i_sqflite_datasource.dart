@@ -7,6 +7,7 @@ import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_t
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_lesson.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_lesson_save_input.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_term.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_binanbijo_vote.dart';
 
 abstract class ISqfliteDatasource {
   /// 記事一覧
@@ -71,4 +72,10 @@ abstract class ISqfliteDatasource {
 
   /// 出欠情報の削除
   Future<void> deleteTimetableAttendance(String attendanceId);
+  
+  // 今日の投票を取得
+  Future<List<SQFBinanbijoVote>> fetchDailyVote(DateTime now);
+
+  // 投票を保存
+  Future<void> saveVote(SQFBinanbijoVote vote);
 }

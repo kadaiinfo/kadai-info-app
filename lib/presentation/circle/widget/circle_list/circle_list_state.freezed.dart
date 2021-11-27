@@ -168,6 +168,11 @@ abstract class _CircleListState implements CircleListState {
 
   /// 次のページの有無
   bool get hasNext;
+  List<CircleModel> get circles => throw _privateConstructorUsedError;
+  @override
+
+  /// 次のページの有無
+  bool get hasNext => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CircleListStateCopyWith<_CircleListState> get copyWith =>

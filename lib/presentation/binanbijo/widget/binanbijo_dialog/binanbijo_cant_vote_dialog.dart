@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_candidate_model.dart';
 
-class BinanbijoVotedDialog extends ConsumerWidget {
-  const BinanbijoVotedDialog({Key? key, required this.candidate}) : super(key: key);
+class BinanbijoCantVoteDialog extends ConsumerWidget {
+  const BinanbijoCantVoteDialog({Key? key}) : super(key: key);
 
   static const _dialogBaseColor = Color(0xFFF8F8F8);
   static const _dialogBorderColor = Color(0xFF707070);
-  final BinanbijoCandidateModel candidate;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,7 +22,7 @@ class BinanbijoVotedDialog extends ConsumerWidget {
             color: _dialogBaseColor,
             borderRadius: BorderRadius.circular(_width * 0.08)),
         child: Center(
-          child: Text('${candidate.name}さんに投票しました！',
+          child: Text('投票できません',
               style: DefaultTextStyle.of(context).style.apply(
                     fontWeightDelta: 2,
                     decoration: TextDecoration.underline,

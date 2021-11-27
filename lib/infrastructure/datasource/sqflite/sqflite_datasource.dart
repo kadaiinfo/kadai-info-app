@@ -9,6 +9,7 @@ import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_t
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_lesson.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_lesson_save_input.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_term.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_binanbijo_vote.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:uuid/uuid.dart';
@@ -28,10 +29,17 @@ class SqfliteDatasource implements ISqfliteDatasource {
   static const _timetableLessonTableName = 'lesson';
   static const _timetableAttendanceTableName = 'attendance';
 
+  // 美男美女投票関連
+  static const _voteDBName = 'vote.db';
+  static const _voteTableName = 'vote';
+  static late Database _voteDB;
+  static const _voteVersion = 1;
+
   /// 初期化
   static Future<void> init() async {
     _articleDB = await _getArticleDatabase();
     _timetableDB = await _getTimetableDatabase();
+    _voteDB = await _getVoteDatabase();
   }
 
   @override
@@ -97,6 +105,30 @@ class SqfliteDatasource implements ISqfliteDatasource {
             ${SQFTimetable.keyUpdatedAt} INTEGER 
             )
             ''',
+          );
+        },
+      );
+      return db;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<Database> _getVoteDatabase() async {
+    try {
+      final Database db = await openDatabase(
+        join(await getDatabasesPath(), _voteDBName),
+        version: _voteVersion,
+        onCreate: (db, version) async {
+          await db.execute(
+              '''
+              CREATE TABLE $_voteTableName (
+              ${SQFBinanbijoVote.keyEntryNumber} INTEGER, 
+              ${SQFBinanbijoVote.keyGender} TEXT, 
+              ${SQFBinanbijoVote.keyIsStudent} INTEGER, 
+              ${SQFBinanbijoVote.keyCreatedAt} INTEGER PRIMARY KEY
+              )
+              ''',
           );
         },
       );
@@ -375,6 +407,8 @@ class SqfliteDatasource implements ISqfliteDatasource {
     }
   }
 
+  Future<void> saveTimetableAttendance() async {}
+
   @override
   Future<SQFTimetableLesson> findTimetableLesson(String lessonId) async {
     try {
@@ -384,6 +418,40 @@ class SqfliteDatasource implements ISqfliteDatasource {
         whereArgs: [lessonId],
       );
       return SQFTimetableLesson.from(result.first);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<SQFBinanbijoVote>> fetchDailyVote(DateTime now) async {
+    try {
+      final firstTime =
+          DateTime(now.year, now.month, now.day).millisecondsSinceEpoch;
+      final lastTime =
+          DateTime(now.year, now.month, now.day + 1).millisecondsSinceEpoch;
+      final voteMaps = await _voteDB.query(
+        _voteTableName,
+        where:
+            '${SQFBinanbijoVote.keyCreatedAt} BETWEEN $firstTime AND $lastTime',
+      );
+      final result =
+          voteMaps.map((map) => SQFBinanbijoVote.fromMap(map)).toList();
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> saveVote(SQFBinanbijoVote vote) async {
+    try {
+      final data = vote.toMap();
+      await _voteDB.insert(
+        _voteTableName,
+        data,
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
     } catch (e) {
       rethrow;
     }

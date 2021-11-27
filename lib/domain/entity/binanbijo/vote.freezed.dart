@@ -143,23 +143,17 @@ class _$_Vote implements _Vote {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Vote &&
+        (other.runtimeType == runtimeType &&
+            other is _Vote &&
             (identical(other.entryNumber, entryNumber) ||
-                const DeepCollectionEquality()
-                    .equals(other.entryNumber, entryNumber)) &&
-            (identical(other.gender, gender) ||
-                const DeepCollectionEquality().equals(other.gender, gender)) &&
+                other.entryNumber == entryNumber) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.isStudent, isStudent) ||
-                const DeepCollectionEquality()
-                    .equals(other.isStudent, isStudent)));
+                other.isStudent == isStudent));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(entryNumber) ^
-      const DeepCollectionEquality().hash(gender) ^
-      const DeepCollectionEquality().hash(isStudent);
+  int get hashCode => Object.hash(runtimeType, entryNumber, gender, isStudent);
 
   @JsonKey(ignore: true)
   @override
@@ -174,11 +168,11 @@ abstract class _Vote implements Vote {
       required bool isStudent}) = _$_Vote;
 
   @override
-  int get entryNumber => throw _privateConstructorUsedError;
+  int get entryNumber;
   @override
-  String get gender => throw _privateConstructorUsedError;
+  String get gender;
   @override
-  bool get isStudent => throw _privateConstructorUsedError;
+  bool get isStudent;
   @override
   @JsonKey(ignore: true)
   _$VoteCopyWith<_Vote> get copyWith => throw _privateConstructorUsedError;

@@ -14,7 +14,6 @@ class TimetablePeriodList extends StatelessWidget {
         _Period(period: '3'),
         _Period(period: '4'),
         _Period(period: '5'),
-        _Period(period: '6'),
       ],
     );
   }

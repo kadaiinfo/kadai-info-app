@@ -18,20 +18,23 @@ class TimetableAdsenseBanner extends ConsumerWidget {
         data: (data) {
           return GestureDetector(
             onTap: () {
+              // リンクを開く
               NavigatorUtil.push(
                 context: context,
                 page: WebViewPage(data.link),
                 fullscreenDialog: true,
               );
             },
+
+            /// バナー画像
             child: CachedNetworkImage(
               imageUrl: data.imageUrl,
               fit: BoxFit.fitWidth,
             ),
           );
         },
-        error: (error, _) => const SizedBox(),
-        loading: () => const SizedBox(),
+        error: (error, _) => const SizedBox(), // データ未取得時は何も表示しない
+        loading: () => const SizedBox(), // データ未取得時は何も表示しない
       ),
     );
   }

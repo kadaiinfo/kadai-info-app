@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/application/timetable/timetable_application.dart';
 
@@ -30,19 +29,4 @@ class TimetableLessonItemController
   Future<void> deleteLesson() async {
     state = const TimetableLessonItemState();
   }
-}
-
-class TimetableLessonItemArgument extends Equatable {
-  final int year;
-  final int day;
-  final int period;
-
-  const TimetableLessonItemArgument({
-    required this.period,
-    required this.day,
-    required this.year,
-  });
-
-  @override
-  List<Object?> get props => [year, day, period];
 }

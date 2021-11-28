@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/application/timetable/timetable_application_provider.dart';
 import 'package:kadai_info_flutter/presentation/timetable/widget/timetable_lesson_item/timetable_lesson_item_controller.dart';
@@ -35,3 +36,18 @@ final timetableLessonItemControllerProvider = StateNotifierProvider.autoDispose
     );
   },
 );
+
+class TimetableLessonItemArgument extends Equatable {
+  final int year;
+  final int day;
+  final int period;
+
+  const TimetableLessonItemArgument({
+    required this.period,
+    required this.day,
+    required this.year,
+  });
+
+  @override
+  List<Object?> get props => [year, day, period];
+}

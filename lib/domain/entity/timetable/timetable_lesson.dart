@@ -18,12 +18,16 @@ class TimetableLesson extends Equatable {
   /// 時間割ID
   final String timetableId;
 
+  /// コマの色
+  final int boardColor;
+
   const TimetableLesson({
     required this.id,
     required this.subject,
     required this.day,
     required this.period,
     required this.timetableId,
+    required this.boardColor,
   });
 
   @override

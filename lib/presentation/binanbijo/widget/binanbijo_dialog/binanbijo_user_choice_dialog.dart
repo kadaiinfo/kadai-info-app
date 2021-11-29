@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kadai_info_flutter/core/analytics/firebase_analytics_service.dart';
+import 'package:kadai_info_flutter/core/constant/binanbijo_constant.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_candidate_model.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/controller/binanbijo_dialog_display_controller_provider.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_scroll_view/controller/binanbijo_is_student_controller_provider.dart';
@@ -8,8 +10,6 @@ class BinanbijoUserChoiceDialog extends ConsumerWidget {
   const BinanbijoUserChoiceDialog({Key? key, required this.candidate})
       : super(key: key);
 
-  static const _dialogBaseColor = Color(0xFFF8F8F8);
-  static const _dialogBorderColor = Color(0xFFB7B7B7);
   final BinanbijoCandidateModel candidate;
 
   @override
@@ -22,13 +22,13 @@ class BinanbijoUserChoiceDialog extends ConsumerWidget {
 
     return Dialog(
         shape: RoundedRectangleBorder(
-            side: const BorderSide(color: _dialogBorderColor, width: 2.0),
+            side: const BorderSide(color: BinanbijoConstant.dialogBorder, width: 2.0),
             borderRadius: BorderRadius.all(Radius.circular(_width * 0.08))),
         child: Container(
             height: _width * 0.5,
             width: _width * 0.8,
             decoration: BoxDecoration(
-                color: _dialogBaseColor,
+                color: BinanbijoConstant.dialogBase,
                 borderRadius: BorderRadius.circular(_width * 0.08)),
             child: Column(children: [
               Expanded(
@@ -51,6 +51,12 @@ class BinanbijoUserChoiceDialog extends ConsumerWidget {
                         child: Image.asset(
                             'asset/image/binanbijo2021/student_vote.png'),
                         onTap: () async {
+                          await FirebaseAnalyticsService().sendEvent(
+                            event: AnalyticsEvent.scan,
+                            parameterMap: {
+                              'scanId': 'binanbijo2021_scan'
+                            }
+                          );
                           await _isStudentController.scan();
                         },
                       )),
@@ -59,7 +65,13 @@ class BinanbijoUserChoiceDialog extends ConsumerWidget {
                       child: InkWell(
                           child: Image.asset(
                               'asset/image/binanbijo2021/general_vote.png'),
-                          onTap: () {
+                          onTap: () async {
+                            await FirebaseAnalyticsService().sendEvent(
+                            event: AnalyticsEvent.button,
+                            parameterMap: {
+                              'buttonId': 'binanbijo2021_general_vote'
+                            }
+                          );
                             _displayController.choiceUser();
                           })),
                   Expanded(flex: 1, child: Container()),

@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:kadai_info_flutter/core/constant/binanbijo_constant.dart';
 
 class BinanBijoDescription extends StatelessWidget {
   const BinanBijoDescription({Key? key}) : super(key: key);
 
-  static const bbsBlack = Color(0xFF250B0D);
-  static const bbsYellow = Color(0xFFF6D967);
-
   @override
   Widget build(BuildContext context) {
     final _defaultTextStyle =
-        DefaultTextStyle.of(context).style.apply(color: bbsBlack);
+        DefaultTextStyle.of(context).style.apply(color: BinanbijoConstant.black);
     return Column(
       children: [
-        Container(
-          color: const Color(0xFFF7F5F5),
+        SizedBox(
           width: double.maxFinite,
           child: Image.asset(
               'asset/image/binanbijo2021/banner.jpg')
@@ -31,7 +28,7 @@ class BinanBijoDescription extends StatelessWidget {
                 vertical: _defaultTextStyle.fontSize! * 0.25,
                 horizontal: _defaultTextStyle.fontSize! * 2.0),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24.0), color: bbsYellow),
+                borderRadius: BorderRadius.circular(24.0), color: BinanbijoConstant.yellow),
             child: Text(
               '投票ページ',
               style: _defaultTextStyle.apply(
@@ -64,8 +61,8 @@ class BinanBijoDescription extends StatelessWidget {
           child: OutlinedButton.icon(
               style: ButtonStyle(
                   side: MaterialStateProperty.all(
-                      const BorderSide(color: bbsBlack)),
-                  foregroundColor: MaterialStateProperty.all(bbsBlack),
+                      const BorderSide(color: BinanbijoConstant.black)),
+                  foregroundColor: MaterialStateProperty.all(BinanbijoConstant.black),
                   overlayColor: MaterialStateProperty.all(Colors.black12),
                   textStyle: MaterialStateProperty.all(
                       _defaultTextStyle.apply(fontWeightDelta: 2))),

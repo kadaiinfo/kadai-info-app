@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:kadai_info_flutter/core/constant/binanbijo_constant.dart';
 
 class TabBarColorModel {
-  static const bbsGirls = Color(0xFFC72430);
-  static const bbsBoys = Color(0xFF2D4195);
-  static const grey = Color(0xFF868686);
+  static const bbsGirls = BinanbijoConstant.girls;
+  static const bbsBoys = BinanbijoConstant.boys;
+  static const grey = BinanbijoConstant.unselected;
 
   final Color girlsColor;
   final Color boysColor;

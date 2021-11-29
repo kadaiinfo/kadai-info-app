@@ -4,7 +4,6 @@ class SQFBinanbijoVote {
   static const keyIsStudent = 'isStudent';
   static const keyCreatedAt = 'createdAt';
 
-
   final int entryNumber;
   final String gender;
   final bool isStudent;

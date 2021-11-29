@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_gender_model.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_description/binanbijo_description.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidates/binanbijo_candidates.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_scroll_view/controller/binanbijo_is_student_controller_provider.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_scroll_view/controller/tab_bar_color_controller_provider.dart';
 
 class BinanBijoScrollView extends HookConsumerWidget {
@@ -20,6 +21,7 @@ class BinanBijoScrollView extends HookConsumerWidget {
         .style
         .apply(fontWeightDelta: 3, fontSizeFactor: 1.8);
     final _width = MediaQuery.of(context).size.width;
+    ref.watch(binanbijoIsStudentControllerProvider);
     return NestedScrollView(
       controller: _scrollController,
       headerSliverBuilder: (context, value) {

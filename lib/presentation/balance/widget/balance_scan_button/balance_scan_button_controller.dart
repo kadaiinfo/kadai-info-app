@@ -20,6 +20,7 @@ class BalanceScanButtonController
   /// ICカードを読み取る
   Future<void> scanICCard() async {
     state = BalanceScanButtonState(isRunning: true);
+    await NfcManager.instance.stopSession();
     await NfcManager.instance.startSession(
       onDiscovered: (tag) async {
         try {

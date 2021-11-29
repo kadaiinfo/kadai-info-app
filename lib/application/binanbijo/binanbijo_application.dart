@@ -1,6 +1,7 @@
 import 'package:kadai_info_flutter/domain/entity/binanbijo/candidate_collection.dart';
 import 'package:kadai_info_flutter/domain/entity/binanbijo/vote.dart';
 import 'package:kadai_info_flutter/domain/repository/binanbijo/i_binanbijo_repository.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 
 class BinanbijoApplication {
   BinanbijoApplication(this._repository);
@@ -22,6 +23,17 @@ class BinanbijoApplication {
     try {
       final result = await _repository.fetchVote(vote);
       return result;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // 学生証の取得
+  Future<bool> getUnivCard(NfcTag tag) async {
+    try {
+      final result = await _repository.getUnivCard(tag);
+      // 有効期限を判定
+      return DateTime.now().isBefore(result.expiryAt);
     } catch (e) {
       return false;
     }

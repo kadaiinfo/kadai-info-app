@@ -15,5 +15,11 @@
       "type": "dart",
       "flutterMode": "profile"
     }
+    {
+      "name": "kadai_info_flutter (release mode)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    }
   ]
 }

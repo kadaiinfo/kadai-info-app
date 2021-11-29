@@ -1,6 +1,7 @@
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_info.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_prepaid_balance.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_prepaid_transaction.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_user_info.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 
 abstract class INfcDatasource {
@@ -15,4 +16,7 @@ abstract class INfcDatasource {
 
   /// 大学生協のプリペイド残高情報の取得
   Future<NfcUnivCoopPrepaidBalance> univCoopPrepaidBalance(NfcTag tag);
+
+  // 学生証の基本情報の取得
+  Future<NfcUnivUserInfo> univUserInfo(NfcTag tag);
 }

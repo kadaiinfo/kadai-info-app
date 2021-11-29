@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_candidate_model.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/controller/binanbijo_dialog_display_controller_provider.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_scroll_view/controller/binanbijo_is_student_controller_provider.dart';
 
 class BinanbijoUserChoiceDialog extends ConsumerWidget {
-  const BinanbijoUserChoiceDialog({Key? key, required this.candidate}) : super(key: key);
+  const BinanbijoUserChoiceDialog({Key? key, required this.candidate})
+      : super(key: key);
 
   static const _dialogBaseColor = Color(0xFFF8F8F8);
   static const _dialogBorderColor = Color(0xFFB7B7B7);
@@ -15,6 +17,8 @@ class BinanbijoUserChoiceDialog extends ConsumerWidget {
     final _width = MediaQuery.of(context).size.width;
     final _displayController =
         ref.watch(binanbijoDialogDisplayControllerProvider.notifier);
+    final _isStudentController =
+        ref.read(binanbijoIsStudentControllerProvider.notifier);
 
     return Dialog(
         shape: RoundedRectangleBorder(
@@ -46,8 +50,8 @@ class BinanbijoUserChoiceDialog extends ConsumerWidget {
                       child: InkWell(
                         child: Image.asset(
                             'asset/image/binanbijo2021/student_vote.png'),
-                        onTap: () {
-                          _displayController.choiceUser();
+                        onTap: () async {
+                          await _isStudentController.scan();
                         },
                       )),
                   Expanded(

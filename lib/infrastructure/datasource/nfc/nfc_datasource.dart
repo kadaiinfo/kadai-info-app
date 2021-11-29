@@ -9,6 +9,7 @@ import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_felic
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_info.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_prepaid_balance.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_prepaid_transaction.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_user_info.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:nfc_manager/platform_tags.dart';
 
@@ -194,6 +195,24 @@ class NfcDatasource implements INfcDatasource {
     } else if (FeliCa.from(tag) != null) {
       final feliCa = FeliCa.from(tag)!;
       await feliCa.sendFeliCaCommand(command);
+    }
+  }
+
+  @override
+  Future<NfcUnivUserInfo> univUserInfo(NfcTag tag) async {
+    try {
+      final serviceCode = [0x01, 0x0B];
+      final pollingResponse = await _polling(tag, type: NfcFeliCaType.univUser);
+      final readWithoutEncryptionRes = await _readWithoutEncryption(
+        tag: tag,
+        idm: pollingResponse.idm,
+        serviceCode: serviceCode,
+        blockCount: 4,
+      );
+      await _resetMode(tag: tag, idm: pollingResponse.idm);
+      return NfcUnivUserInfo.from(readWithoutEncryptionRes.blockData);
+    } catch (e) {
+      rethrow;
     }
   }
 }

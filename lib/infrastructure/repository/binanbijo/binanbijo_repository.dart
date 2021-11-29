@@ -1,17 +1,21 @@
 import 'package:kadai_info_flutter/domain/entity/binanbijo/candidate.dart';
 import 'package:kadai_info_flutter/domain/entity/binanbijo/candidate_collection.dart';
+import 'package:kadai_info_flutter/domain/entity/binanbijo/univ_user_card.dart';
 import 'package:kadai_info_flutter/domain/entity/binanbijo/vote.dart';
 import 'package:kadai_info_flutter/domain/repository/binanbijo/i_binanbijo_repository.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/micro_cms/i_micro_cms_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/micro_cms/model/mc_binanbijo_post.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/nfc/i_nfc_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/i_sqflite_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_binanbijo_vote.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 
 class BinanbijoRepository implements IBinanbijoRepository {
-  BinanbijoRepository({required this.mc, required this.sqf});
+  BinanbijoRepository({required this.mc, required this.sqf, required this.nfc});
 
   final IMicroCmsDatasource mc;
   final ISqfliteDatasource sqf;
+  final INfcDatasource nfc;
 
   @override
   Future<CandidateCollection> getCandidateCollection() async {
@@ -39,13 +43,11 @@ class BinanbijoRepository implements IBinanbijoRepository {
       for (var voted in daily) {
         (voted.gender == '男') ? maleNum++ : femaleNum++;
       }
-      if(maleNum >= 2 && vote.gender == '男') {
+      if (maleNum >= 2 && vote.gender == '男') {
         return false;
-      }
-      else if(femaleNum >= 2 && vote.gender == '女') {
+      } else if (femaleNum >= 2 && vote.gender == '女') {
         return false;
-      }
-      else {
+      } else {
         await sqf.saveVote(_toSQFBinanbijoVote(vote));
         return true;
       }
@@ -60,5 +62,16 @@ class BinanbijoRepository implements IBinanbijoRepository {
         gender: vote.gender,
         isStudent: vote.isStudent,
         createdAt: DateTime.now());
+  }
+
+  @override
+  Future<UnivUserCard> getUnivCard(NfcTag tag) async {
+    try {
+      final result = await nfc.univUserInfo(tag);
+      return UnivUserCard(
+          studentNumber: result.studentNumber, expiryAt: result.expiryAt);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

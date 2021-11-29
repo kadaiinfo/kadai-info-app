@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kadai_info_flutter/core/util/navigator_util.dart';
+import 'package:kadai_info_flutter/presentation/common/web_view_page/web_view_page.dart';
 
 class BinanbijoExternalLinkButton extends StatelessWidget {
   const BinanbijoExternalLinkButton({Key? key}) : super(key: key);
@@ -15,7 +17,11 @@ class BinanbijoExternalLinkButton extends StatelessWidget {
           vertical: _defaultTextStyle.fontSize! * 3.0,
           horizontal: _width * 0.15),
       child: OutlinedButton.icon(
-          onPressed: () {},
+          onPressed: () async {
+            NavigatorUtil.push(
+                context: context,
+                page: const WebViewPage('https://binanbijosnap.com/2021'));
+          },
           icon: const Icon(Icons.launch),
           label: const Text('美男美女SNAP2021ページへ'),
           style: ButtonStyle(

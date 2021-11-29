@@ -10,15 +10,13 @@ class BinanBijoDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     final _defaultTextStyle =
         DefaultTextStyle.of(context).style.apply(color: bbsBlack);
-    // final _width = MediaQuery.of(context).size.width;
     return Column(
       children: [
         Container(
           color: const Color(0xFFF7F5F5),
           width: double.maxFinite,
           child: Image.asset(
-              'asset/logo/binanbijo2021/binanbijo2021logo-alpha.png'),
-          height: 160.0,
+              'asset/image/binanbijo2021/banner.jpg')
         ),
         Padding(
           padding: EdgeInsets.only(
@@ -71,7 +69,16 @@ class BinanBijoDescription extends StatelessWidget {
                   overlayColor: MaterialStateProperty.all(Colors.black12),
                   textStyle: MaterialStateProperty.all(
                       _defaultTextStyle.apply(fontWeightDelta: 2))),
-              onPressed: () {},
+              onPressed: () async {
+                await showDialog(context: context, builder: (context) {
+                  return SimpleDialog(
+                    backgroundColor: Colors.transparent,
+                    children: [
+                      Image.asset('asset/image/binanbijo2021/scan_description.jpg'),
+                    ],
+                  );
+                });
+              },
               icon: const Icon(Icons.expand_less),
               label: const Text('鹿大生登録の方法を見る')),
         ),

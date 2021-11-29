@@ -8,6 +8,7 @@ import 'package:kadai_info_flutter/presentation/content/content_page.dart';
 import 'package:kadai_info_flutter/presentation/home/home_controller.dart';
 import 'package:kadai_info_flutter/presentation/setting/setting_page.dart';
 import 'package:kadai_info_flutter/presentation/timetable/timetable_page.dart';
+import 'package:kadai_info_flutter/presentation/timetable/widget/timetable_adsense_banner/timetable_adsense_banner.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class HomePage extends ConsumerWidget {
         index: currentIndex,
         children: const [
           ArticlePage(),
-          TimetablePage(),
+          // TimetablePage(),
           BalancePage(),
           ContentPage(),
           SettingPage(),
@@ -33,10 +34,10 @@ class HomePage extends ConsumerWidget {
             icon: Icon(Icons.article),
             label: '記事',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today_rounded),
-            label: '時間割',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.calendar_today_rounded),
+          //   label: '時間割',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.payment),
             label: '残高',
@@ -73,6 +74,7 @@ class HomePage extends ConsumerWidget {
                   AssetImage('asset/logo/binanbijo2021/binanbijo2021logo.png'));
         },
       ),
+      bottomSheet: const TimetableAdsenseBanner(),
     );
   }
 }

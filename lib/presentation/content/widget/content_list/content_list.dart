@@ -14,7 +14,7 @@ class ContentList extends StatelessWidget {
         shrinkWrap: true,
         children: const [
           /// サークル
-          _CircleContent(),
+          // _CircleContent(),
 
           /// 美男美女
           _BinanBijoContent(),
@@ -32,8 +32,8 @@ class _BinanBijoContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const ContentItem(
-      imagePath: 'asset/image/no_image.png',
-      title: '美男美女',
+      imagePath: 'asset/logo/binanbijo2021/binanbijo2021logo.png',
+      title: '美男美女SNAP2021',
       page: BinanbijoPage(),
     );
   }

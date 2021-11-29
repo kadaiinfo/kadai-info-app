@@ -17,7 +17,7 @@ class ContentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(5.0),
       child: Center(
         child: GestureDetector(
           onTap: () => NavigatorUtil.push(context: context, page: page),
@@ -73,8 +73,8 @@ class _ContentImage extends StatelessWidget {
         child: Image.asset(
           imagePath,
           fit: BoxFit.contain,
-          width: 80,
-          height: 80,
+          width: 60,
+          height: 60,
         ),
       ),
     );

@@ -13,6 +13,7 @@ class BalancePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(balanceControllerProvider);
+    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -26,12 +27,18 @@ class BalancePage extends ConsumerWidget {
                 return const _NotAvailableText();
               }
               return Column(
-                children: const [
+                children: [
                   /// ICカード情報
-                  UnivCoopCardInfo(),
+                  const UnivCoopCardInfo(),
 
                   /// スキャンボタン
-                  BalanceScanButton(),
+                  const BalanceScanButton(),
+
+                  // バナー用余白
+                  SizedBox(
+                    width: _width,
+                    height: _width / 4,
+                  )
                 ],
               );
             },

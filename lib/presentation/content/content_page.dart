@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kadai_info_flutter/presentation/content/widget/content_footer/content_footer.dart';
+// import 'package:kadai_info_flutter/presentation/content/widget/content_footer/content_footer.dart';
 import 'package:kadai_info_flutter/presentation/content/widget/content_list/content_list.dart';
 
 class ContentPage extends StatelessWidget {
@@ -14,7 +14,7 @@ class ContentPage extends StatelessWidget {
           ContentList(),
 
           /// フッター
-          ContentFooter(),
+          // ContentFooter(),
         ],
       ),
     );

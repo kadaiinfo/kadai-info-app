@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:connectivity/connectivity.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/sqflite_datasource.dart';
@@ -15,37 +17,40 @@ class SplashController {
   Future<SetupModel> setup() async {
     await Future.wait([
       /// スプラッシュ画像の最低表示時間
-      Future.delayed(const Duration(seconds: 1)),
+      Future.delayed(const Duration(milliseconds: 800)),
 
       /// SQFLiteのデータベース初期化
       SqfliteDatasource.init(),
     ]);
-    final data = SetupModel(
-      /// アプリ更新
-      shouldUpdate: true,
-    );
-    return data;
+    if (await Connectivity().checkConnectivity() == ConnectivityResult.none) {
+      return SetupModel(shouldUpdate: false, canConnectNetwork: false);
+    }
+    await FirebaseMessaging.instance.subscribeToTopic('article');
+    return SetupModel(shouldUpdate: await _shouldUpdate(), canConnectNetwork: true);
   }
 
   Future<bool> _shouldUpdate() async {
+    bool flag = false;
+    final RemoteConfig remoteConfig = RemoteConfig.instance;
     final packageInfo = await PackageInfo.fromPlatform();
     final version = packageInfo.version;
-
-    final RemoteConfig remoteConfig = RemoteConfig.instance;
-
-    // TODO: アップデートのたびに数字を変える
-    final defaultValues = {'android_version': '7.0.1', 'ios_version': '7.0.1'};
-    await remoteConfig.setDefaults(defaultValues);
-    await remoteConfig.setConfigSettings(RemoteConfigSettings(
-      fetchTimeout: const Duration(seconds: 10),
-      minimumFetchInterval: Duration.zero,
-    ));
-
-    bool flag = false;
     try {
+      // TODO: アップデートのたびに数字を変える
+      final defaultValues = {
+        'android_version': '7.0.1',
+        'ios_version': '7.0.1'
+      };
+      await remoteConfig.setDefaults(defaultValues);
+      await remoteConfig.setConfigSettings(RemoteConfigSettings(
+        fetchTimeout: const Duration(seconds: 15),
+        minimumFetchInterval: const Duration(seconds: 60),
+      ));
       await remoteConfig.fetchAndActivate();
+      final iosOrAndroid = Platform.isIOS ? 'ios_version' : 'android_version';
+      final requiredVersion = remoteConfig.getString(iosOrAndroid);
+      flag = version != requiredVersion;
     } catch (e) {
-      print(e);
+      rethrow;
     } finally {
       final iosOrAndroid = Platform.isIOS ? 'ios_version' : 'android_version';
       final requiredVersion = remoteConfig.getString(iosOrAndroid);

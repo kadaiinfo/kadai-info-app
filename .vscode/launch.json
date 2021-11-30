@@ -7,19 +7,31 @@
     {
       "name": "kadai_info_flutter",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "args": [
+        "--dart-define=MICRO_CMS_API_KEY=f6b8cde361284e42a2a402d1405a4055289e",
+        "--dart-define=WORDPRESS_API_KEY=meshiprio503:3qGK AE3N t6Je 8GjP k7uH PvJI"
+      ]
     },
     {
       "name": "kadai_info_flutter (profile mode)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "profile"
-    }
+      "flutterMode": "profile",
+      "args": [
+        "--dart-define=MICRO_CMS_API_KEY=f6b8cde361284e42a2a402d1405a4055289e",
+        "--dart-define=WORDPRESS_API_KEY=meshiprio503:3qGK AE3N t6Je 8GjP k7uH PvJI"
+      ]
+    },
     {
       "name": "kadai_info_flutter (release mode)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "release"
+      "flutterMode": "release",
+      "args": [
+        "--dart-define=MICRO_CMS_API_KEY=f6b8cde361284e42a2a402d1405a4055289e",
+        "--dart-define=WORDPRESS_API_KEY=meshiprio503:3qGK AE3N t6Je 8GjP k7uH PvJI"
+      ]
     }
   ]
 }

@@ -16,8 +16,8 @@ class BinanBijoCandidates extends ConsumerWidget {
     final _width = MediaQuery.of(context).size.width;
     final _candidatesProvider = ref.watch(binanbijoCandidatesProvider);
     return _candidatesProvider.when(
-        error: ((_, __) => const LoadingIndicator()),
-        loading: (() => const LoadingIndicator()),
+        error: ((e, ee) => Center(child: Text(e.toString() + ee.toString()))),
+        loading: (() => const Center(child: Text('ローディング中...'))),
         data: ((candidates) {
           if (candidates == null) {
             return const LoadingIndicator();

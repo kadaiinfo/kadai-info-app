@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:kadai_info_flutter/core/constant/app_constant.dart';
 import 'package:kadai_info_flutter/core/exception/network_exception.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/i_wordpress_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_post_list_response.dart';
@@ -9,7 +10,7 @@ class WordpressDatasource implements IWordpressDatasource {
   static const _baseUrl = 'https://kadai-info.com/wp-json/wp/v2';
   static final _defaultHeaders = {
     'Authorization': 'Basic ' +
-        base64Encode(utf8.encode('meshiprio503:3qGK AE3N t6Je 8GjP k7uH PvJI'))
+        base64Encode(utf8.encode(AppConstant.wordPressApiKey))
   };
   static const _commonParams = '_embed=true&status=publish';
   static final _dio = Dio()..options.headers = _defaultHeaders;

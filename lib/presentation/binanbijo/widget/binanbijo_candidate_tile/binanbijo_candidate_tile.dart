@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kadai_info_flutter/core/constant/binanbijo_constant.dart';
+import 'package:kadai_info_flutter/core/util/navigator_util.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/binanbijo_candidate_convert.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_candidate_model.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidate_tile/binanbijo_candidate_picture.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidate_tile/binanbijo_candidate_picture_stack.dart';
+import 'package:kadai_info_flutter/presentation/common/web_view_page/web_view_page.dart';
 
 class BinanbijoCandidateTile extends HookConsumerWidget {
   const BinanbijoCandidateTile({Key? key, required this.candidate})
@@ -13,15 +17,22 @@ class BinanbijoCandidateTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _topString(candidate.description),
-        (candidate.canVoted)
-            ? BinanbijoCandidatePictureStack(candidate: candidate)
-            : BinanbijoCandidatePicture(candidate: candidate),
-        _bottomString(candidate.entryNumber, candidate.name)
-      ],
+    return GestureDetector(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _topString(candidate.description),
+          (candidate.canVoted)
+              ? BinanbijoCandidatePictureStack(candidate: candidate)
+              : BinanbijoCandidatePicture(candidate: candidate),
+          _bottomString(candidate.entryNumber, candidate.name)
+        ],
+      ),
+      onTap: () async {
+        final _domain = await const BinanbijoConstant().getDomainName();
+        final _id = BinanbijoCandidateConvert().toId(candidate.name);
+        NavigatorUtil.push(context: context, page: WebViewPage('https://$_domain/$_id'));
+      },
     );
   }
 

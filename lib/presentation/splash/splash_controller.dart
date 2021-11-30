@@ -40,8 +40,8 @@ class SplashController {
     try {
       // TODO: アップデートのたびに数字を変える
       final defaultValues = {
-        'android_version': '7.0.1',
-        'ios_version': '7.0.1'
+        'android_version': '8.0.0',
+        'ios_version': '8.0.0'
       };
       await remoteConfig.setDefaults(defaultValues);
       await remoteConfig.setConfigSettings(RemoteConfigSettings(

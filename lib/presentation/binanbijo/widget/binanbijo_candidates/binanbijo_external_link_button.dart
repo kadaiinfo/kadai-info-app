@@ -19,7 +19,7 @@ class BinanbijoExternalLinkButton extends StatelessWidget {
           onPressed: () async {
             NavigatorUtil.push(
                 context: context,
-                page: const WebViewPage('https://binanbijosnap.com/2021'));
+                page: WebViewPage('https://${await const BinanbijoConstant().getDomainName()}'));
           },
           icon: const Icon(Icons.launch),
           label: const Text('美男美女SNAP2021ページへ'),

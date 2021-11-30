@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kadai_info_flutter/core/constant/app_constant.dart';
 import 'package:kadai_info_flutter/presentation/setting/widget/setting_item/setting_notification_item.dart';
 import 'package:kadai_info_flutter/presentation/setting/widget/setting_item/setting_web_view_item.dart';
 
@@ -42,10 +43,10 @@ List<Widget> settingItems(String groupTitle) {
     return const [
       SettingWebViewItem(
           settingTitle: 'KADAI INFOについて',
-          settingUrl: 'https://kadai-info.com/lp/about-us/'),
+          settingUrl: AppConstant.aboutUrl),
       Divider(height: 0.5, indent: 15.0, endIndent: 15.0),
       SettingWebViewItem(
-          settingTitle: 'お問い合わせ', settingUrl: 'https://kadai-info.com/contact/')
+          settingTitle: 'お問い合わせ', settingUrl: AppConstant.inquiryUrl)
     ];
   } else {
     return [];

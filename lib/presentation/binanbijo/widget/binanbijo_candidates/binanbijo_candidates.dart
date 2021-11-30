@@ -20,7 +20,7 @@ class BinanBijoCandidates extends ConsumerWidget {
         loading: (() => const Center(child: Text('ローディング中...'))),
         data: ((candidates) {
           if (candidates == null) {
-            return const LoadingIndicator();
+            return const Center(child: Text('ローディング中....'));
           }
           candidates.shuffle();
           return ListView(physics: const ClampingScrollPhysics(), children: [

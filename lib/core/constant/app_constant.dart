@@ -37,8 +37,7 @@ class AppConstant {
   static const pointUnit = 'pt';
 
   // microCMS APIKEY
-  // static const microCmsApiKey = String.fromEnvironment('MICRO_CMS_API_KEY');
-  static const microCmsApiKey = 'f6b8cde361284e42a2a402d1405a4055289e';
+  static const microCmsApiKey = String.fromEnvironment('MICRO_CMS_API_KEY');
 
   // WordPress ID/Pass
   static const wordPressApiKey = String.fromEnvironment('WORDPRESS_API_KEY');

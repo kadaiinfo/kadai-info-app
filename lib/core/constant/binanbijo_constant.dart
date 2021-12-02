@@ -5,7 +5,6 @@ import 'package:kadai_info_flutter/core/exception/network_exception.dart';
 
 class BinanbijoConstant {
   const BinanbijoConstant();
-  const BinanbijoConstant._();
 
   // 黒
   static const black = Color(0xFF250B0D);

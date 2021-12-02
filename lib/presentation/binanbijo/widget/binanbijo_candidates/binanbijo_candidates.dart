@@ -4,7 +4,6 @@ import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_gender
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidate_tile/binanbijo_candidate_tile.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidates/binanbijo_candidates_provider.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidates/binanbijo_external_link_button.dart';
-import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
 
 class BinanBijoCandidates extends ConsumerWidget {
   const BinanBijoCandidates({Key? key, required this.gender}) : super(key: key);

@@ -8,18 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info/package_info.dart';
 
-class SettingNotification extends HookConsumerWidget {
-  const SettingNotification({Key? key, required this.notificationSettings})
+class NotificationPage extends HookConsumerWidget {
+  const NotificationPage({Key? key, required this.notificationSettings})
       : super(key: key);
 
   final NotificationSettings notificationSettings;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final isNotificated = useState((notificationSettings.authorizationStatus ==
-    //         AuthorizationStatus.authorized)
-    //     ? true
-    //     : false);
 
     return Scaffold(
       appBar: AppBar(),

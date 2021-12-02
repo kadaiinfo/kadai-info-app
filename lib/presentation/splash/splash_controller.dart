@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/core/analytics/firebase_analytics_service.dart';
+import 'package:kadai_info_flutter/core/constant/app_constant.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/sqflite_datasource.dart';
 import 'package:kadai_info_flutter/presentation/splash/model/setup_model.dart';
 import 'package:package_info/package_info.dart';
@@ -38,10 +39,9 @@ class SplashController {
     final packageInfo = await PackageInfo.fromPlatform();
     final version = packageInfo.version;
     try {
-      // TODO: アップデートのたびに数字を変える
       final defaultValues = {
-        'android_version': '8.0.0',
-        'ios_version': '8.0.0'
+        'android_version': AppConstant.androidVersion,
+        'ios_version': AppConstant.iosVersion
       };
       await remoteConfig.setDefaults(defaultValues);
       await remoteConfig.setConfigSettings(RemoteConfigSettings(

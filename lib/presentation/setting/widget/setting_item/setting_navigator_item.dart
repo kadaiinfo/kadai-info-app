@@ -1,14 +1,13 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:kadai_info_flutter/core/util/navigator_util.dart';
-import 'package:kadai_info_flutter/presentation/setting/page/notification/notification_page.dart';
+import 'package:kadai_info_flutter/presentation/setting/page/cantact/contact_page.dart';
 
-class SettingNotificationItem extends StatelessWidget {
-  const SettingNotificationItem({Key? key, required this.settingTitle})
+class SettingNavigatorItem extends StatelessWidget {
+  const SettingNavigatorItem({Key? key, required this.settingTitle, required this.page})
       : super(key: key);
 
   final String settingTitle;
+  final Widget page;
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +29,10 @@ class SettingNotificationItem extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () async {
-        await Firebase.initializeApp();
-        final notificationSettings =
-            await FirebaseMessaging.instance.requestPermission();
+      onTap: () {
         NavigatorUtil.push(
           context: context,
-          page: NotificationPage(notificationSettings: notificationSettings),
+          page: page,
         );
       },
     );

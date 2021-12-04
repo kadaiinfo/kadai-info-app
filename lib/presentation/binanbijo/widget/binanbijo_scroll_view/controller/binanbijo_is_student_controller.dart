@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/application/binanbijo/binanbijo_application.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/controller/binanbijo_dialog_display_controller_provider.dart';
@@ -28,8 +30,8 @@ class BinanbijoIsStudentController
 
   // 学生証を読み取る
   Future<void> scan() async {
-    // TODO: 謎の処理
-    await NfcManager.instance.stopSession();
+    // TODO: androidだけ落ちる
+    if(Platform.isIOS) await NfcManager.instance.stopSession();
     final _displayController =
         reader(binanbijoDialogDisplayControllerProvider.notifier);
     // 次の画面へ

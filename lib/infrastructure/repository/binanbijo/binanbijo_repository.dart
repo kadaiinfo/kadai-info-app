@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:kadai_info_flutter/domain/entity/binanbijo/candidate.dart';
 import 'package:kadai_info_flutter/domain/entity/binanbijo/candidate_collection.dart';
 import 'package:kadai_info_flutter/domain/entity/binanbijo/univ_user_card.dart';
@@ -8,17 +10,25 @@ import 'package:kadai_info_flutter/infrastructure/datasource/firestore/model/fir
 import 'package:kadai_info_flutter/infrastructure/datasource/micro_cms/i_micro_cms_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/micro_cms/model/mc_binanbijo_post.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/i_nfc_datasource.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/realtime_database/i_reaitime_datasource.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/realtime_database/model/realtime_database_binanbijo_vote.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/i_sqflite_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_binanbijo_vote.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 
 class BinanbijoRepository implements IBinanbijoRepository {
-  BinanbijoRepository({required this.mc, required this.sqf, required this.nfc, required this.firestore});
+  BinanbijoRepository(
+      {required this.mc,
+      required this.sqf,
+      required this.nfc,
+      required this.firestore,
+      required this.rtdb});
 
   final IMicroCmsDatasource mc;
   final ISqfliteDatasource sqf;
   final INfcDatasource nfc;
   final IFirestoreDatasource firestore;
+  final IRealtimeDatabaseDatasource rtdb;
 
   @override
   Future<CandidateCollection> getCandidateCollection() async {
@@ -52,7 +62,13 @@ class BinanbijoRepository implements IBinanbijoRepository {
         return false;
       } else {
         await sqf.saveVote(_toSQFBinanbijoVote(vote));
-        await firestore.pushVote(_toFirestoreBinanbijoVote(vote));
+        if (Platform.isIOS) {
+          await firestore.pushVote(_toFirestoreBinanbijoVote(vote));
+        } else if (Platform.isAndroid) {
+          await rtdb.pushVote(_toRtdbBinanbijoVote(vote));
+        } else {
+          return false;
+        }
         return true;
       }
     } catch (e) {
@@ -70,11 +86,18 @@ class BinanbijoRepository implements IBinanbijoRepository {
 
   FirestoreBinanbijoVote _toFirestoreBinanbijoVote(Vote vote) {
     return FirestoreBinanbijoVote(
-      entryNumber: vote.entryNumber,
-      gender: vote.gender,
-      isStudent: vote.isStudent,
-      createdAt: DateTime.now()
-    );
+        entryNumber: vote.entryNumber,
+        gender: vote.gender,
+        isStudent: vote.isStudent,
+        createdAt: DateTime.now());
+  }
+
+  RealtimeDatabaseBinanbijoVote _toRtdbBinanbijoVote(Vote vote) {
+    return RealtimeDatabaseBinanbijoVote(
+        entryNumber: vote.entryNumber,
+        gender: vote.gender,
+        isStudent: vote.isStudent,
+        createdAt: DateTime.now());
   }
 
   @override

@@ -34,7 +34,7 @@ class SettingAboutAppGroup extends StatelessWidget {
               const SettingWebViewItem(
                   settingTitle: 'お問い合わせ', settingUrl: AppConstant.inquiryUrl),
               const Divider(height: 0.5, indent: 15.0, endIndent: 15.0),
-              const SettingNavigatorItem(settingTitle: '連絡先', page: ContactPage()),
+              // const SettingNavigatorItem(settingTitle: '連絡先', page: ContactPage()),
               const Divider(height: 0.5, indent: 15.0, endIndent: 15.0),
               SettingNavigatorItem(settingTitle: 'ライセンス', page: LicensePage(
                 applicationName: AppConstant.appName,

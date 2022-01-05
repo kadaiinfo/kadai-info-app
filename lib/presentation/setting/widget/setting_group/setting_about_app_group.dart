@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:kadai_info_flutter/core/constant/app_constant.dart';
-import 'package:kadai_info_flutter/presentation/setting/page/cantact/contact_page.dart';
+// import 'package:kadai_info_flutter/presentation/setting/page/cantact/contact_page.dart';
 import 'package:kadai_info_flutter/presentation/setting/widget/setting_item/setting_navigator_item.dart';
 import 'package:kadai_info_flutter/presentation/setting/widget/setting_item/setting_web_view_item.dart';
 
@@ -33,7 +33,7 @@ class SettingAboutAppGroup extends StatelessWidget {
               const Divider(height: 0.5, indent: 15.0, endIndent: 15.0),
               const SettingWebViewItem(
                   settingTitle: 'お問い合わせ', settingUrl: AppConstant.inquiryUrl),
-              const Divider(height: 0.5, indent: 15.0, endIndent: 15.0),
+              // const Divider(height: 0.5, indent: 15.0, endIndent: 15.0),
               // const SettingNavigatorItem(settingTitle: '連絡先', page: ContactPage()),
               const Divider(height: 0.5, indent: 15.0, endIndent: 15.0),
               SettingNavigatorItem(settingTitle: 'ライセンス', page: LicensePage(

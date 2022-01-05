@@ -1,13 +1,13 @@
-import 'package:animations/animations.dart';
+// import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kadai_info_flutter/presentation/article/article_page.dart';
 import 'package:kadai_info_flutter/presentation/balance/balance_page.dart';
-import 'package:kadai_info_flutter/presentation/binanbijo/binanbijo_page.dart';
+// import 'package:kadai_info_flutter/presentation/binanbijo/binanbijo_page.dart';
 import 'package:kadai_info_flutter/presentation/content/content_page.dart';
 import 'package:kadai_info_flutter/presentation/home/home_controller.dart';
 import 'package:kadai_info_flutter/presentation/setting/setting_page.dart';
-import 'package:kadai_info_flutter/presentation/timetable/timetable_page.dart';
+// import 'package:kadai_info_flutter/presentation/timetable/timetable_page.dart';
 import 'package:kadai_info_flutter/presentation/timetable/widget/timetable_adsense_banner/timetable_adsense_banner.dart';
 
 class HomePage extends ConsumerWidget {
@@ -55,25 +55,25 @@ class HomePage extends ConsumerWidget {
         onTap: controller.selectTab,
         type: BottomNavigationBarType.fixed,
       ),
-      floatingActionButton: OpenContainer(
-        transitionType: ContainerTransitionType.fade,
-        transitionDuration: const Duration(milliseconds: 400),
-        openBuilder: (context, action) {
-          return const BinanbijoPage();
-        },
-        closedElevation: 8.0,
-        closedColor: const Color(0xFFF6D967),
-        closedShape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(50.0))),
-        closedBuilder: (context, action) {
-          return const CircleAvatar(
-              maxRadius: 50.0,
-              minRadius: 35.0,
-              backgroundColor: Color(0xFFF6D967),
-              backgroundImage:
-                  AssetImage('asset/logo/binanbijo2021/binanbijo2021logo.png'));
-        },
-      ),
+      // floatingActionButton: OpenContainer(
+      //   transitionType: ContainerTransitionType.fade,
+      //   transitionDuration: const Duration(milliseconds: 400),
+      //   openBuilder: (context, action) {
+      //     return const BinanbijoPage();
+      //   },
+      //   closedElevation: 8.0,
+      //   closedColor: const Color(0xFFF6D967),
+      //   closedShape: const RoundedRectangleBorder(
+      //       borderRadius: BorderRadius.all(Radius.circular(50.0))),
+      //   closedBuilder: (context, action) {
+      //     return const CircleAvatar(
+      //         maxRadius: 50.0,
+      //         minRadius: 35.0,
+      //         backgroundColor: Color(0xFFF6D967),
+      //         backgroundImage:
+      //             AssetImage('asset/logo/binanbijo2021/binanbijo2021logo.png'));
+      //   },
+      // ),
       bottomSheet: const TimetableAdsenseBanner(),
     );
   }

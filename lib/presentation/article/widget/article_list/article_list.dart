@@ -26,6 +26,7 @@ class ArticleList extends HookConsumerWidget {
     final scrollController = useScrollController();
     useEffect(() {
       scrollController.addListener(() => _listener(scrollController, ref.read));
+      return null;
     }, const []);
     return SmartRefresher(
       controller: refreshController,

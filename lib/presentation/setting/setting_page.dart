@@ -8,13 +8,12 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          children: const [
-            SettingGeneralGroup(),
-            SettingAboutAppGroup()
-          ],
-        ),
+      appBar: AppBar(toolbarHeight: 0),
+      body: ListView(
+        children: const [
+          SettingGeneralGroup(),
+          SettingAboutAppGroup()
+        ],
       ),
     );
   }

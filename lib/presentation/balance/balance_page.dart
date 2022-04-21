@@ -15,36 +15,35 @@ class BalancePage extends ConsumerWidget {
     final asyncValue = ref.watch(balanceControllerProvider);
     final _width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppConstant.outsidePadding,
-            vertical: AppConstant.outsidePadding,
-          ),
-          child: asyncValue.when(
-            data: (data) {
-              if (!data.isAvailable) {
-                return const _NotAvailableText();
-              }
-              return Column(
-                children: [
-                  /// ICカード情報
-                  const UnivCoopCardInfo(),
+      appBar: AppBar(toolbarHeight: 0),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppConstant.outsidePadding,
+          vertical: AppConstant.outsidePadding,
+        ),
+        child: asyncValue.when(
+          data: (data) {
+            if (!data.isAvailable) {
+              return const _NotAvailableText();
+            }
+            return Column(
+              children: [
+                /// ICカード情報
+                const UnivCoopCardInfo(),
 
-                  /// スキャンボタン
-                  const BalanceScanButton(),
+                /// スキャンボタン
+                const BalanceScanButton(),
 
-                  // バナー用余白
-                  SizedBox(
-                    width: _width,
-                    height: _width / 4,
-                  )
-                ],
-              );
-            },
-            error: (error, stack) => ErrorText(error),
-            loading: () => const LoadingIndicator(),
-          ),
+                // バナー用余白
+                SizedBox(
+                  width: _width,
+                  height: _width / 4,
+                )
+              ],
+            );
+          },
+          error: (error, stack) => ErrorText(error),
+          loading: () => const LoadingIndicator(),
         ),
       ),
     );

@@ -13,7 +13,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   hooks_riverpod: ^1.0.0
   flutter_hooks: ^0.18.0
-  sizer: ^2.0.13
   flex_color_scheme: ^4.1.1
   equatable: ^2.0.3
   intl: ^0.17.0

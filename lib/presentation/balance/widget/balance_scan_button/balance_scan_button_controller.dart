@@ -1,9 +1,12 @@
+// Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:nfc_manager/nfc_manager.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/application/univ_coop/univ_coop_application.dart';
 import 'package:kadai_info_flutter/presentation/balance/model/univ_coop_card_model.dart';
 import 'package:kadai_info_flutter/presentation/balance/widget/balance_scan_button/balance_scan_button_state.dart';
 import 'package:kadai_info_flutter/presentation/balance/widget/univ_coop_card_info/univ_coop_card_info_controller_provider.dart';
-import 'package:nfc_manager/nfc_manager.dart';
 
 class BalanceScanButtonController
     extends StateNotifier<BalanceScanButtonState> {

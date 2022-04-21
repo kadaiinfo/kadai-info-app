@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:equatable/equatable.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/domain/entity/timetable/timetable_lesson.dart';
 
 /// 時間割

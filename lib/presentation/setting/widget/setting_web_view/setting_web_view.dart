@@ -1,7 +1,12 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+// Project imports:
+import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
 
 class SettingWebView extends ConsumerWidget {
   const SettingWebView({Key? key, required this.url}) : super(key: key);

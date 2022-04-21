@@ -1,5 +1,7 @@
+// Dart imports:
 import 'dart:typed_data';
 
+// Project imports:
 import 'package:kadai_info_flutter/core/extension/uint8list_extension.dart';
 import 'package:kadai_info_flutter/core/util/datetime_util.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_member_type.dart';

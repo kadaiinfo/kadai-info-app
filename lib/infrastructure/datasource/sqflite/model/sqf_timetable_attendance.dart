@@ -1,5 +1,5 @@
+// Project imports:
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_attendance_type.dart';
-
 import '../sqflite_extension.dart';
 
 /// 授業の出席情報

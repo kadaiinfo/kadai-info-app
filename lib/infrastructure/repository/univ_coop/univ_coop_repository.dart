@@ -1,3 +1,7 @@
+// Package imports:
+import 'package:nfc_manager/nfc_manager.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/core/result/result.dart';
 import 'package:kadai_info_flutter/core/util/datetime_util.dart';
 import 'package:kadai_info_flutter/domain/entity/univ_coop_card/univ_coop_card.dart';
@@ -7,7 +11,6 @@ import 'package:kadai_info_flutter/domain/entity/univ_coop_card/univ_coop_prepai
 import 'package:kadai_info_flutter/domain/repository/univ_coop/i_univ_coop_repository.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/i_nfc_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_prepaid_usage_type.dart';
-import 'package:nfc_manager/nfc_manager.dart';
 
 class UnivCoopRepository implements IUnivCoopRepository {
   UnivCoopRepository({required INfcDatasource nfc}) : _nfc = nfc;

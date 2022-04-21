@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/presentation/timetable/widget/timetable_lesson_dialog/timetable_lesson_dialog.dart';
 
 /// 授業コマ

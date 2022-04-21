@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/presentation/balance/widget/univ_coop_card_info/univ_coop_card_info_controller_provider.dart';
 import 'package:kadai_info_flutter/presentation/balance/widget/univ_coop_card_info/widget/balance_introduction.dart';
 import 'package:kadai_info_flutter/presentation/balance/widget/univ_coop_card_info/widget/meal_balance.dart';

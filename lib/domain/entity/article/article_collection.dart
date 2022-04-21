@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/domain/entity/article/article.dart';
 
 part 'article_collection.freezed.dart';

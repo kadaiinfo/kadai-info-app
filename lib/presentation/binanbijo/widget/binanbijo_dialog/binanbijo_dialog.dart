@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_candidate_model.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/binanbijo_cant_vote_dialog.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/binanbijo_user_choice_dialog.dart';

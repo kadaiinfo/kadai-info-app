@@ -1,6 +1,11 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/core/util/navigator_util.dart';
 import 'package:kadai_info_flutter/presentation/setting/page/notification/notification_page.dart';
 

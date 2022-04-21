@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/presentation/balance/widget/univ_coop_card_info/widget/balance_info.dart';
 
 /// プリペイド残高

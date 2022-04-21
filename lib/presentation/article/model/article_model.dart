@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:equatable/equatable.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/core/extension/datetime_extension.dart';
 import 'package:kadai_info_flutter/domain/entity/article/article.dart';
 import 'package:kadai_info_flutter/presentation/article/model/article_author_model.dart';

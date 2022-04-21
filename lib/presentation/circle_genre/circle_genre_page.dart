@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/core/constant/app_constant.dart';
 import 'package:kadai_info_flutter/presentation/circle_genre/widget/circle_genre_list/circle_genre_list.dart';
 

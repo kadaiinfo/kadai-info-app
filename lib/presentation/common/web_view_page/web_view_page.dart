@@ -1,9 +1,15 @@
+// Dart imports:
 import 'dart:io';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
+
+// Package imports:
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+// Project imports:
+import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
 
 class WebViewPage extends StatefulWidget {
   const WebViewPage(this.url, {Key? key, this.title = ''}) : super(key: key);

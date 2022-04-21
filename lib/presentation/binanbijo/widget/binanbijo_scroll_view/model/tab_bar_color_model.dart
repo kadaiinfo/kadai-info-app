@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/core/constant/binanbijo_constant.dart';
 
 class TabBarColorModel {

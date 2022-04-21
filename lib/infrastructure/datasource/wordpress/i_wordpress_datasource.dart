@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_post_list_response.dart';
 
 abstract class IWordpressDatasource {

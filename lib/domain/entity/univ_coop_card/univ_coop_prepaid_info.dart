@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:kadai_info_flutter/domain/entity/univ_coop_card/univ_coop_prepaid_transaction.dart';
 
 /// 大学生協プリペイド情報

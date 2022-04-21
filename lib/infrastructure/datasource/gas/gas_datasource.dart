@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:dio/dio.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/core/exception/network_exception.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/gas/i_gas_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/gas/model/gas_adsense_banner.dart';

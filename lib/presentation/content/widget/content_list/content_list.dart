@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/presentation/binanbijo/binanbijo_page.dart';
 import 'package:kadai_info_flutter/presentation/circle_genre/circle_genre_page.dart';
 import 'package:kadai_info_flutter/presentation/content/widget/content_item/content_item.dart';

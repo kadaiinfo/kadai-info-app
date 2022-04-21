@@ -1,14 +1,18 @@
+// Dart imports:
 import 'dart:io';
 
+// Package imports:
 import 'package:connectivity/connectivity.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:package_info/package_info.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/core/analytics/firebase_analytics_service.dart';
 import 'package:kadai_info_flutter/core/constant/app_constant.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/sqflite_datasource.dart';
 import 'package:kadai_info_flutter/presentation/splash/model/setup_model.dart';
-import 'package:package_info/package_info.dart';
 
 final splashController = Provider<SplashController>(
   (ref) => SplashController(),

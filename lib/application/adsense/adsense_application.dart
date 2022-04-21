@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:kadai_info_flutter/core/result/result.dart';
 import 'package:kadai_info_flutter/domain/entity/adsense/adsense_banner.dart';
 import 'package:kadai_info_flutter/domain/repository/%20adsense/i_adsense_repository.dart';

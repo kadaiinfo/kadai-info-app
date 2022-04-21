@@ -1,5 +1,5 @@
+// Project imports:
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_term.dart';
-
 import '../sqflite_extension.dart';
 
 /// 時間割

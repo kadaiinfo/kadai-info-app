@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/presentation/common/error_text/error_text.dart';
 import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
 import 'package:kadai_info_flutter/presentation/timetable/widget/timetable_day_list/timetable_day_list.dart';

@@ -1,5 +1,7 @@
+// Dart imports:
 import 'dart:typed_data';
 
+// Project imports:
 import 'package:kadai_info_flutter/core/extension/uint8list_extension.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_prepaid_usage_type.dart';
 

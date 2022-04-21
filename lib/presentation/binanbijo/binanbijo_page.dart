@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_scroll_view/binanbijo_scroll_view.dart';
 
 /// 美男美女投票画面

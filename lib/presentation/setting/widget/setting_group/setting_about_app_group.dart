@@ -1,10 +1,15 @@
+// Dart imports:
 import 'dart:io';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/core/constant/app_constant.dart';
-// import 'package:kadai_info_flutter/presentation/setting/page/cantact/contact_page.dart';
 import 'package:kadai_info_flutter/presentation/setting/widget/setting_item/setting_navigator_item.dart';
 import 'package:kadai_info_flutter/presentation/setting/widget/setting_item/setting_web_view_item.dart';
+
+// import 'package:kadai_info_flutter/presentation/setting/page/cantact/contact_page.dart';
 
 class SettingAboutAppGroup extends StatelessWidget {
   const SettingAboutAppGroup({Key? key}) : super(key: key);

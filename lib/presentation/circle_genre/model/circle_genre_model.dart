@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:kadai_info_flutter/domain/entity/circle/circle_category.dart';
 
 class CircleGenreModel {

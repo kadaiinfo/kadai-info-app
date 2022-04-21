@@ -1,5 +1,7 @@
+// Dart imports:
 import 'dart:typed_data';
 
+// Project imports:
 import 'package:kadai_info_flutter/core/extension/uint8list_extension.dart';
 
 /// 大学生協の残額情報

@@ -1,7 +1,10 @@
+// Package imports:
+import 'package:nfc_manager/nfc_manager.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/domain/entity/binanbijo/candidate_collection.dart';
 import 'package:kadai_info_flutter/domain/entity/binanbijo/vote.dart';
 import 'package:kadai_info_flutter/domain/repository/binanbijo/i_binanbijo_repository.dart';
-import 'package:nfc_manager/nfc_manager.dart';
 
 class BinanbijoApplication {
   BinanbijoApplication(this._repository);

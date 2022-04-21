@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_media_size.dart';
 
 class WPMediaDetail {

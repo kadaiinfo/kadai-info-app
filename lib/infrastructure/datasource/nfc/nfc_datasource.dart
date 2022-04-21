@@ -1,6 +1,12 @@
+// Dart imports:
 import 'dart:io';
 import 'dart:typed_data';
 
+// Package imports:
+import 'package:nfc_manager/nfc_manager.dart';
+import 'package:nfc_manager/platform_tags.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/i_nfc_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_felica_polling_response.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_felica_read_without_encryption_response.dart';
@@ -10,8 +16,6 @@ import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_prepaid_balance.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_prepaid_transaction.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_user_info.dart';
-import 'package:nfc_manager/nfc_manager.dart';
-import 'package:nfc_manager/platform_tags.dart';
 
 class NfcDatasource implements INfcDatasource {
   @override

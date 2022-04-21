@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:dio/dio.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_post.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/wordpress/model/wp_response_header.dart';
 

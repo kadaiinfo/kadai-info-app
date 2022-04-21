@@ -1,5 +1,10 @@
-import 'package:dio/dio.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:dio/dio.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/core/constant/app_constant.dart';
 import 'package:kadai_info_flutter/core/exception/network_exception.dart';
 

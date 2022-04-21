@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/presentation/timetable/model/timetable_lesson_model.dart';
 
 part 'timetable_lesson_list_state.freezed.dart';

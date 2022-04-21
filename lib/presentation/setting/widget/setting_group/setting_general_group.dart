@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/presentation/setting/widget/setting_item/setting_notification_item.dart';
 
 class SettingGeneralGroup extends StatelessWidget {

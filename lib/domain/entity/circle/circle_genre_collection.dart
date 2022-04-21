@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:kadai_info_flutter/domain/entity/circle/circle_genre.dart';
 
 /// サークルジャンル一覧

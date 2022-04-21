@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:equatable/equatable.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/domain/entity/binanbijo/candidate.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_gender_model.dart';
 

@@ -1,9 +1,11 @@
+// Package imports:
 import 'package:equatable/equatable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/application/timetable/timetable_application_provider.dart';
 import 'package:kadai_info_flutter/presentation/timetable/widget/timetable_lesson_item/timetable_lesson_item_controller.dart';
 import 'package:kadai_info_flutter/presentation/timetable/widget/timetable_lesson_list/timetable_lesson_list_controller_provider.dart';
-
 import 'timetable_lesson_item_state.dart';
 
 final timetableLessonItemControllerProvider = StateNotifierProvider.autoDispose

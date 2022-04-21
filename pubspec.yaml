@@ -40,6 +40,7 @@ dependencies:
   connectivity: ^3.0.6
   firebase_analytics: ^8.3.4
   firebase_database: ^8.2.0
+  import_sorter: ^4.6.0
 
 dev_dependencies:
   flutter_test:

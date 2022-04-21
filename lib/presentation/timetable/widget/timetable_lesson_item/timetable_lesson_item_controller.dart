@@ -1,6 +1,8 @@
+// Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kadai_info_flutter/application/timetable/timetable_application.dart';
 
+// Project imports:
+import 'package:kadai_info_flutter/application/timetable/timetable_application.dart';
 import 'timetable_lesson_item_state.dart';
 
 class TimetableLessonItemController

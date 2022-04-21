@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:kadai_info_flutter/domain/entity/adsense/adsense_banner.dart';
 
 class TimetableAdsenseBannerState {

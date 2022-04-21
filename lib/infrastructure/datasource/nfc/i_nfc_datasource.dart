@@ -1,8 +1,11 @@
+// Package imports:
+import 'package:nfc_manager/nfc_manager.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_info.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_prepaid_balance.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_prepaid_transaction.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_user_info.dart';
-import 'package:nfc_manager/nfc_manager.dart';
 
 abstract class INfcDatasource {
   /// 大学生協の基本情報取得

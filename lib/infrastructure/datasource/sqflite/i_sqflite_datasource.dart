@@ -1,13 +1,14 @@
+// Project imports:
 import 'package:kadai_info_flutter/core/result/result.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_article.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_article_table.dart';
+import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_binanbijo_vote.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_attendance.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_attendance_type.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_lesson.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_lesson_save_input.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_term.dart';
-import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_binanbijo_vote.dart';
 
 abstract class ISqfliteDatasource {
   /// 記事一覧

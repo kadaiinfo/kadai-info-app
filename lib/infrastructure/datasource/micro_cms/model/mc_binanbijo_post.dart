@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:kadai_info_flutter/infrastructure/datasource/micro_cms/model/mc_picture.dart';
 
 class McBinanbijoPost {

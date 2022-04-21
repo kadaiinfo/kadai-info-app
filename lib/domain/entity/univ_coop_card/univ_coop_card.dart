@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:kadai_info_flutter/domain/entity/univ_coop_card/univ_coop_meal_prepaid_info.dart';
 import 'package:kadai_info_flutter/domain/entity/univ_coop_card/univ_coop_prepaid_info.dart';
 

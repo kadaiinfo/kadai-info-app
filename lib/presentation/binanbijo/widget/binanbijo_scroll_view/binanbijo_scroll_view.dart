@@ -1,9 +1,14 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_gender_model.dart';
-import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_description/binanbijo_description.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_candidates/binanbijo_candidates.dart';
+import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_description/binanbijo_description.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_scroll_view/controller/binanbijo_is_student_controller_provider.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_scroll_view/controller/tab_bar_color_controller_provider.dart';
 

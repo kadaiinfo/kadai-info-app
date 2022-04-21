@@ -1,6 +1,9 @@
+// Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kadai_info_flutter/presentation/balance/balance_state.dart';
 import 'package:nfc_manager/nfc_manager.dart';
+
+// Project imports:
+import 'package:kadai_info_flutter/presentation/balance/balance_state.dart';
 
 class BalanceController extends StateNotifier<AsyncValue<BalanceState>> {
   BalanceController() : super(const AsyncLoading()) {

@@ -1,5 +1,10 @@
+// Dart imports:
 import 'dart:io';
 
+// Package imports:
+import 'package:nfc_manager/nfc_manager.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/domain/entity/binanbijo/candidate.dart';
 import 'package:kadai_info_flutter/domain/entity/binanbijo/candidate_collection.dart';
 import 'package:kadai_info_flutter/domain/entity/binanbijo/univ_user_card.dart';
@@ -14,7 +19,6 @@ import 'package:kadai_info_flutter/infrastructure/datasource/realtime_database/i
 import 'package:kadai_info_flutter/infrastructure/datasource/realtime_database/model/realtime_database_binanbijo_vote.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/i_sqflite_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_binanbijo_vote.dart';
-import 'package:nfc_manager/nfc_manager.dart';
 
 class BinanbijoRepository implements IBinanbijoRepository {
   BinanbijoRepository(

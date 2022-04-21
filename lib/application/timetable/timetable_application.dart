@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:kadai_info_flutter/domain/entity/timetable/timetable_lesson.dart';
 
 class TimetableApplication {

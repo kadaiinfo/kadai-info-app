@@ -1,10 +1,14 @@
+// Dart imports:
 import 'dart:io';
 
+// Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:nfc_manager/nfc_manager.dart';
+
+// Project imports:
 import 'package:kadai_info_flutter/application/binanbijo/binanbijo_application.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/controller/binanbijo_dialog_display_controller_provider.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_scroll_view/model/binanbijo_is_student_model.dart';
-import 'package:nfc_manager/nfc_manager.dart';
 
 class BinanbijoIsStudentController
     extends StateNotifier<BinanbijoIsStudentModel> {

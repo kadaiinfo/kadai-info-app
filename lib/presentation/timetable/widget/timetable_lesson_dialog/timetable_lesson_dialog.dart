@@ -16,13 +16,13 @@ class TimetableLessonDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
+          const Text(
             '金曜日：1限目',
             style: TextStyle(
               color: Colors.grey,
             ),
           ),
-          Text(
+          const Text(
             '情報生態システム工学研究Ⅰ',
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -42,13 +42,13 @@ class TimetableLessonDialog extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               const TimetableLessonDeleteButton(),
             ],
           ),
-          Divider(),
+          const Divider(),
           Column(
-            children: [
+            children: const [
               Text(
                 '教室：未設定',
                 style: TextStyle(

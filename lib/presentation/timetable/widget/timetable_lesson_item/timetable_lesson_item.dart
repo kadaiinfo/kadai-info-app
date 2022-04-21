@@ -36,13 +36,13 @@ class TimetableLessonItem extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return TimetableLessonDialog();
+                    return const TimetableLessonDialog();
                   },
                 );
               },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   SizedBox(),
                   Text(
                     '情報生態システム工学実験Ⅰ',

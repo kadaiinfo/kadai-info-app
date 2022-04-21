@@ -15,7 +15,7 @@ class TimetableEditPage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('金：3限目（2021年度）'),
+          title: const Text('金：3限目（2021年度）'),
           actions: [
             IconButton(
               onPressed: () {},
@@ -40,15 +40,15 @@ class TimetableEditPage extends StatelessWidget {
                   TimetableEditColorForm(),
                 ],
               ),
-              _TextFormField(
+              const _TextFormField(
                 iconData: Icons.meeting_room,
                 labelText: '教室',
               ),
-              _TextFormField(
+              const _TextFormField(
                 iconData: Icons.person,
                 labelText: '教師',
               ),
-              _TextFormField(
+              const _TextFormField(
                 iconData: Icons.description,
                 labelText: 'メモ',
                 keyboardType: TextInputType.multiline,

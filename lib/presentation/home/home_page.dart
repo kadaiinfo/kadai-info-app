@@ -1,14 +1,12 @@
 // import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kadai_info_flutter/presentation/article/article_page.dart';
 import 'package:kadai_info_flutter/presentation/balance/balance_page.dart';
 // import 'package:kadai_info_flutter/presentation/binanbijo/binanbijo_page.dart';
 import 'package:kadai_info_flutter/presentation/content/content_page.dart';
 import 'package:kadai_info_flutter/presentation/home/home_controller.dart';
 import 'package:kadai_info_flutter/presentation/setting/setting_page.dart';
 // import 'package:kadai_info_flutter/presentation/timetable/timetable_page.dart';
-import 'package:kadai_info_flutter/presentation/timetable/widget/timetable_adsense_banner/timetable_adsense_banner.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,7 +19,7 @@ class HomePage extends ConsumerWidget {
       body: IndexedStack(
         index: currentIndex,
         children: const [
-          ArticlePage(),
+          // ArticlePage(),
           // TimetablePage(),
           BalancePage(),
           ContentPage(),
@@ -30,10 +28,10 @@ class HomePage extends ConsumerWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.article),
-            label: '記事',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.article),
+          //   label: '記事',
+          // ),
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.calendar_today_rounded),
           //   label: '時間割',
@@ -74,7 +72,7 @@ class HomePage extends ConsumerWidget {
       //             AssetImage('asset/logo/binanbijo2021/binanbijo2021logo.png'));
       //   },
       // ),
-      bottomSheet: const TimetableAdsenseBanner(),
+      // bottomSheet: const TimetableAdsenseBanner(),
     );
   }
 }

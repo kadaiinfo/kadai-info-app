@@ -38,8 +38,8 @@ class SqfliteDatasource implements ISqfliteDatasource {
   static late Database _voteDB;
   static const _voteVersion = 1;
 
-  /// 初期化
-  static Future<void> init() async {
+  @override
+  Future<void> init() async {
     _articleDB = await _getArticleDatabase();
     _timetableDB = await _getTimetableDatabase();
     _voteDB = await _getVoteDatabase();

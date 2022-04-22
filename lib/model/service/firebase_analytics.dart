@@ -1,6 +1,9 @@
 // Package imports:
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final firebaseAnalyticsService = Provider((_) => FirebaseAnalyticsService());
 
 enum AnalyticsEvent { button, banner, scan }
 

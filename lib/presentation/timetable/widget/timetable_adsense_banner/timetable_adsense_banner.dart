@@ -6,8 +6,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:kadai_info_flutter/core/analytics/firebase_analytics_service.dart';
 import 'package:kadai_info_flutter/core/util/navigator_util.dart';
+import 'package:kadai_info_flutter/model/service/service.dart';
 import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
 import 'package:kadai_info_flutter/presentation/common/web_view_page/web_view_page.dart';
 import 'package:kadai_info_flutter/presentation/timetable/widget/timetable_adsense_banner/timetable_adsense_banner_controller_provider.dart';
@@ -26,7 +26,7 @@ class TimetableAdsenseBanner extends ConsumerWidget {
         data: (data) {
           return GestureDetector(
             onTap: () async {
-              FirebaseAnalyticsService().sendEvent(
+              ref.read(firebaseAnalyticsService).sendEvent(
                 event: AnalyticsEvent.banner,
                 parameterMap: {
                   'customerName': 'kagobura',

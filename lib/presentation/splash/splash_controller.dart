@@ -3,7 +3,6 @@ import 'dart:io';
 
 // Package imports:
 import 'package:connectivity/connectivity.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info/package_info.dart';
@@ -31,7 +30,6 @@ class SplashController {
     if (await Connectivity().checkConnectivity() == ConnectivityResult.none) {
       return SetupModel(shouldUpdate: false, canConnectNetwork: false);
     }
-    await FirebaseMessaging.instance.subscribeToTopic('article');
     return SetupModel(shouldUpdate: await _shouldUpdate(), canConnectNetwork: true);
   }
 

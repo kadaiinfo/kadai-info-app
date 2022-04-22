@@ -20,6 +20,7 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     ref.watch(firebaseAnalyticsService);
+    ref.watch(firebaseMessagingService).subscribeToTopic('article');
 
     final currentIndex = ref.watch(homeController).currentIndex;
     final controller = ref.read(homeController.notifier);

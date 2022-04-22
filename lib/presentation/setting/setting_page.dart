@@ -2,8 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:kadai_info_flutter/presentation/setting/widget/setting_group/setting_about_app_group.dart';
-import 'package:kadai_info_flutter/presentation/setting/widget/setting_group/setting_general_group.dart';
+import 'package:settings_ui/settings_ui.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -12,12 +11,20 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(toolbarHeight: 0),
-      body: ListView(
-        children: const [
-          SettingGeneralGroup(),
-          SettingAboutAppGroup()
-        ],
-      ),
+      // body: ListView(
+      //   children: const [
+      //     SettingGeneralGroup(),
+      //     SettingAboutAppGroup()
+      //   ],
+      // ),
+      body: SettingsList(sections: [
+        SettingsSection(title: const Text('一般'), tiles: [
+          SettingsTile.navigation(
+            title: const Text('通知'),
+            leading: const Icon(Icons.notifications_active_outlined),
+          )
+        ])
+      ]),
     );
   }
 }

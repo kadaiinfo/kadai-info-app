@@ -2,6 +2,12 @@
     package="kadai.info.kadaiinfoapplication.kadai_info_flutter">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.NFC" />
+    <queries>
+      <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="https" />
+      </intent>
+    </queries>
     <application
         android:label="KADAI INFO"
         android:icon="@mipmap/ic_launcher">

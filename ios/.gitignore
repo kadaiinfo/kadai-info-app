@@ -38,3 +38,6 @@ Runner/GeneratedPluginRegistrant.*
 
 # provisioningFile
 **/*.mobileprovision
+
+# ExportOptions
+ExportOptions/

@@ -7,14 +7,14 @@ packages:
       name: _fe_analyzer_shared
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "38.0.0"
+    version: "39.0.0"
   analyzer:
     dependency: transitive
     description:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.4.1"
+    version: "4.0.0"
   android_intent:
     dependency: "direct main"
     description:
@@ -175,21 +175,21 @@ packages:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.12"
+    version: "3.1.13"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
       name: cloud_firestore_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.5.3"
+    version: "5.5.4"
   cloud_firestore_web:
     dependency: transitive
     description:
       name: cloud_firestore_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.6.12"
+    version: "2.6.13"
   code_builder:
     dependency: transitive
     description:
@@ -337,41 +337,34 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
-  firebase:
-    dependency: transitive
-    description:
-      name: firebase
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "9.0.2"
   firebase_analytics:
     dependency: "direct main"
     description:
       name: firebase_analytics
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.3.4"
+    version: "9.1.6"
   firebase_analytics_platform_interface:
     dependency: transitive
     description:
       name: firebase_analytics_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "3.1.4"
   firebase_analytics_web:
     dependency: transitive
     description:
       name: firebase_analytics_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0+1"
+    version: "0.4.0+11"
   firebase_core:
     dependency: "direct main"
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.14.1"
+    version: "1.15.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
@@ -392,56 +385,63 @@ packages:
       name: firebase_database
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.2.0"
+    version: "9.0.12"
   firebase_database_platform_interface:
     dependency: transitive
     description:
       name: firebase_database_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0+4"
+    version: "0.2.1+4"
   firebase_database_web:
     dependency: transitive
     description:
       name: firebase_database_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.2+1"
+    version: "0.2.0+11"
   firebase_messaging:
     dependency: "direct main"
     description:
       name: firebase_messaging
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "11.2.13"
+    version: "11.2.14"
   firebase_messaging_platform_interface:
     dependency: transitive
     description:
       name: firebase_messaging_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.3"
+    version: "3.3.0"
   firebase_messaging_web:
     dependency: transitive
     description:
       name: firebase_messaging_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.11"
+    version: "2.2.12"
   firebase_remote_config:
     dependency: "direct main"
     description:
       name: firebase_remote_config
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.11.0+2"
+    version: "2.0.5"
   firebase_remote_config_platform_interface:
     dependency: transitive
     description:
       name: firebase_remote_config_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0+7"
+    version: "1.1.4"
+  firebase_remote_config_web:
+    dependency: transitive
+    description:
+      name: firebase_remote_config_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.10"
   fixnum:
     dependency: transitive
     description:
@@ -455,7 +455,7 @@ packages:
       name: flex_color_scheme
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.2.0"
+    version: "5.0.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -526,14 +526,14 @@ packages:
       name: freezed
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.1"
+    version: "2.0.2"
   freezed_annotation:
     dependency: "direct main"
     description:
       name: freezed_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "2.0.1"
   frontend_server_client:
     dependency: transitive
     description:
@@ -1063,7 +1063,7 @@ packages:
       name: webview_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.8.0"
+    version: "3.0.2"
   webview_flutter_android:
     dependency: transitive
     description:

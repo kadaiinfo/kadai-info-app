@@ -6,7 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:kadai_info_flutter/core/constant/binanbijo_constant.dart';
-import 'package:kadai_info_flutter/model/service/service.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_candidate_model.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/controller/binanbijo_dialog_display_controller_provider.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_scroll_view/controller/binanbijo_is_student_controller_provider.dart';
@@ -56,12 +55,12 @@ class BinanbijoUserChoiceDialog extends ConsumerWidget {
                         child: Image.asset(
                             'asset/image/binanbijo2021/student_vote.png'),
                         onTap: () async {
-                          await ref.read(firebaseAnalyticsService).sendEvent(
-                            event: AnalyticsEvent.scan,
-                            parameterMap: {
-                              'scanId': 'binanbijo2021_scan'
-                            }
-                          );
+                          // await ref.read(firebaseAnalyticsService).sendEvent(
+                          //   event: AnalyticsEvent.scan,
+                          //   parameterMap: {
+                          //     'scanId': 'binanbijo2021_scan'
+                          //   }
+                          // );
                           await _isStudentController.scan();
                         },
                       )),
@@ -71,12 +70,12 @@ class BinanbijoUserChoiceDialog extends ConsumerWidget {
                           child: Image.asset(
                               'asset/image/binanbijo2021/general_vote.png'),
                           onTap: () async {
-                            await ref.read(firebaseAnalyticsService).sendEvent(
-                            event: AnalyticsEvent.button,
-                            parameterMap: {
-                              'buttonId': 'binanbijo2021_general_vote'
-                            }
-                          );
+                          //   await ref.read(firebaseAnalyticsService).sendEvent(
+                          //   event: AnalyticsEvent.button,
+                          //   parameterMap: {
+                          //     'buttonId': 'binanbijo2021_general_vote'
+                          //   }
+                          // );
                             _displayController.choiceUser();
                           })),
                   Expanded(flex: 1, child: Container()),

@@ -25,12 +25,11 @@ class HomePage extends ConsumerWidget {
       return const LoadingIndicator();
     } else if (!connectivity.asData!.value) {
       // TODO: ネットワークエラーを表示
-      return const LoadingIndicator();
     }
 
     final sqflite = ref.watch(sqfliteInitializer);
     if(sqflite is AsyncLoading || sqflite is AsyncError) {
-      return const LoadingIndicator();
+      // TODO: データベース初期化エラーを表示
     }
 
     final shouldUpdate = ref.watch(shouldUpdateChecker);
@@ -38,10 +37,9 @@ class HomePage extends ConsumerWidget {
       return const LoadingIndicator();
     } else if (!shouldUpdate.asData!.value) {
       // TODO: アップデートを要求
-      return const LoadingIndicator();
     }
 
-    ref.watch(firebaseAnalyticsService);
+    // ref.watch(firebaseAnalyticsService);
     ref.watch(firebaseMessagingService).subscribeToTopic('article');
 
     final currentIndex = ref.watch(homeController).currentIndex;

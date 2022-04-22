@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:kadai_info_flutter/presentation/home/home_page.dart';
 
-// Project imports:
-
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
@@ -16,7 +14,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: FlexColorScheme.light(
         scheme: scheme,
         scaffoldBackground: Colors.grey[100],

@@ -6,7 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:kadai_info_flutter/core/constant/binanbijo_constant.dart';
-import 'package:kadai_info_flutter/model/service/service.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_candidate_model.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/controller/binanbijo_dialog_display_controller_provider.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/controller/binanbijo_vote_provider.dart';
@@ -58,16 +57,16 @@ class BinanbijoVoteDialog extends ConsumerWidget {
                       final _isStudent = ref
                           .read(binanbijoIsStudentControllerProvider)
                           .isStudent;
-                      ref.read(firebaseAnalyticsService).sendEvent(
-                          event: AnalyticsEvent.button,
-                          parameterMap: {
-                            'buttonId': 'binanbijo2021_vote',
-                            'result': result.toString(),
-                            'entryNumber': candidate.entryNumber.toString(),
-                            'gender': candidate.gender.toString(),
-                            'name': candidate.name,
-                            'isStudent': _isStudent.toString()
-                          });
+                      // ref.read(firebaseAnalyticsService).sendEvent(
+                      //     event: AnalyticsEvent.button,
+                      //     parameterMap: {
+                      //       'buttonId': 'binanbijo2021_vote',
+                      //       'result': result.toString(),
+                      //       'entryNumber': candidate.entryNumber.toString(),
+                      //       'gender': candidate.gender.toString(),
+                      //       'name': candidate.name,
+                      //       'isStudent': _isStudent.toString()
+                      //     });
                       if (!result) {
                         _displayController.cantVote();
                       } else {
@@ -75,11 +74,11 @@ class BinanbijoVoteDialog extends ConsumerWidget {
                       }
                     }),
                     _voteButton('いいえ', _defaultTextStyle, () async {
-                      FirebaseAnalyticsService().sendEvent(
-                          event: AnalyticsEvent.button,
-                          parameterMap: {
-                            'buttonId': 'binanbijo2021_vote_cancel'
-                          });
+                      // FirebaseAnalyticsService().sendEvent(
+                      //     event: AnalyticsEvent.button,
+                      //     parameterMap: {
+                      //       'buttonId': 'binanbijo2021_vote_cancel'
+                      //     });
                       Navigator.pop(context);
                     })
                   ]))

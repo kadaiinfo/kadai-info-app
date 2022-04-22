@@ -1,3 +1,7 @@
 flutter_native_splash:
   color: "#FFFFFF"
   image: asset/icon/splash_icon.png
+
+ios: true
+android: true
+web: false

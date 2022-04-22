@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 
 // Package imports:
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
@@ -15,11 +14,6 @@ Future<void> main() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp, //縦固定
   ]);
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await Firebase.initializeApp();
   runApp(const ProviderScope(child: App()));
-}
-
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
 }

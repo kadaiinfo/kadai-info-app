@@ -11,6 +11,9 @@ import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_t
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/model/sqf_timetable_term.dart';
 
 abstract class ISqfliteDatasource {
+  // 初期化
+  Future<void> init();
+
   /// 記事一覧
   Future<Result<SQFArticleTable>> findAllArticles({
     required int limit,

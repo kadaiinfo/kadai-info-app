@@ -8,6 +8,7 @@ import 'package:kadai_info_flutter/model/service/service.dart';
 // Project imports:
 import 'package:kadai_info_flutter/presentation/article/article_page.dart';
 import 'package:kadai_info_flutter/presentation/balance/balance_page.dart';
+import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
 import 'package:kadai_info_flutter/presentation/content/content_page.dart';
 import 'package:kadai_info_flutter/presentation/home/home_controller.dart';
 import 'package:kadai_info_flutter/presentation/setting/setting_page.dart';
@@ -19,8 +20,22 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
+    final connectivity = ref.watch(connectivityService);
+    if(connectivity is AsyncLoading || connectivity is AsyncError) {
+      return const LoadingIndicator();
+    } else if (!connectivity.asData!.value) {
+      // TODO: ネットワークエラーを表示
+    }
+
+    final sqflite = ref.watch(sqfliteInitializer);
+    if(sqflite is AsyncLoading || sqflite is AsyncError) {
+      return const LoadingIndicator();
+    }
+
     ref.watch(firebaseAnalyticsService);
     ref.watch(firebaseMessagingService).subscribeToTopic('article');
+
+
 
     final currentIndex = ref.watch(homeController).currentIndex;
     final controller = ref.read(homeController.notifier);

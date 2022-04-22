@@ -32,10 +32,15 @@ class HomePage extends ConsumerWidget {
       return const LoadingIndicator();
     }
 
+    final shouldUpdate = ref.watch(shouldUpdateChecker);
+    if(shouldUpdate is AsyncLoading || shouldUpdate is AsyncError) {
+      return const LoadingIndicator();
+    } else if (!shouldUpdate.asData!.value) {
+      // TODO: アップデートを要求
+    }
+
     ref.watch(firebaseAnalyticsService);
     ref.watch(firebaseMessagingService).subscribeToTopic('article');
-
-
 
     final currentIndex = ref.watch(homeController).currentIndex;
     final controller = ref.read(homeController.notifier);

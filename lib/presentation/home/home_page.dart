@@ -25,6 +25,7 @@ class HomePage extends ConsumerWidget {
       return const LoadingIndicator();
     } else if (!connectivity.asData!.value) {
       // TODO: ネットワークエラーを表示
+      return const LoadingIndicator();
     }
 
     final sqflite = ref.watch(sqfliteInitializer);
@@ -37,6 +38,7 @@ class HomePage extends ConsumerWidget {
       return const LoadingIndicator();
     } else if (!shouldUpdate.asData!.value) {
       // TODO: アップデートを要求
+      return const LoadingIndicator();
     }
 
     ref.watch(firebaseAnalyticsService);

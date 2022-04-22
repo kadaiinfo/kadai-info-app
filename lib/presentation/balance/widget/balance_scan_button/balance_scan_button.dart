@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:kadai_info_flutter/core/analytics/firebase_analytics_service.dart';
+import 'package:kadai_info_flutter/model/service/service.dart';
 import 'package:kadai_info_flutter/presentation/balance/widget/balance_scan_button/balance_scan_button_controller_provider.dart';
 
 /// 学生証読取りボタン
@@ -21,7 +21,8 @@ class BalanceScanButton extends ConsumerWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () async {
-          await FirebaseAnalyticsService().sendEvent(
+          final _analytics = ref.read(firebaseAnalyticsService);
+          await _analytics.sendEvent(
             event: AnalyticsEvent.scan,
             parameterMap: {
               'scanId': 'balance',

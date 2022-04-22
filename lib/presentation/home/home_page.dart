@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kadai_info_flutter/model/service/service.dart';
 
 // Project imports:
 import 'package:kadai_info_flutter/presentation/article/article_page.dart';
@@ -17,6 +18,9 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    ref.watch(firebaseAnalyticsService);
+
     final currentIndex = ref.watch(homeController).currentIndex;
     final controller = ref.read(homeController.notifier);
     return Scaffold(

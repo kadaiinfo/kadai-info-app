@@ -9,7 +9,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info/package_info.dart';
 
 // Project imports:
-import 'package:kadai_info_flutter/core/analytics/firebase_analytics_service.dart';
 import 'package:kadai_info_flutter/core/constant/app_constant.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/sqflite/sqflite_datasource.dart';
 import 'package:kadai_info_flutter/presentation/splash/model/setup_model.dart';
@@ -29,7 +28,6 @@ class SplashController {
       SqfliteDatasource.init(),
 
     ]);
-    FirebaseAnalyticsService();
     if (await Connectivity().checkConnectivity() == ConnectivityResult.none) {
       return SetupModel(shouldUpdate: false, canConnectNetwork: false);
     }

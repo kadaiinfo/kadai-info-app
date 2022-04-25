@@ -40,7 +40,7 @@ class HomePage extends ConsumerWidget {
     }
 
     // ref.watch(firebaseAnalyticsService);
-    ref.watch(firebaseMessagingService).subscribeToTopic('article');
+    ref.watch(firebaseMessagingService).subscribeToTopic('wordpress-publish');
 
     final currentIndex = ref.watch(homeController).currentIndex;
     final controller = ref.read(homeController.notifier);

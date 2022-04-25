@@ -13,33 +13,35 @@ import 'package:kadai_info_flutter/presentation/content/content_page.dart';
 import 'package:kadai_info_flutter/presentation/home/home_controller.dart';
 import 'package:kadai_info_flutter/presentation/setting/setting_page.dart';
 import 'package:kadai_info_flutter/presentation/timetable/widget/timetable_adsense_banner/timetable_adsense_banner.dart';
+import 'package:launch_review/launch_review.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-    final connectivity = ref.watch(connectivityService);
-    if(connectivity is AsyncLoading || connectivity is AsyncError) {
-      return const LoadingIndicator();
+    final connectivity = ref.watch(connectivityStreamService);
+    if (connectivity is AsyncLoading || connectivity is AsyncError) {
+      return const LoadingWhiteIndicator();
     } else if (!connectivity.asData!.value) {
-      // TODO: ネットワークエラーを表示
+      return const HomeNetworkErrorDialog();
     }
 
     final sqflite = ref.watch(sqfliteInitializer);
-    if(sqflite is AsyncLoading || sqflite is AsyncError) {
-      // TODO: データベース初期化エラーを表示
+    if (sqflite is AsyncError) {
+      return const HomeNetworkErrorDialog();
+    } else if (sqflite is AsyncLoading) {
+      return const HomeDatabaseErrorDialog();
     }
 
     final shouldUpdate = ref.watch(shouldUpdateChecker);
-    if(shouldUpdate is AsyncLoading || shouldUpdate is AsyncError) {
-      return const LoadingIndicator();
+    if (shouldUpdate is AsyncLoading || shouldUpdate is AsyncError) {
+      return const LoadingWhiteIndicator();
     } else if (!shouldUpdate.asData!.value) {
-      // TODO: アップデートを要求
+      return const HomeUpdateDialog();
     }
 
-    // ref.watch(firebaseAnalyticsService);
+    ref.watch(firebaseAnalyticsService);
     ref.watch(firebaseMessagingService).subscribeToTopic('wordpress-publish');
 
     final currentIndex = ref.watch(homeController).currentIndex;
@@ -79,5 +81,57 @@ class HomePage extends ConsumerWidget {
       ),
       bottomSheet: const TimetableAdsenseBanner(),
     );
+  }
+}
+
+class HomeNetworkErrorDialog extends StatelessWidget {
+  const HomeNetworkErrorDialog({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        color: Colors.white,
+        child: const AlertDialog(
+          title: Text('ネットワークエラー'),
+          content: Text('ネットワークに接続していません。接続を見直してください。'),
+        ));
+  }
+}
+
+class HomeDatabaseErrorDialog extends StatelessWidget {
+  const HomeDatabaseErrorDialog({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        color: Colors.white,
+        child: const AlertDialog(
+          title: Text('データベース初期化エラー'),
+          content: Text('データベースの初期化に失敗しました。アプリを再起動してください。'),
+        ));
+  }
+}
+
+class HomeUpdateDialog extends StatelessWidget {
+  const HomeUpdateDialog({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        color: Colors.white,
+        child: AlertDialog(
+          title: const Text('アップデートのお知らせ'),
+          content: const Text('新しいバージョンが利用できます。アップデートしてください。。'),
+          actions: [
+            TextButton(
+                onPressed: () async {
+                  LaunchReview.launch(
+                      androidAppId: "kadai.info.kadaiinfoapplication",
+                      iOSAppId: "1489778052",
+                      writeReview: false);
+                },
+                child: const Text('アップデート'))
+          ],
+        ));
   }
 }

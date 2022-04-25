@@ -13,6 +13,7 @@ class UnivCoopCardInfoController
   })  : _app = app,
         super(const AsyncLoading());
 
+  // ignore: unused_field
   final UnivCoopApplication _app;
 
   /// ICカード情報を更新する

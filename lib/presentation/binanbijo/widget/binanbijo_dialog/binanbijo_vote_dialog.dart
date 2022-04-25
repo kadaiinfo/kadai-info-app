@@ -9,7 +9,6 @@ import 'package:kadai_info_flutter/core/constant/binanbijo_constant.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/model/binanbijo_candidate_model.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/controller/binanbijo_dialog_display_controller_provider.dart';
 import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_dialog/controller/binanbijo_vote_provider.dart';
-import 'package:kadai_info_flutter/presentation/binanbijo/widget/binanbijo_scroll_view/controller/binanbijo_is_student_controller_provider.dart';
 
 class BinanbijoVoteDialog extends ConsumerWidget {
   const BinanbijoVoteDialog({Key? key, required this.candidate})
@@ -54,9 +53,9 @@ class BinanbijoVoteDialog extends ConsumerWidget {
                     _voteButton('はい', _defaultTextStyle, () async {
                       final result =
                           await ref.read(binanbijoVoteProvider(candidate));
-                      final _isStudent = ref
-                          .read(binanbijoIsStudentControllerProvider)
-                          .isStudent;
+                      // final _isStudent = ref
+                      //     .read(binanbijoIsStudentControllerProvider)
+                      //     .isStudent;
                       // ref.read(firebaseAnalyticsService).sendEvent(
                       //     event: AnalyticsEvent.button,
                       //     parameterMap: {

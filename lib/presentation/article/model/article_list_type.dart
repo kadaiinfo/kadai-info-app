@@ -50,6 +50,7 @@ extension ArticleListTypeExt on ArticleListType {
       default:
         break;
     }
+    return null;
   }
 
   String get toTitle {

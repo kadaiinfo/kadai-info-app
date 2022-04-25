@@ -12,7 +12,7 @@ final timetableEditColorDialogControllerProvider = StateNotifierProvider<
     TimetableEditColorDialogController, TimetableEditColorDialogState>(
   (ref) {
     const _state = TimetableEditColorDialogState(
-        selectedColor: Colors.blue); // TODO: 初期値の指定
+        selectedColor: Colors.blue);
     return TimetableEditColorDialogController(
       _state,
       reader: ref.read,

@@ -12,7 +12,7 @@ final timetableEditColorFormControllerProvider = StateNotifierProvider
     .autoDispose<TimetableEditColorFormController, TimetableEditColorFormState>(
   (ref) {
     const _state =
-        TimetableEditColorFormState(selectedColor: Colors.blue); // TODO: 初期値の指定
+        TimetableEditColorFormState(selectedColor: Colors.blue);
     return TimetableEditColorFormController(_state);
   },
 );

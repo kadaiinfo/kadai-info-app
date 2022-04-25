@@ -1,6 +1,4 @@
 // Package imports:
-import 'package:firebase_database/firebase_database.dart';
-
 class RealtimeDatabaseBinanbijoVote {
   static const keyEntryNumber = 'entryNumber';
   static const keyGender = 'gender';

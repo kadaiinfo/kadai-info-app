@@ -34,7 +34,6 @@ class BinanbijoIsStudentController
 
   // 学生証を読み取る
   Future<void> scan() async {
-    // TODO: androidだけ落ちる
     if(Platform.isIOS) await NfcManager.instance.stopSession();
     final _displayController =
         reader(binanbijoDialogDisplayControllerProvider.notifier);

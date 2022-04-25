@@ -10,11 +10,9 @@ class NfcFeliCaReadWithoutEncryptionResponse {
   final Uint8List idm;
 
   /// ステータスフラグ1
-  /// TODO: enum等で定義
   final bool statusFlag1;
 
   /// ステータスフラグ2
-  /// TODO: enum等で定義
   final bool statusFlag2;
 
   /// ブロック数

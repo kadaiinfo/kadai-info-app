@@ -10,7 +10,6 @@ import 'package:nfc_manager/platform_tags.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/i_nfc_datasource.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_felica_polling_response.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_felica_read_without_encryption_response.dart';
-import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_felica_request_service_response.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_felica_type.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_info.dart';
 import 'package:kadai_info_flutter/infrastructure/datasource/nfc/model/nfc_univ_coop_prepaid_balance.dart';
@@ -107,34 +106,34 @@ class NfcDatasource implements INfcDatasource {
   }
 
   /// RequestService
-  Future<NfcFeliCaRequestServiceResponse> _requestService({
-    required Uint8List idm,
-    required List<int> serviceCode,
-    required NfcTag tag,
-  }) async {
-    final Uint8List nodeCodeList = Uint8List.fromList(serviceCode);
-    final List<int> packet = [];
-    if (Platform.isAndroid) {
-      packet.add(0x06);
-    }
-    packet.add(0x02);
-    packet.addAll(idm);
-    packet.add(nodeCodeList.elementSizeInBytes);
-    packet.add(serviceCode[1]);
-    packet.add(serviceCode[0]);
+  // Future<NfcFeliCaRequestServiceResponse> _requestService({
+  //   required Uint8List idm,
+  //   required List<int> serviceCode,
+  //   required NfcTag tag,
+  // }) async {
+  //   final Uint8List nodeCodeList = Uint8List.fromList(serviceCode);
+  //   final List<int> packet = [];
+  //   if (Platform.isAndroid) {
+  //     packet.add(0x06);
+  //   }
+  //   packet.add(0x02);
+  //   packet.addAll(idm);
+  //   packet.add(nodeCodeList.elementSizeInBytes);
+  //   packet.add(serviceCode[1]);
+  //   packet.add(serviceCode[0]);
 
-    final command = Uint8List.fromList(packet);
-    if (NfcF.from(tag) != null) {
-      final nfcF = NfcF.from(tag)!;
-      final block = await nfcF.transceive(data: command);
-      return NfcFeliCaRequestServiceResponse.from(block);
-    } else if (FeliCa.from(tag) != null) {
-      final feliCa = FeliCa.from(tag)!;
-      final block = await feliCa.sendFeliCaCommand(command);
-      return NfcFeliCaRequestServiceResponse.from(block);
-    }
-    throw Exception();
-  }
+  //   final command = Uint8List.fromList(packet);
+  //   if (NfcF.from(tag) != null) {
+  //     final nfcF = NfcF.from(tag)!;
+  //     final block = await nfcF.transceive(data: command);
+  //     return NfcFeliCaRequestServiceResponse.from(block);
+  //   } else if (FeliCa.from(tag) != null) {
+  //     final feliCa = FeliCa.from(tag)!;
+  //     final block = await feliCa.sendFeliCaCommand(command);
+  //     return NfcFeliCaRequestServiceResponse.from(block);
+  //   }
+  //   throw Exception();
+  // }
 
   /// ReadWithoutEncryption
   Future<NfcFeliCaReadWithoutEncryptionResponse> _readWithoutEncryption({

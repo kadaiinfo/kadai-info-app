@@ -7,6 +7,7 @@ import 'package:kadai_info_flutter/infrastructure/datasource/realtime_database/m
 
 class RealtimeDatabaseDatasource implements IRealtimeDatabaseDatasource {
   RealtimeDatabaseDatasource() {
+    // ignore: deprecated_member_use
     _db = FirebaseDatabase(
         databaseURL:
             'https://kadai-info-flutter-default-rtdb.asia-southeast1.firebasedatabase.app');
@@ -17,7 +18,7 @@ class RealtimeDatabaseDatasource implements IRealtimeDatabaseDatasource {
   @override
   Future<void> pushVote(RealtimeDatabaseBinanbijoVote vote) async {
     try {
-      final _ref = _db.reference().child('binanbijo_vote').push();
+      final _ref = _db.ref().child('binanbijo_vote').push();
       await _ref.set(vote.toMap());
       return;
     } catch (e) {

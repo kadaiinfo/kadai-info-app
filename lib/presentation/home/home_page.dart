@@ -29,9 +29,9 @@ class HomePage extends ConsumerWidget {
 
     final sqflite = ref.watch(sqfliteInitializer);
     if (sqflite is AsyncError) {
-      return const HomeNetworkErrorDialog();
-    } else if (sqflite is AsyncLoading) {
       return const HomeDatabaseErrorDialog();
+    } else if (sqflite is AsyncLoading) {
+      return const LoadingWhiteIndicator();
     }
 
     final shouldUpdate = ref.watch(shouldUpdateChecker);
@@ -44,11 +44,11 @@ class HomePage extends ConsumerWidget {
     ref.watch(firebaseAnalyticsService);
     ref.watch(firebaseMessagingService).subscribeToTopic('wordpress-publish');
 
-    final currentIndex = ref.watch(homeController).currentIndex;
-    final controller = ref.read(homeController.notifier);
+    final pageOrdinal = ref.watch(pageOrdinalProvider);
+    final pageOrdinalController = ref.watch(pageOrdinalProvider.notifier);
     return Scaffold(
       body: IndexedStack(
-        index: currentIndex,
+        index: pageOrdinal.index,
         children: const [
           ArticlePage(),
           BalancePage(),
@@ -75,8 +75,10 @@ class HomePage extends ConsumerWidget {
             label: '設定',
           ),
         ],
-        currentIndex: currentIndex,
-        onTap: controller.selectTab,
+        currentIndex: pageOrdinal.index,
+        onTap: (index) {
+          pageOrdinalController.update((state) => PageOrdinal.values[index]);
+        },
         type: BottomNavigationBarType.fixed,
       ),
       bottomSheet: const TimetableAdsenseBanner(),
@@ -121,7 +123,7 @@ class HomeUpdateDialog extends StatelessWidget {
         color: Colors.white,
         child: AlertDialog(
           title: const Text('アップデートのお知らせ'),
-          content: const Text('新しいバージョンが利用できます。アップデートしてください。。'),
+          content: const Text('新しいバージョンが利用できます。アップデートしてください。'),
           actions: [
             TextButton(
                 onPressed: () async {

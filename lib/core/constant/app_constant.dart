@@ -6,8 +6,8 @@ class AppConstant {
 
   // バージョン
   // TODO: アップデートのたびに数字を変える
-  static const iosVersion = '8.0.3';
-  static const androidVersion = '8.0.3';
+  static const iosVersion = '8.1.0';
+  static const androidVersion = '8.1.0';
 
   // 団体URL
   static const aboutUrl = 'https://kadai-info.com/lp/about-us/';

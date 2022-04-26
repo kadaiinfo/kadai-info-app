@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'vote.dart';
@@ -11,26 +12,7 @@ part of 'vote.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$VoteTearOff {
-  const _$VoteTearOff();
-
-  _Vote call(
-      {required int entryNumber,
-      required String gender,
-      required bool isStudent}) {
-    return _Vote(
-      entryNumber: entryNumber,
-      gender: gender,
-      isStudent: isStudent,
-    );
-  }
-}
-
-/// @nodoc
-const $Vote = _$VoteTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$Vote {
@@ -145,15 +127,18 @@ class _$_Vote implements _Vote {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Vote &&
-            (identical(other.entryNumber, entryNumber) ||
-                other.entryNumber == entryNumber) &&
-            (identical(other.gender, gender) || other.gender == gender) &&
-            (identical(other.isStudent, isStudent) ||
-                other.isStudent == isStudent));
+            const DeepCollectionEquality()
+                .equals(other.entryNumber, entryNumber) &&
+            const DeepCollectionEquality().equals(other.gender, gender) &&
+            const DeepCollectionEquality().equals(other.isStudent, isStudent));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, entryNumber, gender, isStudent);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(entryNumber),
+      const DeepCollectionEquality().hash(gender),
+      const DeepCollectionEquality().hash(isStudent));
 
   @JsonKey(ignore: true)
   @override
@@ -163,16 +148,16 @@ class _$_Vote implements _Vote {
 
 abstract class _Vote implements Vote {
   const factory _Vote(
-      {required int entryNumber,
-      required String gender,
-      required bool isStudent}) = _$_Vote;
+      {required final int entryNumber,
+      required final String gender,
+      required final bool isStudent}) = _$_Vote;
 
   @override
-  int get entryNumber;
+  int get entryNumber => throw _privateConstructorUsedError;
   @override
-  String get gender;
+  String get gender => throw _privateConstructorUsedError;
   @override
-  bool get isStudent;
+  bool get isStudent => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$VoteCopyWith<_Vote> get copyWith => throw _privateConstructorUsedError;

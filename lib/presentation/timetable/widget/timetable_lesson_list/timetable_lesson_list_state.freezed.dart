@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'timetable_lesson_list_state.dart';
@@ -11,23 +12,7 @@ part of 'timetable_lesson_list_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$TimetableLessonListStateTearOff {
-  const _$TimetableLessonListStateTearOff();
-
-  _TimetableLessonListState call(
-      {List<TimetableLessonModel> lessons = const [], required int year}) {
-    return _TimetableLessonListState(
-      lessons: lessons,
-      year: year,
-    );
-  }
-}
-
-/// @nodoc
-const $TimetableLessonListState = _$TimetableLessonListStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$TimetableLessonListState {
@@ -118,11 +103,17 @@ class __$TimetableLessonListStateCopyWithImpl<$Res>
 
 class _$_TimetableLessonListState implements _TimetableLessonListState {
   const _$_TimetableLessonListState(
-      {this.lessons = const [], required this.year});
+      {final List<TimetableLessonModel> lessons = const [], required this.year})
+      : _lessons = lessons;
 
-  @JsonKey(defaultValue: const [])
+  final List<TimetableLessonModel> _lessons;
   @override
-  final List<TimetableLessonModel> lessons;
+  @JsonKey()
+  List<TimetableLessonModel> get lessons {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_lessons);
+  }
+
   @override
   final int year;
 
@@ -137,12 +128,14 @@ class _$_TimetableLessonListState implements _TimetableLessonListState {
         (other.runtimeType == runtimeType &&
             other is _TimetableLessonListState &&
             const DeepCollectionEquality().equals(other.lessons, lessons) &&
-            (identical(other.year, year) || other.year == year));
+            const DeepCollectionEquality().equals(other.year, year));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(lessons), year);
+      runtimeType,
+      const DeepCollectionEquality().hash(lessons),
+      const DeepCollectionEquality().hash(year));
 
   @JsonKey(ignore: true)
   @override
@@ -153,13 +146,13 @@ class _$_TimetableLessonListState implements _TimetableLessonListState {
 
 abstract class _TimetableLessonListState implements TimetableLessonListState {
   const factory _TimetableLessonListState(
-      {List<TimetableLessonModel> lessons,
-      required int year}) = _$_TimetableLessonListState;
+      {final List<TimetableLessonModel> lessons,
+      required final int year}) = _$_TimetableLessonListState;
 
   @override
-  List<TimetableLessonModel> get lessons;
+  List<TimetableLessonModel> get lessons => throw _privateConstructorUsedError;
   @override
-  int get year;
+  int get year => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TimetableLessonListStateCopyWith<_TimetableLessonListState> get copyWith =>

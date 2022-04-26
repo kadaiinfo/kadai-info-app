@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'candidate_collection.dart';
@@ -11,21 +12,7 @@ part of 'candidate_collection.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$CandidateCollectionTearOff {
-  const _$CandidateCollectionTearOff();
-
-  _CandidateCollection call({List<Candidate> candidates = const []}) {
-    return _CandidateCollection(
-      candidates: candidates,
-    );
-  }
-}
-
-/// @nodoc
-const $CandidateCollection = _$CandidateCollectionTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$CandidateCollection {
@@ -103,11 +90,16 @@ class __$CandidateCollectionCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CandidateCollection implements _CandidateCollection {
-  const _$_CandidateCollection({this.candidates = const []});
+  const _$_CandidateCollection({final List<Candidate> candidates = const []})
+      : _candidates = candidates;
 
-  @JsonKey(defaultValue: const [])
+  final List<Candidate> _candidates;
   @override
-  final List<Candidate> candidates;
+  @JsonKey()
+  List<Candidate> get candidates {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_candidates);
+  }
 
   @override
   String toString() {
@@ -135,11 +127,11 @@ class _$_CandidateCollection implements _CandidateCollection {
 }
 
 abstract class _CandidateCollection implements CandidateCollection {
-  const factory _CandidateCollection({List<Candidate> candidates}) =
+  const factory _CandidateCollection({final List<Candidate> candidates}) =
       _$_CandidateCollection;
 
   @override
-  List<Candidate> get candidates;
+  List<Candidate> get candidates => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CandidateCollectionCopyWith<_CandidateCollection> get copyWith =>

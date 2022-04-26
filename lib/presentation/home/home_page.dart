@@ -8,24 +8,25 @@ import 'package:kadai_info_flutter/model/service/service.dart';
 // Project imports:
 import 'package:kadai_info_flutter/presentation/article/article_page.dart';
 import 'package:kadai_info_flutter/presentation/balance/balance_page.dart';
-import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading_indicator.dart';
 import 'package:kadai_info_flutter/presentation/content/content_page.dart';
 import 'package:kadai_info_flutter/presentation/home/home_controller.dart';
 import 'package:kadai_info_flutter/presentation/setting/setting_page.dart';
 import 'package:kadai_info_flutter/presentation/common/banner/timetable_adsense_banner.dart';
 import 'package:launch_review/launch_review.dart';
 
+import '../common/loading_indicator/loading_indicator.dart';
+
 class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final connectivity = ref.watch(connectivityStreamService);
-    if (connectivity is AsyncLoading || connectivity is AsyncError) {
-      return const LoadingWhiteIndicator();
-    } else if (!connectivity.asData!.value) {
-      return const HomeNetworkErrorDialog();
-    }
+    // final connectivity = ref.watch(connectivityStreamService);
+    // if (connectivity is AsyncLoading || connectivity is AsyncError) {
+    //   return const LoadingWhiteIndicator();
+    // } else if (!connectivity.asData!.value) {
+    //   return const HomeNetworkErrorDialog();
+    // }
 
     final sqflite = ref.watch(sqfliteInitializer);
     if (sqflite is AsyncError) {
@@ -37,7 +38,7 @@ class HomePage extends ConsumerWidget {
     final shouldUpdate = ref.watch(shouldUpdateChecker);
     if (shouldUpdate is AsyncLoading || shouldUpdate is AsyncError) {
       return const LoadingWhiteIndicator();
-    } else if (!shouldUpdate.asData!.value) {
+    } else if (shouldUpdate.asData!.value) {
       return const HomeUpdateDialog();
     }
 

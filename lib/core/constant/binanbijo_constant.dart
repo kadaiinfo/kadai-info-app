@@ -35,7 +35,7 @@ class BinanbijoConstant {
   // ドメイン
   static const _baseUrl = 'https://bbs2021.microcms.io/api/v1/domain';
   static const _defaultHeaders = {
-    'X-MICROCMS-API-KEY': AppConstant.microCmsApiKey
+    'X-MICROCMS-API-KEY': AppConstant.microCmsBBS2021ApiKey
   };
   static final _dio = Dio()..options.headers = _defaultHeaders;
   Future<String> getDomainName() async {

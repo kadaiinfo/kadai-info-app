@@ -1,7 +1,7 @@
 name: kadai_info_flutter
 description: A new Flutter project.
 publish_to: 'none'
-version: 8.1.0+1
+version: 8.1.0+37
 
 environment:
   sdk: ">=2.16.0 <3.0.0"

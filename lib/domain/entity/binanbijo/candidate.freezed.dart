@@ -152,7 +152,7 @@ class __$CandidateCopyWithImpl<$Res> extends _$CandidateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Candidate implements _Candidate {
-  const _$_Candidate(
+  _$_Candidate(
       {required this.name,
       required this.entryNumber,
       required this.pictureUrl,
@@ -211,7 +211,7 @@ class _$_Candidate implements _Candidate {
 }
 
 abstract class _Candidate implements Candidate {
-  const factory _Candidate(
+  factory _Candidate(
       {required final String name,
       required final int entryNumber,
       required final String pictureUrl,

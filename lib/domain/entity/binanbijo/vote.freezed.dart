@@ -105,7 +105,7 @@ class __$VoteCopyWithImpl<$Res> extends _$VoteCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Vote implements _Vote {
-  const _$_Vote(
+  _$_Vote(
       {required this.entryNumber,
       required this.gender,
       required this.isStudent});
@@ -147,7 +147,7 @@ class _$_Vote implements _Vote {
 }
 
 abstract class _Vote implements Vote {
-  const factory _Vote(
+  factory _Vote(
       {required final int entryNumber,
       required final String gender,
       required final bool isStudent}) = _$_Vote;

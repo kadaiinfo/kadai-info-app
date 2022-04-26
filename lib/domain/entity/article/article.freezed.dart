@@ -162,7 +162,7 @@ class __$ArticleCopyWithImpl<$Res> extends _$ArticleCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Article implements _Article {
-  const _$_Article(
+  _$_Article(
       {required this.id,
       required this.title,
       required this.thumbnailUrl,
@@ -220,7 +220,7 @@ class _$_Article implements _Article {
 }
 
 abstract class _Article implements Article {
-  const factory _Article(
+  factory _Article(
       {required final String id,
       required final String title,
       required final String? thumbnailUrl,

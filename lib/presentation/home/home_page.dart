@@ -12,7 +12,7 @@ import 'package:kadai_info_flutter/presentation/common/loading_indicator/loading
 import 'package:kadai_info_flutter/presentation/content/content_page.dart';
 import 'package:kadai_info_flutter/presentation/home/home_controller.dart';
 import 'package:kadai_info_flutter/presentation/setting/setting_page.dart';
-import 'package:kadai_info_flutter/presentation/timetable/widget/timetable_adsense_banner/timetable_adsense_banner.dart';
+import 'package:kadai_info_flutter/presentation/common/banner/timetable_adsense_banner.dart';
 import 'package:launch_review/launch_review.dart';
 
 class HomePage extends ConsumerWidget {

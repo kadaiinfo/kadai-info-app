@@ -5,7 +5,7 @@ part 'article_author.freezed.dart';
 
 @freezed
 class ArticleAuthor with _$ArticleAuthor {
-  const factory ArticleAuthor({
+  factory ArticleAuthor({
     required String id,
     required String name,
     required String? thumbnailUrl,

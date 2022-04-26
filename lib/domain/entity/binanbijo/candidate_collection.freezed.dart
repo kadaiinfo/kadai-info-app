@@ -90,7 +90,7 @@ class __$CandidateCollectionCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CandidateCollection implements _CandidateCollection {
-  const _$_CandidateCollection({final List<Candidate> candidates = const []})
+  _$_CandidateCollection({final List<Candidate> candidates = const []})
       : _candidates = candidates;
 
   final List<Candidate> _candidates;
@@ -127,7 +127,7 @@ class _$_CandidateCollection implements _CandidateCollection {
 }
 
 abstract class _CandidateCollection implements CandidateCollection {
-  const factory _CandidateCollection({final List<Candidate> candidates}) =
+  factory _CandidateCollection({final List<Candidate> candidates}) =
       _$_CandidateCollection;
 
   @override

@@ -112,7 +112,7 @@ class __$ArticleCollectionCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ArticleCollection implements _ArticleCollection {
-  const _$_ArticleCollection(
+  _$_ArticleCollection(
       {final List<Article> articles = const [],
       this.hasNext = false,
       this.hasPrevious = false})
@@ -163,7 +163,7 @@ class _$_ArticleCollection implements _ArticleCollection {
 }
 
 abstract class _ArticleCollection implements ArticleCollection {
-  const factory _ArticleCollection(
+  factory _ArticleCollection(
       {final List<Article> articles,
       final bool hasNext,
       final bool hasPrevious}) = _$_ArticleCollection;

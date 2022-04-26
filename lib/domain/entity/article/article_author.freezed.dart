@@ -123,7 +123,7 @@ class __$ArticleAuthorCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ArticleAuthor implements _ArticleAuthor {
-  const _$_ArticleAuthor(
+  _$_ArticleAuthor(
       {required this.id,
       required this.name,
       required this.thumbnailUrl,
@@ -170,7 +170,7 @@ class _$_ArticleAuthor implements _ArticleAuthor {
 }
 
 abstract class _ArticleAuthor implements ArticleAuthor {
-  const factory _ArticleAuthor(
+  factory _ArticleAuthor(
       {required final String id,
       required final String name,
       required final String? thumbnailUrl,

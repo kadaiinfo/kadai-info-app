@@ -20,6 +20,7 @@ Banner _$BannerFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Banner {
+  bool get display => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   BannerImage get image => throw _privateConstructorUsedError;
 
@@ -32,7 +33,7 @@ mixin _$Banner {
 abstract class $BannerCopyWith<$Res> {
   factory $BannerCopyWith(Banner value, $Res Function(Banner) then) =
       _$BannerCopyWithImpl<$Res>;
-  $Res call({String url, BannerImage image});
+  $Res call({bool display, String url, BannerImage image});
 
   $BannerImageCopyWith<$Res> get image;
 }
@@ -47,10 +48,15 @@ class _$BannerCopyWithImpl<$Res> implements $BannerCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? display = freezed,
     Object? url = freezed,
     Object? image = freezed,
   }) {
     return _then(_value.copyWith(
+      display: display == freezed
+          ? _value.display
+          : display // ignore: cast_nullable_to_non_nullable
+              as bool,
       url: url == freezed
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -75,7 +81,7 @@ abstract class _$BannerCopyWith<$Res> implements $BannerCopyWith<$Res> {
   factory _$BannerCopyWith(_Banner value, $Res Function(_Banner) then) =
       __$BannerCopyWithImpl<$Res>;
   @override
-  $Res call({String url, BannerImage image});
+  $Res call({bool display, String url, BannerImage image});
 
   @override
   $BannerImageCopyWith<$Res> get image;
@@ -92,10 +98,15 @@ class __$BannerCopyWithImpl<$Res> extends _$BannerCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? display = freezed,
     Object? url = freezed,
     Object? image = freezed,
   }) {
     return _then(_Banner(
+      display: display == freezed
+          ? _value.display
+          : display // ignore: cast_nullable_to_non_nullable
+              as bool,
       url: url == freezed
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -111,11 +122,13 @@ class __$BannerCopyWithImpl<$Res> extends _$BannerCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Banner implements _Banner {
-  _$_Banner({required this.url, required this.image});
+  _$_Banner({required this.display, required this.url, required this.image});
 
   factory _$_Banner.fromJson(Map<String, dynamic> json) =>
       _$$_BannerFromJson(json);
 
+  @override
+  final bool display;
   @override
   final String url;
   @override
@@ -123,7 +136,7 @@ class _$_Banner implements _Banner {
 
   @override
   String toString() {
-    return 'Banner(url: $url, image: $image)';
+    return 'Banner(display: $display, url: $url, image: $image)';
   }
 
   @override
@@ -131,6 +144,7 @@ class _$_Banner implements _Banner {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Banner &&
+            const DeepCollectionEquality().equals(other.display, display) &&
             const DeepCollectionEquality().equals(other.url, url) &&
             const DeepCollectionEquality().equals(other.image, image));
   }
@@ -139,6 +153,7 @@ class _$_Banner implements _Banner {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(display),
       const DeepCollectionEquality().hash(url),
       const DeepCollectionEquality().hash(image));
 
@@ -155,11 +170,14 @@ class _$_Banner implements _Banner {
 
 abstract class _Banner implements Banner {
   factory _Banner(
-      {required final String url,
+      {required final bool display,
+      required final String url,
       required final BannerImage image}) = _$_Banner;
 
   factory _Banner.fromJson(Map<String, dynamic> json) = _$_Banner.fromJson;
 
+  @override
+  bool get display => throw _privateConstructorUsedError;
   @override
   String get url => throw _privateConstructorUsedError;
   @override

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kadai_info_flutter/model/model.dart';
 
 part 'banner_image.freezed.dart';
 part 'banner_image.g.dart';
@@ -12,5 +13,5 @@ class BannerImage with _$BannerImage {
     
   }) = _BannerImage;
 
-  factory BannerImage.fromJson(Map<String, dynamic> json) => _$BannerImageFromJson(json);
+  factory BannerImage.fromJson(JsonMap json) => _$BannerImageFromJson(json);
 }

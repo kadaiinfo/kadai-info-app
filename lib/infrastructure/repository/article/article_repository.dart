@@ -51,7 +51,7 @@ class ArticleRepository implements IArticleRepository {
         success: (localData) async {
           final ids = localData.articles.map((e) => e.id).toList();
           if (ids.isEmpty) {
-            return const Result.success(
+            return Result.success(
               ArticleCollection(),
             );
           }

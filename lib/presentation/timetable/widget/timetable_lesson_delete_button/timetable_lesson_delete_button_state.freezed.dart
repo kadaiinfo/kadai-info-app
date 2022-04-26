@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'timetable_lesson_delete_button_state.dart';
@@ -11,24 +12,7 @@ part of 'timetable_lesson_delete_button_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$TimetableLessonDeleteButtonStateTearOff {
-  const _$TimetableLessonDeleteButtonStateTearOff();
-
-  _TimetableLessonDeleteButtonState call(
-      {String text = '削除', bool isConfirmed = false}) {
-    return _TimetableLessonDeleteButtonState(
-      text: text,
-      isConfirmed: isConfirmed,
-    );
-  }
-}
-
-/// @nodoc
-const $TimetableLessonDeleteButtonState =
-    _$TimetableLessonDeleteButtonStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$TimetableLessonDeleteButtonState {
@@ -125,11 +109,11 @@ class _$_TimetableLessonDeleteButtonState
   _$_TimetableLessonDeleteButtonState(
       {this.text = '削除', this.isConfirmed = false});
 
-  @JsonKey(defaultValue: '削除')
   @override
+  @JsonKey()
   final String text;
-  @JsonKey(defaultValue: false)
   @override
+  @JsonKey()
   final bool isConfirmed;
 
   @override
@@ -142,13 +126,16 @@ class _$_TimetableLessonDeleteButtonState
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _TimetableLessonDeleteButtonState &&
-            (identical(other.text, text) || other.text == text) &&
-            (identical(other.isConfirmed, isConfirmed) ||
-                other.isConfirmed == isConfirmed));
+            const DeepCollectionEquality().equals(other.text, text) &&
+            const DeepCollectionEquality()
+                .equals(other.isConfirmed, isConfirmed));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, text, isConfirmed);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(text),
+      const DeepCollectionEquality().hash(isConfirmed));
 
   @JsonKey(ignore: true)
   @override
@@ -159,13 +146,14 @@ class _$_TimetableLessonDeleteButtonState
 
 abstract class _TimetableLessonDeleteButtonState
     implements TimetableLessonDeleteButtonState {
-  factory _TimetableLessonDeleteButtonState({String text, bool isConfirmed}) =
-      _$_TimetableLessonDeleteButtonState;
+  factory _TimetableLessonDeleteButtonState(
+      {final String text,
+      final bool isConfirmed}) = _$_TimetableLessonDeleteButtonState;
 
   @override
-  String get text;
+  String get text => throw _privateConstructorUsedError;
   @override
-  bool get isConfirmed;
+  bool get isConfirmed => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TimetableLessonDeleteButtonStateCopyWith<_TimetableLessonDeleteButtonState>

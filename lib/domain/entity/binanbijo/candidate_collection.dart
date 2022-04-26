@@ -8,5 +8,5 @@ part 'candidate_collection.freezed.dart';
 
 @freezed
 class CandidateCollection with _$CandidateCollection {
-  const factory CandidateCollection({@Default([]) List<Candidate> candidates}) = _CandidateCollection;
+  factory CandidateCollection({@Default([]) List<Candidate> candidates}) = _CandidateCollection;
 }

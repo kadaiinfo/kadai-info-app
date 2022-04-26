@@ -8,7 +8,7 @@ part 'article.freezed.dart';
 
 @freezed
 class Article with _$Article {
-  const factory Article({
+  factory Article({
     required String id,
     required String title,
     required String? thumbnailUrl,

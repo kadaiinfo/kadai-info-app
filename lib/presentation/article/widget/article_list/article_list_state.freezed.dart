@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'article_list_state.dart';
@@ -11,23 +12,7 @@ part of 'article_list_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$ArticleListStateTearOff {
-  const _$ArticleListStateTearOff();
-
-  _ArticleListState call(
-      {List<ArticleModel> articles = const [], bool hasNext = false}) {
-    return _ArticleListState(
-      articles: articles,
-      hasNext: hasNext,
-    );
-  }
-}
-
-/// @nodoc
-const $ArticleListState = _$ArticleListStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$ArticleListState {
@@ -116,13 +101,20 @@ class __$ArticleListStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ArticleListState implements _ArticleListState {
-  const _$_ArticleListState({this.articles = const [], this.hasNext = false});
+  const _$_ArticleListState(
+      {final List<ArticleModel> articles = const [], this.hasNext = false})
+      : _articles = articles;
 
-  @JsonKey(defaultValue: const [])
+  final List<ArticleModel> _articles;
   @override
-  final List<ArticleModel> articles;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
+  List<ArticleModel> get articles {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_articles);
+  }
+
   @override
+  @JsonKey()
   final bool hasNext;
 
   @override
@@ -136,12 +128,14 @@ class _$_ArticleListState implements _ArticleListState {
         (other.runtimeType == runtimeType &&
             other is _ArticleListState &&
             const DeepCollectionEquality().equals(other.articles, articles) &&
-            (identical(other.hasNext, hasNext) || other.hasNext == hasNext));
+            const DeepCollectionEquality().equals(other.hasNext, hasNext));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(articles), hasNext);
+      runtimeType,
+      const DeepCollectionEquality().hash(articles),
+      const DeepCollectionEquality().hash(hasNext));
 
   @JsonKey(ignore: true)
   @override
@@ -150,13 +144,14 @@ class _$_ArticleListState implements _ArticleListState {
 }
 
 abstract class _ArticleListState implements ArticleListState {
-  const factory _ArticleListState({List<ArticleModel> articles, bool hasNext}) =
-      _$_ArticleListState;
+  const factory _ArticleListState(
+      {final List<ArticleModel> articles,
+      final bool hasNext}) = _$_ArticleListState;
 
   @override
-  List<ArticleModel> get articles;
+  List<ArticleModel> get articles => throw _privateConstructorUsedError;
   @override
-  bool get hasNext;
+  bool get hasNext => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ArticleListStateCopyWith<_ArticleListState> get copyWith =>

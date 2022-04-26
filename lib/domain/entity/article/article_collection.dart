@@ -8,7 +8,7 @@ part 'article_collection.freezed.dart';
 
 @freezed
 class ArticleCollection with _$ArticleCollection {
-  const factory ArticleCollection({
+  factory ArticleCollection({
     @Default([]) List<Article> articles,
     @Default(false) bool hasNext,
     @Default(false) bool hasPrevious,

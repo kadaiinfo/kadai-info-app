@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'candidate.dart';
@@ -11,32 +12,7 @@ part of 'candidate.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$CandidateTearOff {
-  const _$CandidateTearOff();
-
-  _Candidate call(
-      {required String name,
-      required int entryNumber,
-      required String pictureUrl,
-      required String description,
-      required bool canVoted,
-      required String gender}) {
-    return _Candidate(
-      name: name,
-      entryNumber: entryNumber,
-      pictureUrl: pictureUrl,
-      description: description,
-      canVoted: canVoted,
-      gender: gender,
-    );
-  }
-}
-
-/// @nodoc
-const $Candidate = _$CandidateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$Candidate {
@@ -176,7 +152,7 @@ class __$CandidateCopyWithImpl<$Res> extends _$CandidateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Candidate implements _Candidate {
-  const _$_Candidate(
+  _$_Candidate(
       {required this.name,
       required this.entryNumber,
       required this.pictureUrl,
@@ -207,21 +183,26 @@ class _$_Candidate implements _Candidate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Candidate &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.entryNumber, entryNumber) ||
-                other.entryNumber == entryNumber) &&
-            (identical(other.pictureUrl, pictureUrl) ||
-                other.pictureUrl == pictureUrl) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.canVoted, canVoted) ||
-                other.canVoted == canVoted) &&
-            (identical(other.gender, gender) || other.gender == gender));
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality()
+                .equals(other.entryNumber, entryNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.pictureUrl, pictureUrl) &&
+            const DeepCollectionEquality()
+                .equals(other.description, description) &&
+            const DeepCollectionEquality().equals(other.canVoted, canVoted) &&
+            const DeepCollectionEquality().equals(other.gender, gender));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, entryNumber, pictureUrl,
-      description, canVoted, gender);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(entryNumber),
+      const DeepCollectionEquality().hash(pictureUrl),
+      const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(canVoted),
+      const DeepCollectionEquality().hash(gender));
 
   @JsonKey(ignore: true)
   @override
@@ -230,26 +211,26 @@ class _$_Candidate implements _Candidate {
 }
 
 abstract class _Candidate implements Candidate {
-  const factory _Candidate(
-      {required String name,
-      required int entryNumber,
-      required String pictureUrl,
-      required String description,
-      required bool canVoted,
-      required String gender}) = _$_Candidate;
+  factory _Candidate(
+      {required final String name,
+      required final int entryNumber,
+      required final String pictureUrl,
+      required final String description,
+      required final bool canVoted,
+      required final String gender}) = _$_Candidate;
 
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  int get entryNumber;
+  int get entryNumber => throw _privateConstructorUsedError;
   @override
-  String get pictureUrl;
+  String get pictureUrl => throw _privateConstructorUsedError;
   @override
-  String get description;
+  String get description => throw _privateConstructorUsedError;
   @override
-  bool get canVoted;
+  bool get canVoted => throw _privateConstructorUsedError;
   @override
-  String get gender;
+  String get gender => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CandidateCopyWith<_Candidate> get copyWith =>
